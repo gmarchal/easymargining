@@ -1,0 +1,2 @@
+Value Date,SP VaR Weighting factor,Time Horizon N,Decay Factor_N,Decay Factor_1,FHS VaR anchor confidence level,FHS VaR Scaling factor,CBA Moving sub-window,CBA anchor confidence level,CBA multiplier,Liquidity Adjustment,LA risk measure multiplier,SP VaR anchor confidence level,SP VaR Scaling factor
+2015-06-03,0.65,5.0,0.94,0.94,96.6,1.51,60.0,90.0,2.44,Y,2.3263,91.1,2.31
