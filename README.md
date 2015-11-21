@@ -17,3 +17,6 @@ Unzip open/gamma-eurex/pme-18.3_eurex-repository.zip on your drive.
     </profile>
 ## Add the activeProfile below in activeProfiles tag
     <activeProfile>eurex-pme-profile</activeProfile>
+
+## 1.2 Lombok
+https://projectlombok.org/
