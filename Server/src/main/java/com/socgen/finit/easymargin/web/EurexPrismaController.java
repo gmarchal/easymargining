@@ -24,18 +24,19 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.result.Result;
+import com.socgen.finit.easymargin.model.TradeEntity;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.threeten.bp.LocalDate;
 
 import java.net.URL;
 
 @Slf4j
 @RestController
-@RequestMapping("/PrismaEurex")
+@RequestMapping(value = "/PrismaEurex", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EurexPrismaController {
 
     private static final LocalDate s_valuationDate = LocalDate.of(2015, 6, 3);
@@ -45,6 +46,20 @@ public class EurexPrismaController {
     @ResponseBody
     public String index() {
         return "Hello Eurex Easy margin controller";
+    }
+
+
+    @RequestMapping(value = "/trade", method = RequestMethod.GET)
+    public ResponseEntity<TradeEntity> getTrade() {
+        TradeEntity tradeEntity = new TradeEntity();
+        tradeEntity.setProductId("ORDX");
+        return new ResponseEntity<>(tradeEntity, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/trade", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> addTrade(@RequestBody TradeEntity tradeEntity) {
+        return new ResponseEntity<>("AddTrade " + tradeEntity, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/etdMargin", method = RequestMethod.GET)
