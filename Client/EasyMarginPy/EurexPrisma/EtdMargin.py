@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from pandas.io import json
 
-URL_SERVER = 'http://localhost:8080'
+URL_SERVER = 'http://localhost:8090'
 HELLO_PATH = '/'
 PRISMA_EUREX_PATH = '/PrismaEurex'
 
