@@ -8,7 +8,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * Tade entity for REST service
+ * Trade entity for REST service
  * Created by Mederic on 21/11/2015.
  */
 @Getter
