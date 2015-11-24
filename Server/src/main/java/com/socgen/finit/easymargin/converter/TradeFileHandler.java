@@ -1,8 +1,5 @@
 package com.socgen.finit.easymargin.converter;
 
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.bean.CsvToBean;
-import au.com.bytecode.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 import com.socgen.finit.easymargin.model.TradeEntity;
 import com.univocity.parsers.common.processor.BeanListProcessor;
 import com.univocity.parsers.common.processor.BeanWriterProcessor;
@@ -12,17 +9,12 @@ import com.univocity.parsers.csv.CsvWriter;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.testng.collections.Maps;
 
-import javax.annotation.PostConstruct;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Read / write trade file
@@ -35,7 +27,7 @@ public class TradeFileHandler {
     public List<TradeEntity> readTradeFile(URL file) throws IOException {
         log.info("Read trade file " + file);
         // BeanListProcessor converts each parsed row to an instance of a given class, then stores each instance into a list.
-        BeanListProcessor<TradeEntity> rowProcessor = new BeanListProcessor<TradeEntity>(TradeEntity.class);
+        BeanListProcessor<TradeEntity> rowProcessor = new BeanListProcessor<>(TradeEntity.class);
 
         CsvParserSettings parserSettings = new CsvParserSettings();
         parserSettings.setRowProcessor(rowProcessor);
