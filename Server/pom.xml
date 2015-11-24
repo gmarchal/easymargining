@@ -49,6 +49,11 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
 
     <!-- Spring Boot -->
     <dependency>
@@ -428,6 +433,11 @@
       <groupId>com.opengamma.margining</groupId>
       <artifactId>ogm-eurex-prisma-replication</artifactId>
       <version>1.8.3</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
     </dependency>
   </dependencies>
 </project>

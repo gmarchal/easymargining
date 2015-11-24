@@ -20,7 +20,9 @@ public class TradeEntity implements Serializable {
     private static final long serialVersionUID = 1879636427086123116L;
 
     private String productId;
-    private String expiryDate;
+    private String expiryYear;
+    private String expiryMonth;
+    private String expiryDay;
     private String versionNumber;
     private String productSettlementType;
     private String callPutFlag;

@@ -24,15 +24,22 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.result.Result;
+import com.socgen.finit.easymargin.converter.TradeFileHandler;
 import com.socgen.finit.easymargin.model.TradeEntity;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.threeten.bp.LocalDate;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Slf4j
 @RestController
@@ -41,6 +48,14 @@ public class EurexPrismaController {
 
     private static final LocalDate s_valuationDate = LocalDate.of(2015, 6, 3);
 
+    @Value("${path.trade.folder}")
+    private String folderPath;
+
+    @Value("${trade.etd.file.name}")
+    private String etdFileName;
+
+    @Autowired
+    private TradeFileHandler tradeFileHandler;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     @ResponseBody
@@ -80,7 +95,14 @@ public class EurexPrismaController {
         environment.getMarginData().loadData(loadRequest);
 
         // Obtain portfolio, loaded from a trade file on the classpath
-        URL tradeFile = FileResources.byPath("trade/etdTrades.csv");
+        Path path = Paths.get(folderPath, etdFileName);
+        URL tradeFile = null;
+        try {
+            tradeFile = path.toUri().toURL();
+        } catch (MalformedURLException e) {
+            tradeFile = FileResources.byPath("trade/etdTrades.csv");
+            log.error("Incorrect path " + path + " use default");
+        }
         OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
         MarginPortfolio portfolio = PortfolioLoader.load(ImmutableList.of(tradeFile), linkResolver);
 
