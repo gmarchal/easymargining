@@ -13,7 +13,6 @@ import com.opengamma.margining.core.util.CheckResults;
 import com.opengamma.margining.core.util.OgmLinkResolver;
 import com.opengamma.margining.core.util.PortfolioMeasureResultFormatter;
 import com.opengamma.margining.core.util.TradeMeasureResultFormatter;
-import com.opengamma.margining.eurex.prisma.data.FileResources;
 import com.opengamma.margining.eurex.prisma.data.MarketDataFileResolver;
 import com.opengamma.margining.eurex.prisma.loader.MarketDataLoaders;
 import com.opengamma.margining.eurex.prisma.loader.PortfolioLoader;
@@ -24,16 +23,20 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.result.Result;
+import com.socgen.finit.easymargin.converter.TradeFileHandler;
 import com.socgen.finit.easymargin.model.Request;
 import com.socgen.finit.easymargin.model.TradeEntity;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.threeten.bp.LocalDate;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import static com.socgen.finit.easymargin.web.EurexPrismaController.PATH_API;
 
@@ -43,6 +46,12 @@ import static com.socgen.finit.easymargin.web.EurexPrismaController.PATH_API;
 public class EurexPrismaController {
 
     public static final String PATH_API = "/api/PrismaEurex";
+
+    @Autowired
+    private TradeFileHandler tradeFileHandler;
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @RequestMapping(value = "/ComputeEtdMargin", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -58,12 +67,26 @@ public class EurexPrismaController {
     private static final LocalDate s_valuationDate = LocalDate.of(2015, 6, 3);
 
 
+    @RequestMapping(value = "/session", method = RequestMethod.PUT)
+    @ResponseBody
+    public String createSession() {
+        SessionInfo session = sessionFactory.createSession();
+        if (session != null) {
+            return session.getSessionId();
+        }
+        return null;
+    }
 
-    @RequestMapping(value = "/trade", method = RequestMethod.GET)
-    public ResponseEntity<TradeEntity> getTrade() {
-        TradeEntity tradeEntity = new TradeEntity();
-        tradeEntity.setProductId("ORDX");
-        return new ResponseEntity<>(tradeEntity, HttpStatus.OK);
+    @RequestMapping(value = "/trade/{sessionId}", method = RequestMethod.GET)
+    public ResponseEntity<List<TradeEntity>> getTrades(@PathVariable("sessionId") String sessionId) {
+        List<TradeEntity> tradeEntityList = null;
+        try {
+            tradeEntityList = tradeFileHandler.readTradeFile(getEtdTradeUrl(sessionId));
+            return new ResponseEntity<>(tradeEntityList, HttpStatus.OK);
+        } catch (IOException e) {
+            log.error("getTrades error", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/trade", method = RequestMethod.POST)
@@ -72,9 +95,22 @@ public class EurexPrismaController {
         return new ResponseEntity<>("AddTrade " + tradeEntity, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/etdMargin", method = RequestMethod.GET)
+    @RequestMapping(value = "/trade/{sessionId}", method = RequestMethod.POST)
     @ResponseBody
-    public String etdMargin() {
+    public ResponseEntity<String> postTrades(@PathVariable("sessionId") String sessionId, @RequestBody List<TradeEntity> tradeEntities) {
+        try {
+            tradeFileHandler.writeTradeFile(tradeEntities, getEtdTradeUrl(sessionId));
+        } catch (IOException e) {
+            log.error("postTrades error", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/etdMargin/{sessionId}", method = RequestMethod.GET)
+    @ResponseBody
+    public String etdMargin(@PathVariable("sessionId") String sessionId) {
 
         StringBuilder outResult = new StringBuilder();
 
@@ -90,9 +126,8 @@ public class EurexPrismaController {
         environment.getMarginData().loadData(loadRequest);
 
         // Obtain portfolio, loaded from a trade file on the classpath
-        URL tradeFile = FileResources.byPath("trade/etdTrades.csv");
         OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
-        MarginPortfolio portfolio = PortfolioLoader.load(ImmutableList.of(tradeFile), linkResolver);
+        MarginPortfolio portfolio = PortfolioLoader.load(ImmutableList.of(getEtdTradeUrl(sessionId)), linkResolver);
 
         // Build PV calculation request
         EurexPrismaReplicationRequest pvRequest = getPvCalculationRequest();
@@ -164,4 +199,10 @@ public class EurexPrismaController {
                 .build();
 
     }
+
+    private URL getEtdTradeUrl(String sessionId) {
+        SessionInfo orCreateSession = sessionFactory.getOrCreateSession(sessionId);
+        return orCreateSession != null ? orCreateSession.getEtdTradeUrl() : null;
+    }
+
 }
