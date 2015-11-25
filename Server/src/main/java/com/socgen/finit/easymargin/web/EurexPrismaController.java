@@ -24,6 +24,7 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.result.Result;
+import com.socgen.finit.easymargin.model.Request;
 import com.socgen.finit.easymargin.model.TradeEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -34,19 +35,28 @@ import org.threeten.bp.LocalDate;
 
 import java.net.URL;
 
+import static com.socgen.finit.easymargin.web.EurexPrismaController.PATH_API;
+
 @Slf4j
 @RestController
-@RequestMapping(value = "/PrismaEurex", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = PATH_API, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE} )
 public class EurexPrismaController {
+
+    public static final String PATH_API = "/api/PrismaEurex";
+
+    @RequestMapping(value = "/ComputeEtdMargin", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<String> computeEtdMargin(@RequestBody Request request) {
+        return new ResponseEntity<>("AddTrade " + request, HttpStatus.OK);
+    }
+
+
+
+
+
 
     private static final LocalDate s_valuationDate = LocalDate.of(2015, 6, 3);
 
-
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    @ResponseBody
-    public String index() {
-        return "Hello Eurex Easy margin controller";
-    }
 
 
     @RequestMapping(value = "/trade", method = RequestMethod.GET)
@@ -150,6 +160,7 @@ public class EurexPrismaController {
 
         return EurexPrismaReplicationRequests.request(s_valuationDate)
                 .portfolioMeasures(im)
+                .crossMarginingEnabled(true)
                 .build();
 
     }

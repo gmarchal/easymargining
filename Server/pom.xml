@@ -27,6 +27,20 @@
     <jackson-databind.version>2.4.1.1</jackson-databind.version>
   </properties>
 
+
+  <!--
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  -->
   <dependencies>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -61,7 +75,11 @@
       <artifactId>spring-boot-autoconfigure</artifactId>
       <version>${spring-boot.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
@@ -428,6 +446,11 @@
       <groupId>com.opengamma.margining</groupId>
       <artifactId>ogm-eurex-prisma-replication</artifactId>
       <version>1.8.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>4.2.3.RELEASE</version>
     </dependency>
   </dependencies>
 </project>
