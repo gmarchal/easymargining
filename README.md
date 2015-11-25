@@ -20,3 +20,6 @@ Unzip open/gamma-eurex/pme-18.3_eurex-repository.zip on your drive.
 
 ## 1.2 Lombok
 https://projectlombok.org/
+
+## Python for Client tests
+https://www.continuum.io/downloads
