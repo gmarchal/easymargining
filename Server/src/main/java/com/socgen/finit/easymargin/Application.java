@@ -4,13 +4,12 @@ import com.socgen.finit.easymargin.converter.TradeFileHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
+
 import java.util.Arrays;
 
 @Slf4j
@@ -32,6 +31,9 @@ public class Application {
         for (String beanName : beanNames) {
             log.info(beanName);
         }
+
+        log.info("Server started - URL : http//localhost:" +
+                ctx.getEnvironment().getProperty("server.port"));
     }
 
     @Bean
