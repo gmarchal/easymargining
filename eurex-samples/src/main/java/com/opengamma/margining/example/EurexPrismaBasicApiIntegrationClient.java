@@ -210,7 +210,7 @@ public class EurexPrismaBasicApiIntegrationClient {
 
     ForwardRateAgreementSecurity fra = new ForwardRateAgreementSecurity(
         Currency.EUR,
-        FloatingIndex.EUR_EURIBOR_REUTERS.toFrequencySpecificExternalId(SEMI_ANNUAL),
+        FloatingIndex.EUR_EURIBOR_REUTERS.toFrequencySpecificExternalId(SimpleFrequency.SEMI_ANNUAL),
         SimpleFrequency.SEMI_ANNUAL,
         LocalDate.of(2015, 6, 15),
         LocalDate.of(2015, 12, 15),

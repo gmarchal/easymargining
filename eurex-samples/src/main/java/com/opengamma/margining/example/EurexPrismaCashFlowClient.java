@@ -83,7 +83,7 @@ public class EurexPrismaCashFlowClient {
                                                 s_valuationDate,
                                                 EurexPrismaReplicationRequests.IM_BASE_SCENARIO);
     
-    assertEquals(cashFlows.size(), 2);
+    Assert.assertEquals(cashFlows.size(), 2);
     
     System.out.println(CashFlowFormatter.asciiFormatter().formatSwapCashflows(cashFlows));
 
