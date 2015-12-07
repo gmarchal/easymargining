@@ -1,0 +1,11 @@
+AccountId,ClassType,Symbol,ExpirationYear,ExpirationMonth,StrikePrice,PutOrCall,LongPosition,ShortPosition,DVPDate,DVPAmount
+SG1,F,FTMIB,,,,,100,0,,
+SG1,F,MINI,,,,,0,50,,
+SG1,O,FTMIB,2015,12,9000,P,50,0,,
+SG1,O,FTMIB,2015,12,11000,P,50,0,,
+SG1,O,MIBO1W,2015,12,21100,P,0,10,,
+SG1,O,MIBO1W,2015,12,21200,C,20,0,,
+SG1,F,BMPS1,2015,12,,,30,0,,
+SG1,F,BMPS2,2015,12,,,0,20,,
+SG1,F,BMPS2,2015,3,,,0,30,,
+SG1,C,BMPS2,,,,,,,,2015-01-15,103500
