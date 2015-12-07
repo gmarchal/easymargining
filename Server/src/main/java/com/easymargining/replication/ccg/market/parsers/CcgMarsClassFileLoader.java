@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-class CcgMarsClassFileLoader {
+public class CcgMarsClassFileLoader {
 
     public List<ClassFileItem> readCCGClassFileFile(URL file) throws IOException, JAXBException {
         log.info("Read CCG ClassFile file " + file);
