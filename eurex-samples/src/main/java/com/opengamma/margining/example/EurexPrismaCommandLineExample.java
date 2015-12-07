@@ -30,7 +30,6 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.money.MultipleCurrencyAmount;
 import com.opengamma.util.result.Result;
-import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.LocalDate;

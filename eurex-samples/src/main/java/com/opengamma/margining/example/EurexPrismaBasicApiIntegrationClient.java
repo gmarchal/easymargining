@@ -6,7 +6,6 @@
 package com.opengamma.margining.example;
 
 
-import com.google.common.collect.*;
 import com.opengamma.core.id.ExternalSchemes;
 import com.opengamma.core.position.Counterparty;
 import com.opengamma.core.position.impl.SimpleCounterparty;
