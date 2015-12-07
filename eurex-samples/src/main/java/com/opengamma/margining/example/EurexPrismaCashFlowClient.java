@@ -5,16 +5,6 @@
  */
 package com.opengamma.margining.example;
 
-import static org.testng.Assert.assertEquals;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-
-import org.joda.beans.ser.JodaBeanSer;
-import org.springframework.core.io.ClassPathResource;
-import org.threeten.bp.LocalDate;
-
 import com.google.common.collect.ImmutableList;
 import com.opengamma.financial.analytics.model.fixedincome.SwapLegCashFlows;
 import com.opengamma.financial.convention.daycount.DayCounts;
@@ -36,6 +26,15 @@ import com.opengamma.margining.eurex.prisma.replication.data.EurexOtcMarketDataL
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaViewConfig;
 import com.opengamma.sesame.trade.InterestRateSwapTrade;
+import org.joda.beans.ser.JodaBeanSer;
+import org.springframework.core.io.ClassPathResource;
+import org.threeten.bp.LocalDate;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Example of using the cashflow extension API to extract cashflows on a swap.

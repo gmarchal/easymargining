@@ -5,17 +5,6 @@
  */
 package com.opengamma.margining.example;
 
-import java.net.URL;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.threeten.bp.LocalDate;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Table;
 import com.opengamma.margining.core.MarginEnvironment;
@@ -41,6 +30,12 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.money.MultipleCurrencyAmount;
 import com.opengamma.util.result.Result;
+import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.threeten.bp.LocalDate;
+
+import java.net.URL;
 
 /**
  * Implements a command-line example for calculating Eurex Prisma initial margin, where all input data is provided

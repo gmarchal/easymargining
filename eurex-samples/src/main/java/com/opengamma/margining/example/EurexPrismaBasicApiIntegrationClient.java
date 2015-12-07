@@ -6,23 +6,7 @@
 package com.opengamma.margining.example;
 
 
-import static com.opengamma.financial.convention.frequency.SimpleFrequency.SEMI_ANNUAL;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.OffsetTime;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 import com.opengamma.core.id.ExternalSchemes;
 import com.opengamma.core.position.Counterparty;
 import com.opengamma.core.position.impl.SimpleCounterparty;
@@ -69,6 +53,16 @@ import com.opengamma.timeseries.date.localdate.ImmutableLocalDateDoubleTimeSerie
 import com.opengamma.timeseries.date.localdate.LocalDateDoubleTimeSeries;
 import com.opengamma.util.money.Currency;
 import com.opengamma.util.result.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetTime;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+import static com.opengamma.financial.convention.frequency.SimpleFrequency.SEMI_ANNUAL;
 
 /**
  * Example illustrating using direct object creation (rather than loading from files) for essential business

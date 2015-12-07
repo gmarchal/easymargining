@@ -23,3 +23,6 @@ https://projectlombok.org/
 
 ## Python for Client tests
 https://www.continuum.io/downloads
+
+## Git utils tools
+https://desktop.github.com/
