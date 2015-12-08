@@ -52,13 +52,13 @@ public class CcgMarsReplicationCalculator {
                         p -> p,
                         (oldValue, newValue)  -> oldValue)
                 );
-
+        System.out.println(classFileMap);
 
         // Build MarginPosition from marginTradeItem and
         marginTradeItems.forEach( marginTradeItem -> {
             MarginPositions marginPosition = new MarginPositions();
             ClassFileItem classFileItem = classFileMap.get(
-                    marginTradeItem.getSymbol() + "#" + marginTradeItem.getClassType());
+                    marginTradeItem.getSymbol() + "#" + marginTradeItem.getClassType().getShortName());
             marginPosition.setClassGroup(classFileItem.getClassGroup());
             marginPosition.setProductGroup(classFileItem.getProductGroup());
         });
@@ -68,7 +68,7 @@ public class CcgMarsReplicationCalculator {
         //        .stream()
         //        .collect(Collectors.groupingsBy(p -> p.getSymbol(), p -> p));
 
-        System.out.println(classFileMap);
+
 
 
 
