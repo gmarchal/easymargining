@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by Gilles Marchal on 07/12/2015.
@@ -42,6 +44,32 @@ public class CcgMarsReplicationCalculator {
         // class file must be used to acquire the Class Group and Product group for each
         // position record by matching on the “Symbol” field
         List<ClassFileItem> classFileItems = marketDataEnv.getClassFileItems();
+
+        Map<String, ClassFileItem> classFileMap = classFileItems
+                .stream()
+                .collect(Collectors.toMap(
+                        p -> p.getSymbol() + "#" + p.getClassType(), // Unique Key = Symbol + Class Type
+                        p -> p,
+                        (oldValue, newValue)  -> oldValue)
+                );
+
+
+        // Build MarginPosition from marginTradeItem and
+        marginTradeItems.forEach( marginTradeItem -> {
+            MarginPositions marginPosition = new MarginPositions();
+            ClassFileItem classFileItem = classFileMap.get(
+                    marginTradeItem.getSymbol() + "#" + marginTradeItem.getClassType());
+            marginPosition.setClassGroup(classFileItem.getClassGroup());
+            marginPosition.setProductGroup(classFileItem.getProductGroup());
+        });
+
+        // Group by Symbol
+        //Map<String, ClassFileItem> classFileMap = classFileItems
+        //        .stream()
+        //        .collect(Collectors.groupingsBy(p -> p.getSymbol(), p -> p));
+
+        System.out.println(classFileMap);
+
 
 
 

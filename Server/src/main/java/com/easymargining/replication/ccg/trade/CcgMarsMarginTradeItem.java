@@ -3,10 +3,7 @@ package com.easymargining.replication.ccg.trade;
 import com.univocity.parsers.annotations.EnumOptions;
 import com.univocity.parsers.annotations.Parsed;
 import com.univocity.parsers.conversions.EnumSelector;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -18,6 +15,8 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class CcgMarsMarginTradeItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
