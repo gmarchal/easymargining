@@ -2,13 +2,13 @@ package com.easymargining.replication.ccg.market.parsers;
 
 import com.easymargining.replication.ccg.market.RiskArrayItem;
 import com.easymargining.replication.eurex.Application;
-import com.opengamma.margining.eurex.prisma.data.FileResources;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.Assert;
@@ -34,7 +34,7 @@ public class CcgMarsRiskArrayLoaderTest {
     public void testReadCCGRiskArrayFile() throws Exception {
         Assert.notNull(ccgMarsRiskArrayLoader);
 
-        URL url = FileResources.byPath("ccg/market/riskarray.xml");
+        URL url = new ClassPathResource("ccg/marketData/20151126/riskarray.xml").getURL();
         Assert.notNull(url);
 
         List<RiskArrayItem> items = ccgMarsRiskArrayLoader.readCCGRiskArrayFile(url);
