@@ -3,6 +3,7 @@ package com.easymargining.replication.ccg.market.parsers;
 import com.easymargining.replication.ccg.market.ClassFileItem;
 import com.opengamma.margining.eurex.prisma.data.FileResources;
 import com.easymargining.replication.eurex.Application;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import java.util.List;
 @SpringApplicationConfiguration(Application.class)   // 2
 @WebAppConfiguration   // 3
 @IntegrationTest("server.port:0")
-
+@Slf4j
 public class CcgMarsClassFileLoaderTest {
 
     private static final String symbol = "AAA13";
@@ -39,7 +40,7 @@ public class CcgMarsClassFileLoaderTest {
     private static final String Multiplier = "1.0";
     private static final String ProductStyle = "";
     private static final String UnderlyingCode = "AAA13";
-    private static final String CMV = "103.50";
+    private static final double CMV = 103.50;
     private static final String UnderlyingIsinCode = "FR0011146315";
     private static final String MarginInteval = "5.0";
     private static final String Currency = "EU";
@@ -72,7 +73,9 @@ public class CcgMarsClassFileLoaderTest {
         Assert.notNull(item);
         Assert.isTrue(item.getClassGroup().equals(classGroup));
         Assert.isTrue(item.getClassType().equals(ClassType));
-        Assert.isTrue(item.getCmv().equals(CMV));
+        Assert.isTrue(item.getCmv() == CMV);
+
+        log.info("First row of ClassFile file : " + item.toString());
 
         //for (ClassFileItem item : items) {
         //    System.out.println(item);

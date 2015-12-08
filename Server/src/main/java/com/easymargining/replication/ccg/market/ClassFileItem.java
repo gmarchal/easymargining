@@ -55,19 +55,19 @@ public class ClassFileItem implements Serializable {
     private String productType;
 
     @XmlElement(name="offset")
-    private String Offset;
+    private int Offset;
 
     @XmlElement(name="Spot-Spread-Rate")
-    private String spotSpreadRate;
+    private double spotSpreadRate;
 
     @XmlElement(name="Non-Spot-Spread-Rate")
-    private String nonSpotSpreadRate;
+    private double nonSpotSpreadRate;
 
     @XmlElement(name="Delivery-Rate")
-    private String deliveryRate;
+    private double deliveryRate;
 
     @XmlElement(name="Multiplier")
-    private String Multiplier;
+    private double Multiplier;
 
     @XmlElement(name="Product-Style")
     private String productStyle;
@@ -76,7 +76,7 @@ public class ClassFileItem implements Serializable {
     private String underlyingCode;
 
     @XmlElement(name="CMV")
-    private String cmv;
+    private double cmv;
 
     @XmlElement(name="Underlying-Isin-Code")
     private String underlyingIsinCode;
@@ -91,27 +91,27 @@ public class ClassFileItem implements Serializable {
     private String exchangeRate;
 
     @XmlElement(name="Currency-Haircut")
-    private String currencyHaircut;
+    private int currencyHaircut;
 
     @XmlElement(name="Minimum-Margin")
-    private String minimumMargin;
+    private double minimumMargin;
 
     @XmlElement(name="Interest-Rate")
-    private String interestRate;
+    private double interestRate;
 
     @XmlElement(name="Days-To-Settle")
-    private String daysToSettle;
+    private int daysToSettle;
 
     @XmlElement(name="Expiry-Time")
-    private String expiryTime;
+    private int expiryTime;
 
     @XmlElement(name="Market-Id")
-    private String marketId;
+    private int marketId;
 
     @XmlElement(name="SubType")
     private String subType;
 
     @XmlElement(name="VM-Multiplier")
-    private String vmMultiplier;
+    private double vmMultiplier;
 
 }

@@ -1,8 +1,9 @@
 package com.easymargining.replication.ccg.market.parsers;
 
 import com.easymargining.replication.ccg.market.RiskArrayItem;
-import com.opengamma.margining.eurex.prisma.data.FileResources;
 import com.easymargining.replication.eurex.Application;
+import com.opengamma.margining.eurex.prisma.data.FileResources;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import java.util.List;
 @SpringApplicationConfiguration(Application.class)   // 2
 @WebAppConfiguration   // 3
 @IntegrationTest("server.port:0")
-
+@Slf4j
 public class CcgMarsRiskArrayLoaderTest {
 
     @Autowired
@@ -38,5 +39,10 @@ public class CcgMarsRiskArrayLoaderTest {
 
         List<RiskArrayItem> items = ccgMarsRiskArrayLoader.readCCGRiskArrayFile(url);
         Assert.notEmpty(items);
+
+        int index = 0;
+        RiskArrayItem item = items.get(index);
+        Assert.notNull(item);
+        log.info("First row of RiskArray file : " + item.toString());
     }
 }

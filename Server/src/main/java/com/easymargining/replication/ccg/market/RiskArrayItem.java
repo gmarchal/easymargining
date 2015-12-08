@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Gilles Marchal on 07/12/2015.
@@ -27,7 +28,7 @@ public class RiskArrayItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name="Date")
-    private String date;
+    private Date date;
 
     @XmlElement(name="Class-Type")
     private String classType;
@@ -36,13 +37,13 @@ public class RiskArrayItem implements Serializable {
     private String symbol;
 
     @XmlElement(name="Year")
-    private String year;
+    private int year;
 
     @XmlElement(name="Month")
-    private String month;
+    private int month;
 
     @XmlElement(name="Strike-Price")
-    private String strikePrice;
+    private double strikePrice;
 
     @XmlElement(name="P-C")
     private String optionType;
@@ -51,52 +52,52 @@ public class RiskArrayItem implements Serializable {
     private String isinCode;
 
     @XmlElement(name="Mark-Price")
-    private String markPrice;
+    private double markPrice;
 
     @XmlElement(name="Downside5")
-    private String downside5;
+    private double downside5;
 
     @XmlElement(name="Downside4")
-    private String downside4;
+    private double downside4;
 
     @XmlElement(name="Downside3")
-    private String downside3;
+    private double downside3;
 
     @XmlElement(name="Downside2")
-    private String downside2;
+    private double downside2;
 
     @XmlElement(name="Downside1")
-    private String downside1;
+    private double downside1;
 
     @XmlElement(name="Upside1")
-    private String Upside1;
+    private double Upside1;
 
     @XmlElement(name="Upside2")
-    private String Upside2;
+    private double Upside2;
 
     @XmlElement(name="Upside3")
-    private String Upside3;
+    private double Upside3;
 
     @XmlElement(name="Upside4")
-    private String Upside4;
+    private double Upside4;
 
     @XmlElement(name="Upside5")
-    private String Upside5;
+    private double Upside5;
 
     @XmlElement(name="Short-Adjustment")
-    private String shortAdjustment;
+    private double shortAdjustment;
 
     @XmlElement(name="Volatility")
-    private String volatility;
+    private double volatility;
 
     @XmlElement(name="Open-Interest")
-    private String openInterest;
+    private double openInterest;
 
     @XmlElement(name="Cleared-Volume")
-    private String clearedVolume;
+    private double clearedVolume;
 
     @XmlElement(name="Market-Id")
-    private String marketId;
+    private int marketId;
 
     @XmlElement(name="Currency")
     private String currency;
