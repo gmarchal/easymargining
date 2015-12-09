@@ -1,5 +1,6 @@
 package com.easymargining.replication.ccg.market;
 
+import com.easymargining.replication.ccg.common.ClassTypeEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -102,4 +103,7 @@ public class RiskArrayItem implements Serializable {
     @XmlElement(name="Currency")
     private String currency;
 
+    public ClassTypeEnum getClassType() {
+        return ClassTypeEnum.valueOf(ClassTypeEnum.getEnumKey(classType));
+    }
 }

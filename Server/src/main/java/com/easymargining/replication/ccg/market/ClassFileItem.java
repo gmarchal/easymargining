@@ -1,5 +1,6 @@
 package com.easymargining.replication.ccg.market;
 
+import com.easymargining.replication.ccg.common.ClassTypeEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -114,4 +115,7 @@ public class ClassFileItem implements Serializable {
     @XmlElement(name="VM-Multiplier")
     private double vmMultiplier;
 
+    public ClassTypeEnum getClassType() {
+        return ClassTypeEnum.valueOf(ClassTypeEnum.getEnumKey(classType));
+    }
 }

@@ -1,5 +1,7 @@
 package com.easymargining.replication.ccg.trade;
 
+import com.easymargining.replication.ccg.common.ClassTypeEnum;
+import com.easymargining.replication.ccg.common.OptionTypeEnum;
 import com.univocity.parsers.annotations.EnumOptions;
 import com.univocity.parsers.annotations.Parsed;
 import com.univocity.parsers.conversions.EnumSelector;
@@ -25,7 +27,7 @@ public class CcgMarsMarginTradeItem implements Serializable {
     private String accountid;
     @Parsed(field = "ClassType")
     @EnumOptions(customElement = "_classType", selectors = { EnumSelector.CUSTOM_FIELD })
-    private ClassType classType;
+    private ClassTypeEnum classType;
     @Parsed(field = "Symbol")
     private String symbol;
     @Parsed(field = "ExpirationYear")
@@ -36,7 +38,7 @@ public class CcgMarsMarginTradeItem implements Serializable {
     private String strikePrice;
     @Parsed(field = "PutOrCall")
     @EnumOptions(customElement = "_optionType", selectors = { EnumSelector.CUSTOM_FIELD })
-    private OptionType optionType;
+    private OptionTypeEnum optionType;
     @Parsed(field = "LongPosition")
     private String longPosition;
     @Parsed(field = "ShortPosition")
