@@ -121,7 +121,14 @@ public class CcgMarsReplicationCalculator {
                                 p.getTradeItem().getOptionType())
                         ));
 
-        log.info(futuresMarginPositionsMap.toString());
+
+        futuresMarginPositionsMap.forEach(
+                (marginPositionAggregationKey, marginPositionItems) -> {
+                    log.info(marginPositionItems.toString());
+                    //test
+                } );
+
+
     }
 
     public void computeMarktoMarketMargin() {
