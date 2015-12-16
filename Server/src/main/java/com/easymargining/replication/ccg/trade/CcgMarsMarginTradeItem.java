@@ -31,21 +31,23 @@ public class CcgMarsMarginTradeItem implements Serializable {
     @Parsed(field = "Symbol")
     private String symbol;
     @Parsed(field = "ExpirationYear")
-    private String expYear;
+    private Integer expYear;
     @Parsed(field = "ExpirationMonth")
-    private String expMonth;
+    private Integer expMonth;
     @Parsed(field = "StrikePrice")
     private String strikePrice;
     @Parsed(field = "PutOrCall")
     @EnumOptions(customElement = "_optionType", selectors = { EnumSelector.CUSTOM_FIELD })
     private OptionTypeEnum optionType;
     @Parsed(field = "LongPosition")
-    private String longPosition;
+    private Double longPosition;
     @Parsed(field = "ShortPosition")
-    private String shortPosition;
+    private Double shortPosition;
+    @Parsed(field = "NetPosition")
+    private Double netPosition;
     @Parsed(field = "DVPDate")
     private String dvpDate;
     @Parsed(field = "DVPAmount")
-    private String dvpAmount;
+    private Double dvpAmount;
 
 }

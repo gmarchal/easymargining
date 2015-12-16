@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class CcgMarsReplicationCalculator {
 
 
-    public void computeFuturesSpreadMargin(LocalDate s_valuationDate, List<CcgMarsMarginTradeItem> marginTradeItems){
+    public List<FuturesSpreadMargin> computeFuturesSpreadMargin(LocalDate s_valuationDate, List<CcgMarsMarginTradeItem> marginTradeItems){
 
         // Use file resolver utility to discover data from CCG directory structure
         MarketDataFileResolver fileResolver = new MarketDataFileResolver("marketData", s_valuationDate);
@@ -122,23 +122,206 @@ public class CcgMarsReplicationCalculator {
                         ));
 
 
+        List<MarginPositionItem> futureMarginPositionsNetted = new ArrayList<>();
         futuresMarginPositionsMap.forEach(
                 (marginPositionAggregationKey, marginPositionItems) -> {
                     log.info(marginPositionItems.toString());
-                    //test
+                    if (marginPositionItems.size() > 1 ) {
+                        // Net Futures positions
+
+                        // Find Future position with greater multiplier
+                        MarginPositionItem futurePositionWithGreaterMultiplier =
+                                marginPositionItems.stream()
+                                        .max((p1, p2) -> Double.compare(
+                                                p1.getClassFileItem().getMultiplier(),
+                                                p2.getClassFileItem().getMultiplier()))
+                                        .get();
+                        log.info(" Future Position With Greater Multiplier = " + futurePositionWithGreaterMultiplier.toString());
+
+                        // Find Future position with smaller multiplier
+                        MarginPositionItem futurePositionWithSmallerMultiplier =
+                                marginPositionItems.stream()
+                                        .min((p1, p2) -> Double.compare(
+                                                p1.getClassFileItem().getMultiplier(),
+                                                p2.getClassFileItem().getMultiplier()))
+                                        .get();
+
+                        log.info(" Future Position With Smaller Multiplier = " + futurePositionWithSmallerMultiplier.toString());
+
+                        // Calculate Conversion Factor
+                        double conversionFactor = futurePositionWithGreaterMultiplier.getClassFileItem().getMultiplier() /
+                                futurePositionWithSmallerMultiplier.getClassFileItem().getMultiplier();
+
+                        log.info(" Conversion Factor = " + conversionFactor);
+
+                        // Generate converted position from position with the smaller multiplier
+                        futurePositionWithGreaterMultiplier.getTradeItem().setLongPosition(
+                                futurePositionWithGreaterMultiplier.getTradeItem().getLongPosition() * conversionFactor
+                        );
+                        futurePositionWithGreaterMultiplier.getTradeItem().setShortPosition(
+                                futurePositionWithGreaterMultiplier.getTradeItem().getShortPosition() * conversionFactor
+                        );
+
+                        // Net positions
+                        double nettedLongPosition = 0;
+                        double nettedShortPosition = 0;
+
+                        log.info(" Compute Netted Long/Short position for this list of MarginPositionItem = " +
+                                marginPositionItems);
+
+                        for (MarginPositionItem item : marginPositionItems) {
+                            nettedLongPosition += item.getTradeItem().getLongPosition();
+                            nettedShortPosition += item.getTradeItem().getShortPosition();
+                        }
+                        double nettedNetPosition = nettedShortPosition - nettedLongPosition;
+
+                        log.info(" NettedLongPosition = " + nettedLongPosition + ", NettedShortPosition = " +
+                                nettedShortPosition + ", NettedNetPosition = " + nettedNetPosition);
+
+                        futurePositionWithSmallerMultiplier.getTradeItem().setLongPosition(nettedLongPosition);
+                        futurePositionWithSmallerMultiplier.getTradeItem().setShortPosition(nettedShortPosition);
+                        futurePositionWithSmallerMultiplier.getTradeItem().setNetPosition(nettedNetPosition);
+
+                        futureMarginPositionsNetted.add(futurePositionWithSmallerMultiplier);
+
+                    } else {
+                        //No Netting
+                        log.info("No netting needed, only one position items = " + marginPositionItems.toString());
+                        futureMarginPositionsNetted.addAll(marginPositionItems);
+                    }
                 } );
 
+        log.info(" Future Margin Positions netted are : " );
+        futureMarginPositionsNetted.forEach(
+                (marginPositionItem) -> {
+                    log.info(" --- " + marginPositionItem.getTradeItem().toString());
+                }
+        );
 
+        // *************************************************************************************************************
+        // Calculate Future Spread margin
+        // *************************************************************************************************************
+        // Sum the total of all net long futures positions in the class and the total
+        // of all net short futures positions in the class.
+
+        Map<MarginPositionAggregationKey, List<MarginPositionItem>> futuresMarginPositionsGroupByClassMap = futureMarginPositionsNetted.stream()
+        .collect(Collectors.groupingBy(p -> new MarginPositionAggregationKey(
+                p.getTradeItem().getAccountid(),
+                p.getClassFileItem().getClassGroup(),
+                p.getClassFileItem().getClassType(),
+                null,
+                null,
+                null,
+                null)));
+
+        List<FuturesSpreadMargin> futuresSpreadMargins = new ArrayList<>();
+        futuresMarginPositionsGroupByClassMap.forEach(
+                (marginPositionAggregationKey, marginPositionItems) -> {
+                    log.info(marginPositionItems.toString());
+
+                    // Calculate Total Spread Quantity (Long & Short) for the class
+                    double totalClassSpreadLongQuantity = 0;
+                    double totalClassSpreadShortQuantity = 0;
+                    for (MarginPositionItem item : marginPositionItems) {
+                        totalClassSpreadLongQuantity += item.getTradeItem().getLongPosition();
+                        totalClassSpreadShortQuantity += item.getTradeItem().getShortPosition();
+                    }
+                    double totalClassSpreadQuantity = totalClassSpreadShortQuantity - totalClassSpreadLongQuantity;
+
+                    //Calculate the total non spread contrat quantity for the class
+                    double totalClassNonSpreadContractQuantity = totalClassSpreadShortQuantity -
+                            totalClassSpreadLongQuantity;
+
+                    // Looking for the spot month (nearest future contact)
+                    MarginPositionItem spotMonthFuturesPosition =
+                            marginPositionItems.stream()
+                                    .min((p1, p2) -> Double.compare(
+                                            p1.getTradeItem().getExpYear() * 100 + p1.getTradeItem().getExpMonth(),
+                                            p2.getTradeItem().getExpYear() * 100 + p2.getTradeItem().getExpMonth()))
+                                    .get();
+
+                    // Calculate SpotMontSpreadQuantity
+                    double spotMonthSpreadQuantity = 0;
+                    if (spotMonthFuturesPosition.getTradeItem().getNetPosition() < 0) { // Long Position
+                        if (spotMonthFuturesPosition.getTradeItem().getLongPosition() <= totalClassSpreadLongQuantity) {
+                            spotMonthSpreadQuantity = spotMonthFuturesPosition.getTradeItem().getLongPosition();
+                        } else {
+                            spotMonthSpreadQuantity = totalClassSpreadLongQuantity;
+                        }
+                    } else { // short Position
+                        if (spotMonthFuturesPosition.getTradeItem().getShortPosition() <= totalClassSpreadShortQuantity) {
+                            spotMonthSpreadQuantity = spotMonthFuturesPosition.getTradeItem().getShortPosition();
+                        } else {
+                            spotMonthSpreadQuantity = totalClassSpreadShortQuantity;
+                        }
+                    }
+
+                    double nonSpotSpreadContractQuantity = totalClassSpreadQuantity - spotMonthSpreadQuantity;
+
+                    double classSpotMonthSpreadMargin = spotMonthSpreadQuantity *
+                            spotMonthFuturesPosition.getClassFileItem().getNonSpotSpreadRate();
+                    double classNonSpotMonthSpreadMargin = nonSpotSpreadContractQuantity *
+                            spotMonthFuturesPosition.getClassFileItem().getSpotSpreadRate();
+
+                    // Spread Margin Requirement for the Futures - Maturity
+                    double totalClassSpreadMarginRequirement = classSpotMonthSpreadMargin +
+                            classNonSpotMonthSpreadMargin;
+
+                    futuresSpreadMargins.add(new FuturesSpreadMargin(
+                            marginPositionItems.get(0).getClassFileItem().getProductGroup(),
+                            marginPositionItems.get(0).getClassFileItem().getClassGroup(),
+                            totalClassSpreadMarginRequirement,      // Spread Margin requirements
+                            totalClassNonSpreadContractQuantity)     // Non Spread contract quantity
+                    );
+                }
+        );
+
+        log.info(" Future Spread Margin are : " );
+        futuresSpreadMargins.forEach(
+                (futuresSpreadMargin) -> {
+                    log.info(" --- " + futuresSpreadMargin.toString());
+                }
+        );
+
+        return futuresSpreadMargins;
     }
 
+    /*
+     * Mark-To-Market Margin: calculated for securities positions and for stock futures
+     * positions which have been expired and have not yet been settled. It has the
+     * purpose of revaluating the theoretical liquidation gains/losses to current market
+     * prices (Mark-To-Market). For equity positions it represents a theoretical credit for
+     * the clearing member that has bought/sold shares below/above current market
+     * prices, assumed equal to the reference price. On the other side, it represents a
+     * theoretical debit for the clearing member that has bought (sold) shares above
+     * (below) current market prices. For stock Future positions it represents a theoretical
+     * credit (debit) for the member who bought the futures if the settlement price is lower
+     * (higher) than the current market value, set equal to the reference price of the of the
+     * underlying, and vice versa for the member that sold the futures.
+     */
     public void computeMarktoMarketMargin() {
 
     }
 
+    /*
+     * Premium Margins: calculated only for stock-style options. It has the purpose of
+     * revaluating the theoretical liquidation costs/revenues at the current market values
+     * (market-to-market) and therefore represents a theoretical credit for the options
+     * buyer and a theoretical debt for the seller. It is equal to the current market value of
+     * the option itself, assumed equal to the closing price that is calculated daily.
+     */
     public void premiumMargin() {
 
     }
 
+    /*
+     * Additional Margin: calculated for all securities positions, option positions and nonspread
+     * futures positions. It has the purpose of evaluating the maximum loss
+     * reasonably possible in the hypothesis of market price fluctuations of the underlying
+     * asset. If the risk margin component of a particular product group is less than a
+     * calculated minimum margin for the product group, then the minimum margin will be
+     * taken as the additional margin.
+     */
     public void computeAdditionalMargin () {
 
     }

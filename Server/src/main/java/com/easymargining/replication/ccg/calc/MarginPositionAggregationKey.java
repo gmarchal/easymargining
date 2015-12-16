@@ -19,8 +19,8 @@ public class MarginPositionAggregationKey {
     private String AccountId;
     private String ClassGroup;
     private ClassTypeEnum classType;
-    private String expYear;
-    private String expMonth;
+    private Integer expYear;
+    private Integer expMonth;
     private String strikePrice;
     private OptionTypeEnum optionType;
 
