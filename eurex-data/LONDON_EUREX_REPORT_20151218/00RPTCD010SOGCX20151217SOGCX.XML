@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cd010 xmlns="http://www.eurexchange.com/technology">
+<rptHdr>
+<exchNam>EUREX</exchNam>
+<envText>P</envText>
+<rptCod>CD010</rptCod>
+<rptNam>Daily Cash Account CM</rptNam>
+<membLglNam>SOCIETE GENERALE S.A.</membLglNam>
+<rptPrntEffDat>2015-12-17</rptPrntEffDat>
+<rptPrntRunDat>2015-12-17</rptPrntRunDat>
+</rptHdr>
+<cd010Grp>
+<cd010KeyGrp>
+<membClgIdCod>SOGCX</membClgIdCod>
+</cd010KeyGrp>
+<cd010Grp1>
+<cd010KeyGrp1>
+<membExchIdCod>SOGCX</membExchIdCod>
+</cd010KeyGrp1>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>087058                </cshAcctNo2>
+<cshLocKeyCod>SNB  </cshLocKeyCod>
+<currTypCod>CHF</currTypCod>
+<cshRefCod>CCPSA20        </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-16</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<trnTyp2>498</trnTyp2>
+<trnTypText>EUREX CSH COMP PAID </trnTypText>
+<trnDebAmnt>5.22</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398031        </cshInstId>
+<trnTyp2>200</trnTyp2>
+<trnTypText>CASH CALL           </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>5.22</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>087058                </cshAcctNo2>
+<cshLocKeyCod>SNB  </cshLocKeyCod>
+<currTypCod>CHF</currTypCod>
+<cshRefCod>EUREX          </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>224</trnTyp2>
+<trnTypText>PREMIUM PAID        </trnTypText>
+<trnDebAmnt>457463.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>226</trnTyp2>
+<trnTypText>PREMIUM RECEIVED    </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>457463.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>235</trnTyp2>
+<trnTypText>VAR MARGIN RECEIVED </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>334150.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>236</trnTyp2>
+<trnTypText>VAR MARGIN PAID     </trnTypText>
+<trnDebAmnt>334150.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>224</trnTyp2>
+<trnTypText>PREMIUM PAID        </trnTypText>
+<trnDebAmnt>331985.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>226</trnTyp2>
+<trnTypText>PREMIUM RECEIVED    </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>1099979.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>235</trnTyp2>
+<trnTypText>VAR MARGIN RECEIVED </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>5081405.55</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>236</trnTyp2>
+<trnTypText>VAR MARGIN PAID     </trnTypText>
+<trnDebAmnt>3489931.97</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>244</trnTyp2>
+<trnTypText>OTC VAR. MARGIN RCVD</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>138080.91</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>247</trnTyp2>
+<trnTypText>OTC COUPON PAID     </trnTypText>
+<trnDebAmnt>108342.08</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398032        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>2389206.41</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>18500813669556        </cshAcctNo2>
+<cshLocKeyCod>CIT  </cshLocKeyCod>
+<currTypCod>GBP</currTypCod>
+<cshRefCod>EUREX          </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>235</trnTyp2>
+<trnTypText>VAR MARGIN RECEIVED </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>1293087.16</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>236</trnTyp2>
+<trnTypText>VAR MARGIN PAID     </trnTypText>
+<trnDebAmnt>257215.34</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>243</trnTyp2>
+<trnTypText>OTC VAR. MARGIN PAID</trnTypText>
+<trnDebAmnt>946.03</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398038        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>1034925.79</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>36333755              </cshAcctNo2>
+<cshLocKeyCod>CNY  </cshLocKeyCod>
+<currTypCod>USD</currTypCod>
+<cshRefCod>EUREX          </cshRefCod>
+<cshStlRun>MISC</cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-17</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>202</trnTyp2>
+<trnTypText>MARGIN CALL         </trnTypText>
+<trnDebAmnt>12000000.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-17</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5397300        </cshInstId>
+<trnTyp2>200</trnTyp2>
+<trnTypText>CASH CALL           </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>12000000.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>36333755              </cshAcctNo2>
+<cshLocKeyCod>CNY  </cshLocKeyCod>
+<currTypCod>USD</currTypCod>
+<cshRefCod>EUREX          </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>211</trnTyp2>
+<trnTypText>CASH COLLATERAL WDL2</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>12000000.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>235</trnTyp2>
+<trnTypText>VAR MARGIN RECEIVED </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>30.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>236</trnTyp2>
+<trnTypText>VAR MARGIN PAID     </trnTypText>
+<trnDebAmnt>30.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>235</trnTyp2>
+<trnTypText>VAR MARGIN RECEIVED </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>1218820.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>236</trnTyp2>
+<trnTypText>VAR MARGIN PAID     </trnTypText>
+<trnDebAmnt>297718.28</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>244</trnTyp2>
+<trnTypText>OTC VAR. MARGIN RCVD</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>5005.45</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398039        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>12926107.17</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>94840                 </cshAcctNo2>
+<cshLocKeyCod>EOC  </cshLocKeyCod>
+<currTypCod>EUR</currTypCod>
+<cshRefCod>CCPSA307       </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-18</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<trnTyp2>472</trnTyp2>
+<trnTypText>CASH OFFSET SHR RCVD</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>6091.65</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398034        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>6091.65</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>SOGEFRPPXXX           </cshAcctNo2>
+<cshLocKeyCod>BBK  </cshLocKeyCod>
+<currTypCod>EUR</currTypCod>
+<cshRefCod>CCPA0112       </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-18</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<trnTyp2>472</trnTyp2>
+<trnTypText>CASH OFFSET SHR RCVD</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>41244.09</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-18</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<trnTyp2>474</trnTyp2>
+<trnTypText>CASH OFFSET SHR PAID</trnTypText>
+<trnDebAmnt>30536.30</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398033        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>10707.79</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>SOGEFRPPXXX           </cshAcctNo2>
+<cshLocKeyCod>BBK  </cshLocKeyCod>
+<currTypCod>EUR</currTypCod>
+<cshRefCod>CCPSL007       </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<trnTyp2>502</trnTyp2>
+<trnTypText>MARK-TO-MARKET RCV  </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>185250.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398035        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>185250.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>SOGEFRPPXXX           </cshAcctNo2>
+<cshLocKeyCod>BBK  </cshLocKeyCod>
+<currTypCod>EUR</currTypCod>
+<cshRefCod>EUREX          </cshRefCod>
+<cshStlRun>MISC</cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-17</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>202</trnTyp2>
+<trnTypText>MARGIN CALL         </trnTypText>
+<trnDebAmnt>260000000.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-17</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5394600        </cshInstId>
+<trnTyp2>200</trnTyp2>
+<trnTypText>CASH CALL           </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>250000000.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-17</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5394601        </cshInstId>
+<trnTyp2>200</trnTyp2>
+<trnTypText>CASH CALL           </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>10000000.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>SOGEFRPPXXX           </cshAcctNo2>
+<cshLocKeyCod>BBK  </cshLocKeyCod>
+<currTypCod>EUR</currTypCod>
+<cshRefCod>EUREX          </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>207</trnTyp2>
+<trnTypText>CASH COLLATERAL WDL1</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>1117914.69</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>224</trnTyp2>
+<trnTypText>PREMIUM PAID        </trnTypText>
+<trnDebAmnt>4135862.00</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>226</trnTyp2>
+<trnTypText>PREMIUM RECEIVED    </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>4135862.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>235</trnTyp2>
+<trnTypText>VAR MARGIN RECEIVED </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>15454462.50</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXCLIENTECM</poolId>
+<trnTyp2>236</trnTyp2>
+<trnTypText>VAR MARGIN PAID     </trnTypText>
+<trnDebAmnt>15366882.50</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>207</trnTyp2>
+<trnTypText>CASH COLLATERAL WDL1</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>260000000.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>224</trnTyp2>
+<trnTypText>PREMIUM PAID        </trnTypText>
+<trnDebAmnt>97220929.50</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>226</trnTyp2>
+<trnTypText>PREMIUM RECEIVED    </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>44877299.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>235</trnTyp2>
+<trnTypText>VAR MARGIN RECEIVED </trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>224226038.74</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>236</trnTyp2>
+<trnTypText>VAR MARGIN PAID     </trnTypText>
+<trnDebAmnt>420539541.02</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>SOGCXXSTANDARD </poolId>
+<trnTyp2>244</trnTyp2>
+<trnTypText>OTC VAR. MARGIN RCVD</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>9840805.96</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398036        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>22389167.87</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+<cd010Grp2>
+<cd010KeyGrp2>
+<cshAcctNo2>SOGEFRPPXXX           </cshAcctNo2>
+<cshLocKeyCod>BBK  </cshLocKeyCod>
+<currTypCod>EUR</currTypCod>
+<cshRefCod>EUREXCAPDESPA  </cshRefCod>
+<cshStlRun>NTP </cshStlRun>
+<clgHseInd2>ECAG</clgHseInd2>
+</cd010KeyGrp2>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>DESPAXSOGCXSEG </poolId>
+<trnTyp2>207</trnTyp2>
+<trnTypText>CASH COLLATERAL WDL1</trnTypText>
+<trnDebAmnt>0.00</trnDebAmnt>
+<trnCrdAmnt>9067.40</trnCrdAmnt>
+</cd010Rec>
+<cd010Rec>
+<date>2015-12-17</date>
+<trnValDat>2015-12-18</trnValDat>
+<poolId>               </poolId>
+<cshInstId>5398037        </cshInstId>
+<trnTyp2>206</trnTyp2>
+<trnTypText>CASH WITHDRAWAL     </trnTypText>
+<trnDebAmnt>9067.40</trnDebAmnt>
+<trnCrdAmnt>0.00</trnCrdAmnt>
+</cd010Rec>
+</cd010Grp2>
+</cd010Grp1>
+</cd010Grp>
+</cd010>
