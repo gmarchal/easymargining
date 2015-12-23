@@ -1,4 +1,5 @@
-*.class
+#opengamma local repository
+eurex-local-repository
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
