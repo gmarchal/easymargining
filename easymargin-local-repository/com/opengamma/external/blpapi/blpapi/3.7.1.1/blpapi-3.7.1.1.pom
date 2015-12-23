@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.opengamma.external.blpapi</groupId>
+  <artifactId>blpapi</artifactId>
+  <packaging>jar</packaging>
+  <name>Bloomberg Open API</name>
+  <version>3.7.1.1</version>
+  <description>Bloomberg Open API, downloaded (unchanged) by OpenGamma</description>
+  <url>http://www.openbloomberg.com/open-api/</url>
+
+  <issueManagement>
+    <system>Jira</system>
+    <url>http://jira.opengamma.com/browse/PLAT</url>
+  </issueManagement>
+  <inceptionYear>2009</inceptionYear>
+  <mailingLists>
+    <mailingList>
+      <name>OpenGamma forum</name>
+      <archive>http://forums.opengamma.com/forum/discussions</archive>
+    </mailingList>
+  </mailingLists>
+
+  <licenses>
+    <license>
+      <name>Bloomerg MIT style</name>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.4.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.3.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-repository-plugin</artifactId>
+        <version>2.3.1</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

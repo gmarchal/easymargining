@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.sourceforge.jtransforms</groupId>
+  <artifactId>jtransforms</artifactId>
+  <version>2.4.0</version>
+  <name>JTransforms</name>
+  <description>JTransforms is the first, open source, multithreaded FFT library written in pure Java. Benchmark results show better performance than FFTW.</description>
+  <url>http://sourceforge.net/projects/jtransforms/</url>
+
+  <licenses>
+    <license>
+      <name>MPL</name>
+      <url>http://www.mozilla.org/MPL/2.0/index.txt</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>LGPL</name>
+      <url>http://www.gnu.org/licenses/lgpl-2.1.txt</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>GPL</name>
+      <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:svn:https://jtransforms.svn.sourceforge.net/svnroot/jtransforms/trunk/</connection>
+    <developerConnection>scm:svn:https://jtransforms.svn.sourceforge.net/svnroot/jtransforms/trunk/</developerConnection>
+    <url>https://jtransforms.svn.sourceforge.net/svnroot/jtransforms/trunk/</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>wendykierp</id>
+      <name>Piotr Wendykier</name>
+      <email>piotr.wendykier@gmail.com</email>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+    </dependency>
+  </dependencies>
+</project>
+

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>truezip</artifactId>
+    <version>1.2</version>
+  </parent>
+
+  <artifactId>truezip-utils</artifactId>
+  <name>TrueZIP Shared Component</name>
+
+  <description>Shared component usable outside of Maven to manipulate archives. See javadoc and unit test for detailed usage.</description>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>de.schlichtherle.truezip</groupId>
+      <artifactId>truezip-file</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.schlichtherle.truezip</groupId>
+      <artifactId>truezip-driver-zip</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.schlichtherle.truezip</groupId>
+      <artifactId>truezip-driver-tar</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>file-management</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.maven</groupId>
+          <artifactId>maven-plugin-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.maven.shared</groupId>
+          <artifactId>maven-shared-io</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-utils</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.maven.wagon</groupId>
+          <artifactId>wagon-provider-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-container-default</artifactId>
+        </exclusion>
+
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-test-file</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <destFileName>calculator.ear</destFileName>
+                  <groupId>org.apache.geronimo.samples</groupId>
+                  <artifactId>calculator-ear</artifactId>
+                  <version>2.1.2</version>
+                  <type>ear</type>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+
+    </plugins>
+
+  </build>
+
+</project>
