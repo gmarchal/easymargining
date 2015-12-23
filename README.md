@@ -15,6 +15,21 @@ Unzip open/gamma-eurex/pme-18.3_eurex-repository.zip on your drive.
           </repository>
         </repositories>
     </profile>
+    <profile>
+        <id>easymargining</id>
+        <repositories>
+            <repository>
+                <id>easymargining</id>
+                <url>file://[Path of easymargin-local-repository]</url>
+            </repository>
+        </repositories>
+        <pluginRepositories>
+            <pluginRepository>
+                <id>easymargining-plugins</id>
+                <url>file://[Path of easymargin-local-repository]</url>
+            </pluginRepository>
+        </pluginRepositories>
+    	</profile>
 ## Add the activeProfile below in activeProfiles tag
     <activeProfile>eurex-pme-profile</activeProfile>
 
