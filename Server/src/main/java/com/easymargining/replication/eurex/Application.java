@@ -32,7 +32,7 @@ public class Application {
             log.info(beanName);
         }
 
-        log.info("Server started - URL : http//localhost:" +
+        log.info("Server started - URL : http://localhost:" +
                 ctx.getEnvironment().getProperty("server.port"));
     }
 
