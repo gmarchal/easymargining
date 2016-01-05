@@ -4,19 +4,17 @@
   <groupId>com.easymargining.eurex</groupId>
   <artifactId>easymargining.eurex</artifactId>
   <version>0.0.1</version>
-  <licenses>
-    <license>
-      <name>Proprietary EasyMargining Licensing</name>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.3.1.RELEASE</version>
+    </parent>
+
 
   <properties>
     <java.version>1.8</java.version>
     <spring.version>4.2.3.RELEASE</spring.version>
-    <!-- Spring Boot -->
-    <spring-boot.version>1.3.0.RELEASE</spring-boot.version>
-
     <resource.delimiter>@</resource.delimiter> <!-- delimiter that doesn't clash with Spring ${} placeholders -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -27,6 +25,10 @@
     <jackson-databind.version>2.4.1.1</jackson-databind.version>
     <opengamma-eurex.archive>${project.basedir}/../opengamma-eurex/pme-1.8.3_eurex-repository.zip</opengamma-eurex.archive>
     <eurex-local-repository>${project.basedir}/../eurex-local-repository</eurex-local-repository>
+
+      <!-- The main class to start by executing java -jar -->
+      <start-class>com.easymargining.replication.eurex.Application</start-class>
+
   </properties>
 
   <repositories>
@@ -46,21 +48,10 @@
 
   <build>
     <plugins>
-	<!--
-	<plugin>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok-maven-plugin</artifactId>
-      <version>0.9.3.1</version>
-      <executions>
-        <execution>
-          <phase>generate-sources</phase>
-          <goals>
-            <goal>delombok</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
-	-->
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -76,26 +67,6 @@
           </execution>
         </executions>
       </plugin>
-      <!--
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.1.1</version>
-        <executions>
-          <execution>
-            <phase>test</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>com.easymargining.replication.eurex.Application</mainClass>
-              <arguments>
-              </arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>truezip-maven-plugin</artifactId>
@@ -134,59 +105,14 @@
   </build>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-    <!-- Spring Boot -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot</artifactId>
-      <version>${spring-boot.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-      <version>${spring-boot.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-      <version>${spring-boot.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>${jackson-core.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>${jackson-databind.version}</version>
-    </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-actuator</artifactId>
+      </dependency>
 
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -202,355 +128,11 @@
     </dependency>
 
     <dependency>
-      <groupId>com.opengamma.platform</groupId>
-      <artifactId>sesame-examples</artifactId>
-      <version>2.21.0</version>
-      <type>pom</type>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>info.cukes</groupId>
-      <artifactId>cucumber-jvm</artifactId>
-      <version>1.2.4</version>
-      <type>pom</type>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>info.cukes</groupId>
-        <artifactId>cucumber-testng</artifactId>
-        <version>1.2.4</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>info.cukes</groupId>
-      <artifactId>cucumber-java</artifactId>
-      <version>1.2.4</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-library</artifactId>
-      <version>1.3</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-csv</artifactId>
-      <version>1.0</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.platform</groupId>
-      <artifactId>sesame-engine</artifactId>
-      <version>2.21.0</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.margining</groupId>
-      <artifactId>ogm-api</artifactId>
-      <version>1.8.3</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.margining</groupId>
-      <artifactId>ogm-examples-common</artifactId>
-      <version>1.8.3</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.platform</groupId>
-      <artifactId>og-platform</artifactId>
-      <version>2.21.0</version>
-      <type>pom</type>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.joda</groupId>
-      <artifactId>joda-beans</artifactId>
-      <version>1.6</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma</groupId>
-      <artifactId>corporate-parent</artifactId>
-      <version>1.1.8</version>
-      <type>pom</type>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.platform</groupId>
-      <artifactId>sesame-function</artifactId>
-      <version>2.21.0</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.platform</groupId>
-      <artifactId>og-platform-public</artifactId>
-      <version>2.21.0</version>
-      <type>pom</type>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.margining</groupId>
-      <artifactId>ogm-client-common</artifactId>
-      <version>1.8.3</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.margining</groupId>
-      <artifactId>ogm-integration</artifactId>
-      <version>1.8.3</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.opengamma.platform</groupId>
-      <artifactId>og-integration</artifactId>
-      <version>2.21.0</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>og-server</artifactId>
-          <groupId>com.opengamma.platform</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ant-compress</artifactId>
-          <groupId>org.apache.ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>scripts</artifactId>
-          <groupId>com.opengamma.tools</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>com.opengamma.margining</groupId>
       <artifactId>ogm-eurex-prisma-replication</artifactId>
       <version>1.8.3</version>
     </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
