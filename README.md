@@ -41,3 +41,32 @@ https://www.continuum.io/downloads
 
 ## Git utils tools
 https://desktop.github.com/
+
+
+##MongoDB Install
+- Download MongoDB
+- tar xvzf mongodb-linux-x86_64-rhel62-3.2.1.tgz
+- Installation description on : http://www.tokiwinter.com/mongodb-installation-basic-configuration/
+
+# MongDb Config
+vi /home/esmuat01/conf/mongodb.conf
+fork=true
+auth=true
+bind_ip = 0.0.0.0
+port = 1234
+quiet = true
+dbpath = /home/esmuat01/lib/mongodb
+logpath = /home/esmuat01/log/mongodb/mongod.log
+logappend = true
+journal = true
+
+# Script MongoDb
+./mongo --port 1234
+use esmdb
+db.createUser(
+   {
+     user: "esmdbusr",
+     pwd: "esmdbpwd",
+     roles: [ "readWrite", "dbAdmin" ]
+   }
+)
