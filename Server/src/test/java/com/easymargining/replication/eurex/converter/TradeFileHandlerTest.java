@@ -1,10 +1,9 @@
 package com.easymargining.replication.eurex.converter;
 
 import com.beust.jcommander.internal.Lists;
-import com.easymargining.replication.eurex.converter.TradeFileHandler;
 import com.opengamma.margining.eurex.prisma.data.FileResources;
 import com.easymargining.replication.eurex.Application;
-import com.easymargining.replication.eurex.model.TradeEntity;
+import com.easymargining.replication.eurex.domain.model.TradeEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

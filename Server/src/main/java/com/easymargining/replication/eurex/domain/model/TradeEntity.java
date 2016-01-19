@@ -1,4 +1,4 @@
-package com.easymargining.replication.eurex.model;
+package com.easymargining.replication.eurex.domain.model;
 
 import com.opengamma.margining.eurex.prisma.replication.trade.parsers.EurexEtdTradeFileReader;
 import com.univocity.parsers.annotations.EnumOptions;
@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 
@@ -22,6 +23,9 @@ import java.io.Serializable;
 public class TradeEntity implements Serializable {
 
     private static final long serialVersionUID = 1879636427086123116L;
+
+    @Id
+    private String id;
 
     @Parsed(field = "Product ID")
     private String productId;

@@ -1,5 +1,8 @@
 package com.easymargining.replication.eurex;
 
+import com.easymargining.replication.eurex.config.MongoConfiguration;
+import com.easymargining.replication.eurex.config.WebSecurityConfiguration;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.system.ApplicationPidFileWriter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,8 +14,13 @@ import java.util.Arrays;
 /**
  * Created by Gilles Marchal on 24/11/2015.
  */
+@Slf4j
 @SpringBootApplication
-@Import(value = { EurexMarginingServiceConfig.class } )
+@Import(value = {
+        EurexMarginingServiceConfig.class,
+        MongoConfiguration.class,
+        WebSecurityConfiguration.class
+})
 public class EurexMarginingServiceApplication {
 
     public static void main(String[] args) {
@@ -27,6 +35,9 @@ public class EurexMarginingServiceApplication {
         for (String beanName : beanNames) {
             System.out.println(beanName);
         }
+
+        log.info("Server started - URL : http://localhost:" +
+                ctx.getEnvironment().getProperty("server.port"));
     }
 
 }

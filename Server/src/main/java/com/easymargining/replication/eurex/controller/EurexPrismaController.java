@@ -1,4 +1,4 @@
-package com.easymargining.replication.eurex.web;
+package com.easymargining.replication.eurex.controller;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Table;
@@ -24,8 +24,8 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.result.Result;
 import com.easymargining.replication.eurex.converter.TradeFileHandler;
-import com.easymargining.replication.eurex.model.Request;
-import com.easymargining.replication.eurex.model.TradeEntity;
+import com.easymargining.replication.eurex.domain.model.Request;
+import com.easymargining.replication.eurex.domain.model.TradeEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +38,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import static com.easymargining.replication.eurex.web.EurexPrismaController.PATH_API;
+import static com.easymargining.replication.eurex.controller.EurexPrismaController.PATH_API;
 
 @Slf4j
 @RestController

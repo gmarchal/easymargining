@@ -1,4 +1,4 @@
-package com.easymargining.replication.eurex.model;
+package com.easymargining.replication.eurex.domain.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;

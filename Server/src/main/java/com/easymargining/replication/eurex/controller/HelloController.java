@@ -1,4 +1,4 @@
-package com.easymargining.replication.eurex.web;
+package com.easymargining.replication.eurex.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

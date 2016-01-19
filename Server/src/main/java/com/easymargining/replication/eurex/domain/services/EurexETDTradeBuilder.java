@@ -1,4 +1,4 @@
-package com.easymargining.replication.eurex.services;
+package com.easymargining.replication.eurex.domain.services;
 
 import com.opengamma.core.link.SecurityLink;
 import com.opengamma.core.position.Counterparty;

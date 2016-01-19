@@ -1,0 +1,8 @@
+{
+  "name": "ng-easymargining",
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-resource": "~1.5.0",
+    "bootstrap-css-only": "~3.3.6"
+  }
+}

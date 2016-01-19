@@ -1,4 +1,4 @@
-package com.easymargining.replication.eurex.web;
+package com.easymargining.replication.eurex.controller;
 
 import lombok.Getter;
 import lombok.Setter;
