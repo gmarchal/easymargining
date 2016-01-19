@@ -1,5 +1,7 @@
 package com.easymargining.replication.eurex;
 
+import com.easymargining.replication.eurex.config.MongoConfiguration;
+import com.easymargining.replication.eurex.config.WebSecurityConfiguration;
 import com.easymargining.replication.eurex.converter.TradeFileHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,11 @@ import java.util.Arrays;
 
 @Slf4j
 @SpringBootApplication
-@Import(DefaultConfig.class)
+@Import(value = {
+        DefaultConfig.class,
+        MongoConfiguration.class,
+        WebSecurityConfiguration.class
+})
 public class Application {
 
     @Autowired

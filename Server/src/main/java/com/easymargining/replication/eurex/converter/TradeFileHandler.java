@@ -1,6 +1,6 @@
 package com.easymargining.replication.eurex.converter;
 
-import com.easymargining.replication.eurex.model.TradeEntity;
+import com.easymargining.replication.eurex.domain.model.TradeEntity;
 import com.univocity.parsers.common.processor.BeanListProcessor;
 import com.univocity.parsers.common.processor.BeanWriterProcessor;
 import com.univocity.parsers.csv.CsvParser;

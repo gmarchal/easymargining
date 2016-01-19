@@ -1,7 +1,7 @@
 package com.easymargining.replication.eurex;
 
-import com.easymargining.replication.eurex.model.Request;
-import com.easymargining.replication.eurex.web.EurexPrismaController;
+import com.easymargining.replication.eurex.domain.model.Request;
+import com.easymargining.replication.eurex.controller.EurexPrismaController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
