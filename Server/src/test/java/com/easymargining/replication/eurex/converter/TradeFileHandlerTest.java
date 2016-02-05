@@ -3,7 +3,7 @@ package com.easymargining.replication.eurex.converter;
 import com.beust.jcommander.internal.Lists;
 import com.opengamma.margining.eurex.prisma.data.FileResources;
 import com.easymargining.replication.eurex.Application;
-import com.easymargining.replication.eurex.domain.model.TradeEntity;
+import com.easymargining.replication.eurex.domain.model.EurexTradeEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +37,18 @@ public class TradeFileHandlerTest {
 
         Assert.notNull(url);
 
-        List<TradeEntity> tradeEntities = tradeFileHandler.readTradeFile(url);
+        List<EurexTradeEntity> tradeEntities = tradeFileHandler.readTradeFile(url);
         Assert.notEmpty(tradeEntities);
 
         //create a temp file
         File temp = File.createTempFile("temp-etdTrades", ".csv");
 
         tradeFileHandler.writeTradeFile(tradeEntities, temp.toURI().toURL());
-        List<TradeEntity> readTradeEntities = tradeFileHandler.readTradeFile(temp.toURI().toURL());
+        List<EurexTradeEntity> readTradeEntities = tradeFileHandler.readTradeFile(temp.toURI().toURL());
         Assert.notEmpty(readTradeEntities);
         Assert.isTrue(readTradeEntities.size() == tradeEntities.size());
-        for (TradeEntity tradeEntity : tradeEntities) {
-            Assert.isTrue(readTradeEntities.contains(tradeEntity));
+        for (EurexTradeEntity eurexTradeEntity : tradeEntities) {
+            Assert.isTrue(readTradeEntities.contains(eurexTradeEntity));
         }
     }
 
@@ -60,11 +60,11 @@ public class TradeFileHandlerTest {
 
         Assert.notNull(url);
 
-        List<TradeEntity> tradeEntityList = Lists.newArrayList();
-        TradeEntity trade = new TradeEntity();
+        List<EurexTradeEntity> eurexTradeEntityList = Lists.newArrayList();
+        EurexTradeEntity trade = new EurexTradeEntity();
         trade.setProductId("ORDX");
-        tradeEntityList.add(trade);
-        tradeFileHandler.writeTradeFile(tradeEntityList, url);
+        eurexTradeEntityList.add(trade);
+        tradeFileHandler.writeTradeFile(eurexTradeEntityList, url);
         System.out.println("Done");
     }
 }

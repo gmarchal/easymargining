@@ -41,7 +41,7 @@ public class Request implements Comparable<Request>{
     private String portfolioName;
 
     @JsonProperty(value = "tradeEntries", required = true)
-    private List<TradeEntity> tradeEntries;
+    private List<EurexTradeEntity> tradeEntries;
 
     @JsonProperty(value = "currency", required = true)
     private String currency;

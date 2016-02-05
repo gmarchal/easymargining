@@ -22,10 +22,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = false)
 @ComponentScan(basePackageClasses = UserRepositoryUserDetailsService.class)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserDetailsService userDetailsService;
+
 
     @Configuration
     @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -46,25 +49,46 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                //.antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/web/index.htlm")
+                .and()
+                .httpBasic();
+
+        /*
         http
             .authorizeRequests()
-                .antMatchers("/resources/**","/app/**","/**","/signup").permitAll()
+                .antMatchers("/resources/**","/assets/**","/web/css/**", "/web/js/**", "/web/resources/**", "/web/tpl/**" ,"/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/index.html")
+                .loginPage("/login.html")
                 .permitAll()
+                .defaultSuccessUrl("/web/index.htlm")
                 .and()
             .logout()
                 .permitAll();
+                */
     }
     // @formatter:on
 
     // @formatter:off
     @Autowired
     public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER").and()
+                .withUser("admin").password("password").roles("USER", "ADMIN").and();
+        /*
         auth
             .userDetailsService(userDetailsService);
+        */
     }
     // @formatter:on
 }

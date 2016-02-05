@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class TradeEntity implements Serializable {
+public class EurexTradeEntity implements Serializable {
 
     private static final long serialVersionUID = 1879636427086123116L;
 

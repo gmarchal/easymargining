@@ -1,6 +1,6 @@
 package com.easymargining.replication.eurex.converter;
 
-import com.easymargining.replication.eurex.domain.model.TradeEntity;
+import com.easymargining.replication.eurex.domain.model.EurexTradeEntity;
 import com.univocity.parsers.common.processor.BeanListProcessor;
 import com.univocity.parsers.common.processor.BeanWriterProcessor;
 import com.univocity.parsers.csv.CsvParser;
@@ -24,10 +24,10 @@ import java.util.List;
 @Slf4j
 public class TradeFileHandler {
 
-    public List<TradeEntity> readTradeFile(URL file) throws IOException {
+    public List<EurexTradeEntity> readTradeFile(URL file) throws IOException {
         log.info("Read trade file " + file);
         // BeanListProcessor converts each parsed row to an instance of a given class, then stores each instance into a list.
-        BeanListProcessor<TradeEntity> rowProcessor = new BeanListProcessor<>(TradeEntity.class);
+        BeanListProcessor<EurexTradeEntity> rowProcessor = new BeanListProcessor<>(EurexTradeEntity.class);
 
         CsvParserSettings parserSettings = new CsvParserSettings();
         parserSettings.setRowProcessor(rowProcessor);
@@ -37,16 +37,16 @@ public class TradeFileHandler {
         parser.parse(new FileReader(file.getFile()));
 
         // The BeanListProcessor provides a list of objects extracted from the input.
-        List<TradeEntity> beans = rowProcessor.getBeans();
+        List<EurexTradeEntity> beans = rowProcessor.getBeans();
         log.info("Trade file " + file + ": " + beans.size() + " trades.");
         return beans;
     }
 
-    public void writeTradeFile(List<TradeEntity> tradeEntities, URL file) throws IOException {
+    public void writeTradeFile(List<EurexTradeEntity> tradeEntities, URL file) throws IOException {
         log.info("Write " + tradeEntities.size() +  " trades in file " + file);
         // BeanListProcessor converts each parsed row to an instance of a given class, then stores each instance into a list.
         CsvWriterSettings csvWriterSettings = new CsvWriterSettings();
-        csvWriterSettings.setRowWriterProcessor(new BeanWriterProcessor<>(TradeEntity.class));
+        csvWriterSettings.setRowWriterProcessor(new BeanWriterProcessor<>(EurexTradeEntity.class));
         csvWriterSettings.setHeaders("Product ID", "Expiry Year", "Expiry Month", "Expiry Day", "Version Number", "Product Settlement Type", "Call Put Flag", "Exercise Price", "Exercise Style Flag", "Instrument Type", "Assigned/Notified Balance", "Exercised/Allocated Balance", "Long Balance", "Short Balance");
         CsvWriter writer = new CsvWriter(new FileWriter(file.getFile()), csvWriterSettings);
 

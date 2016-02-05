@@ -25,7 +25,7 @@ public class EurexMarginingServiceApplication {
 
     public static void main(String[] args) {
 
-        final SpringApplication springApplication = new SpringApplication(EurexMarginingServiceApplication.class);
+        SpringApplication springApplication = new SpringApplication(EurexMarginingServiceApplication.class);
         springApplication.addListeners(new ApplicationPidFileWriter());
         ApplicationContext ctx =springApplication.run(args);
 
