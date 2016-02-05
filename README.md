@@ -48,7 +48,7 @@ https://desktop.github.com/
 - tar xvzf mongodb-linux-x86_64-rhel62-3.2.1.tgz
 - Installation description on : http://www.tokiwinter.com/mongodb-installation-basic-configuration/
 
-# MongDb Config
+## MongDb Config
 vi /home/esmuat01/conf/mongodb.conf
 fork=true
 auth=true
@@ -60,7 +60,7 @@ logpath = /home/esmuat01/log/mongodb/mongod.log
 logappend = true
 journal = true
 
-# Script MongoDb
+## Script MongoDb
 ./mongo --port 1234
 use esmdb
 db.createUser(
