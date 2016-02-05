@@ -1,0 +1,66 @@
+<div class="wrapper-md">
+  <table class="table table-bordered table-hover table-condensed bg-white-only">
+    <thead>
+		<tr style="font-weight: bold">
+		  <th style="width:12%">Product Id</td>
+		  <th style="width:12%">Instrument Type</td>
+		  <th style="width:12%">Option Type</td>
+		  <th style="width:12%">Expiry Date </td>
+		  <th style="width:12%">Settlement Type</td>
+		  <th style="width:12%">Exercise Price</td>
+		  <th style="width:12%">Exercise Style</td>
+		  <th style="width:12%">Quantity (S/L)</td>
+		  <th style="width:4%">Actions...</td>
+		</tr>
+	</thead>
+    <tr ng-repeat="trade in positions">
+	  <td class="v-middle">
+		<span editable-select="trade.productId" e-name="productId" e-form="rowform"
+				  e-ng-options="s.id as s.id for s in productIds">{{ showProductIds(trade) }} </span>
+	  </td>
+	  <td class="v-middle">
+		<span editable-select="trade.instrumentType" e-name="instrumentType" e-form="rowform"
+				  e-ng-options="s.id as s.name for s in instrumentTypes">{{ showInstrumentTypes(trade) }} </span>
+	  </td>
+	  <td class="v-middle">
+		<span editable-select="trade.optionType" e-name="optionType" e-form="rowform"
+				  e-ng-options="s.id as s.name for s in optionTypes">{{ showOptionTypes(trade) }} </span>
+	  </td>
+	  <td class="v-middle">
+		<span editable-date="trade.expiryDate" e-name="expiryDate" e-form="rowform">
+				{{ (trade.expiryDate | date:"MM/yyyy") || 'empty' }}
+			</span>
+	  </td>
+	  <td class="v-middle">
+		  <span editable-select="trade.productSettlementType" e-name="productSettlementType" e-form="rowform"
+				e-ng-options="s.id as s.name for s in settlementTypes">{{ showSettlementTypes(trade) }} </span>
+	  </td>
+	  <td class="v-middle">
+		<span editable-text="trade.exercisePrice" e-name="exercisePrice" e-form="rowform" e-required>
+				{{ trade.exercisePrice }}
+			</span>
+	  </td>
+	  <td class="v-middle">
+		<span editable-text="trade.exerciseStyleFlag" e-name="exerciseStyleFlag" e-form="rowform" e-required>
+				{{ trade.exerciseStyleFlag }}
+			</span>
+	  </td>
+	  <td class="v-middle">
+		<span editable-text="trade.quantity" e-name="quantity" e-form="rowform" e-required>
+				{{ trade.quantity }}
+			</span>
+	  </td>
+      <td style="white-space: nowrap">
+		<form editable-form name="rowform" onbeforesave="saveTrade($data, trade._id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == trade">
+		  <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i></button>
+		  <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default"><i class="fa fa-undo"></i></button>
+		</form>
+		<div class="buttons" ng-show="!rowform.$visible">
+		  <button class="btn btn-primary" ng-click="rowform.$show()"><i class="glyphicon glyphicon-edit"></i></button>
+		  <button class="btn btn-danger" ng-click="removeTrade($index)"><i class="glyphicon glyphicon-remove"></i></button>
+		</div>  
+      </td>
+    </tr>
+  </table>
+  <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="addTrade()"><i class="fa fa-plus"></i>Add Trade</button>
+</div>

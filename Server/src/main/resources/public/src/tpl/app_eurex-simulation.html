@@ -1,0 +1,177 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false; 
+    app.settings.asideDock = false;
+  ">
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">Eurex Margin Simulation</h1>
+          <small class="text-muted">Welcome to Eurex Margin application</small>
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md" ng-controller="EurexSimulationCtrl">
+		<tabset class="tab-container" ng-init="steps={percent:20, step1:true, step2:false, step3:false}">
+			<tab heading="Parameters" active="steps.step1" select="steps.percent=10">
+			  <p class="m-b">Define your's parameter for the simulation.</p>
+			  <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+			  <h4>General Parameters</h4>
+			  <div name="step1" class="form-validation">
+				<div class="row">
+					<div class="form-group" >
+						<label class="col-sm-2 control-label">Your Portfolio:</label>
+						<div class="col-sm-8">
+
+							<select data-ng-model="portfolioSelected"
+									class="form-control m-b"
+									data-placeholder="Portfolio..."
+									ng-options="portfolio.name for portfolio in portfolios"
+									style="width:240px">
+							</select>
+						</div>
+						<span ng-controller="ModalPortfolioCreationCtrl" class="ng-scope col-sm-2">
+						  <script type="text/ng-template" id="myPortfolioCreationModalContent.html">
+							<div ng-include="'tpl/modal.form.portfolio.html'"></div>
+						  </script>
+						  <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="open('lg')"><i class="fa fa-plus"></i>Add Portfolio</button>
+						</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+					  <label class="col-sm-2 control-label">Your valuation date (optional):</label>
+					  <div class="col-sm-10">
+						<div class="input-group w-md" ng-controller="DatepickerDemoCtrl">
+						  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+						  <span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						  </span>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 m-t m-b">
+					  <button type="submit" ng-disabled="step1.$invalid" class="btn btn-default btn-rounded" ng-click="steps.step2=true">Next</button>
+					</div>
+				</div>
+			  </div>
+			</tab>
+			<tab heading="Positions" disabled="step1.$invalid" active="steps.step2" select="steps.percent=60">
+			  <div name="step2" class="form-validation">
+
+				<p class="m-b">Modify your position for the simulation</p>
+				<progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+				  <div class="row">
+				  	<ui-positions-table class="col-sm-12" portfolioId="0"></ui-positions-table>
+				  </div>
+				<div class="row">
+					<div class="col-sm-12">
+					  <button type="button" class="btn btn-default btn-rounded" ng-click="steps.step1=true">Prev</button>
+					  <button type="submit" ng-disabled="step2.$invalid" class="btn btn-default btn-rounded" ng-click="steps.step3=true">Compute IM</button>
+					</div>
+				</div>
+			  </div>
+			</tab>
+			<tab heading="Results" disabled="step2.$invalid" active="steps.step3" select="steps.percent=100">
+			  <p class="m-b">Congraduations! You got the last step.</p>
+			  <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Detail for the simulation</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div ui-jq="plot" ui-options="
+                                      [
+                                        { label: 'IM Base', data: {{d1_1}} },
+                                        { label: 'Risk Factor', data: {{d1_2}} },
+                                        { label: 'Liquidation Risk', data: {{d1_3}} }
+                                      ],
+                                      {
+                                        bars: { show: true, fill: true, lineWidth: 1, order: 1, fillColor: { colors: [{ opacity: 0.5 }, { opacity: 0.9}] } },
+                                        colors: ['{{app.color.info}}', '{{app.color.success}}', '{{app.color.primary}}'],
+                                        series: { shadowSize: 1 },
+                                        xaxis:{ display: 'none', font: { color: '#ccc' } },
+                                        xaxis:{
+                                          font: { color: '#ccc' },
+                                          position: 'bottom',
+                                          ticks: [
+                                            [ 0, 'Eurex Simulation' ],
+                                          ],
+                                          autoscaleMargin: 0.5,
+                                          tickSize: 20,
+                                        },
+                                        yaxis:{
+                                            font: { color: '#ccc' },
+                                            tickLength: 15,
+                                        },
+                                        grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                                        tooltip: true
+                                      }
+                                " style="height:240px;width:100%"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-striped m-b-none">
+                                    <thead>
+                                    <tr>
+                                        <th>Initial Margin Components</th>
+                                        <th style="width:70px;">Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>MtM Portfolio : </td>
+                                        <td class="text-success">
+                                            <i class="fa fa-level-up"></i> 40€
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Liquidity Add-On</td>
+                                        <td class="text-success">
+                                            <i class="fa fa-level-up"></i> 40€
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Market Risk Component</td>
+                                        <td class="text-success">
+                                            <i class="fa fa-level-up"></i> 40€
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>App downloads</td>
+                                        <td class="text-success">
+                                            <i class="fa fa-level-up"></i> 40€
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Initial Margin Total :</strong></td>
+                                        <td class="text-success">
+                                            <i class="fa fa-level-up"></i> 40€
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+			  <div class="m-t m-b">
+				<button type="button" class="btn btn-default btn-rounded" ng-click="steps.step2=true">Prev</button>
+			  </div>
+			</tab>
+		</tabset>
+
+		<!--<ui-positions-table class="row col-sm-12" portfolioId="0"></ui-positions-table>-->
+
+	<div data-ng-include=" 'tpl/blocks/aside.right.html' ">
+      {% include '../tpl/blocks/aside.right.html' %}
+    </div>
+    </div>
+  </div>
+  <!-- / main -->
+</div>

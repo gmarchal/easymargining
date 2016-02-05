@@ -1,0 +1,41 @@
+[
+	{
+		"portfolioId": 0,
+		"productId": "ORDX",
+		"instrumentType": "Option",
+		"optionType": "P",
+		"expiryYear": 2022,
+		"expiryMonth":  12,
+		"expiryDay": "None",
+		"productSettlementType": "",
+		"exercisePrice": 500.0,
+		"exerciseStyleFlag": "EUROPEAN",
+		"quantity": 100
+	},
+    {
+		"portfolioId": 0,
+		"productId": "OGB1",
+		"instrumentType": "Option",
+		"optionType": "C",
+		"expiryYear": 2015,
+		"expiryMonth":  6,
+		"expiryDay": "None",
+		"productSettlementType": "D",
+		"exercisePrice": 151.5,
+		"exerciseStyleFlag": "AMERICAN",
+		"quantity": -100
+	},
+    {
+		"portfolioId": 0,
+		"productId": "VVU",
+		"instrumentType": "Option",
+		"optionType": "C",
+		"expiryYear": 2015,
+		"expiryMonth":  6,
+		"expiryDay": "None",
+		"productSettlementType": "S",
+		"exercisePrice": 23.5,
+		"exerciseStyleFlag": "AMERICAN",
+		"quantity": 2000
+	}
+]

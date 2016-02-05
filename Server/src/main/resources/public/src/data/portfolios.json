@@ -1,0 +1,14 @@
+[
+  {
+    "_id": 0,
+    "name": "PTF1",
+    "description": "Portefeuille de simulation Equity",
+    "ownerId": 0
+  },
+  {
+    "_id": 1,
+    "name": "PTF2",
+    "description": "Portefeuille de simulation Equity",
+    "ownerId": 0
+  }
+]
