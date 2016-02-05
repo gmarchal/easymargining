@@ -49,7 +49,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
+        /*
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -60,21 +60,30 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/web/index.htlm")
                 .and()
                 .httpBasic();
+        */
 
-        /*
         http
             .authorizeRequests()
-                .antMatchers("/resources/**","/assets/**","/web/css/**", "/web/js/**", "/web/resources/**", "/web/tpl/**" ,"/signup").permitAll()
+                .antMatchers("/landing/**","/libs/**",
+                                "/src/api/**","/src/css/**","/src/data/**","/src/fonts/**",
+                                "/src/img/**","/src/js/**","/src/l10n/**","/src/tpl/blocks/**",
+                                "/src/tpl/page_signup.html","/src/tpl/page_signin.html",
+                                "/src/tpl/page_404.html","/src/tpl/page_forgotpwd.html",
+                                "/src/index.html#/access/signin",
+                                "/src/index.html#/access/signup",
+                                "/src/index.html#/access/forgotpwd",
+                                "/src/index.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login.html")
-                .permitAll()
-                .defaultSuccessUrl("/web/index.htlm")
+                .loginPage("/src/index.html#/access/signin")
+                .defaultSuccessUrl("/src/index.html")
+                .and()
+            .httpBasic()
                 .and()
             .logout()
-                .permitAll();
-                */
+                .logoutUrl("/src/index.html#/access/signin");
+
     }
     // @formatter:on
 
