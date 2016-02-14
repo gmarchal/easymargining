@@ -13,8 +13,8 @@ angular.module('app')
     ]
   )
   .config(
-    [ '$stateProvider', '$urlRouterProvider', 'JQ_CONFIG', 'MODULE_CONFIG',
-      function ($stateProvider,   $urlRouterProvider, JQ_CONFIG, MODULE_CONFIG) {
+    [ '$httpProvider', '$stateProvider', '$urlRouterProvider', 'JQ_CONFIG', 'MODULE_CONFIG',
+      function ($httpProvider, $stateProvider,   $urlRouterProvider, JQ_CONFIG, MODULE_CONFIG) {
           var layout = "tpl/app.html";
 
           if(window.location.href.indexOf("material") > 0){
@@ -78,6 +78,7 @@ angular.module('app')
                   templateUrl: 'tpl/page_404.html'
               });
 
+          $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
           function load(srcs, callback) {
             return {

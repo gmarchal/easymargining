@@ -2,22 +2,58 @@
 
 /* Controllers */
   // signin controller
-app.controller('SigninFormController', ['$scope', '$http', '$state', function($scope, $http, $state) {
-    $scope.user = {};
-    $scope.authError = null;
+app.controller('SigninFormController',
+               ['$scope', '$http', '$state', '$rootScope', 'authService',
+               function($scope, $http, $state, $rootScope, authService) {
+
+    var authenticate = function(credentials, callback) {
+
+        var headers = credentials ? {
+            authorization : "Basic "
+                    + btoa(credentials.username + ":"
+                            + credentials.password)
+        } : {};
+
+        $http.get('/api/users/current', {
+            headers : headers
+        }).success(function(data) {
+            if (data.name) {
+                console.log(data);
+                $rootScope.authenticated = true;
+                $rootScope.principal = data.principal;
+                authService.setPrincipal(data.principal);
+                authService.setAuthenticated(true);
+            } else {
+                $rootScope.authenticated = false;
+                authService.setAuthenticated(false);
+            }
+            callback && callback($rootScope.authenticated);
+        }).error(function() {
+            $rootScope.authenticated = false;
+            authService.setAuthenticated(false);
+            callback && callback(false);
+        });
+
+    }
+
+    authenticate();
+
+    $scope.credentials = {};
     $scope.login = function() {
-      $scope.authError = null;
-      // Try to login
-      $http.post('api/login', {email: $scope.user.email, password: $scope.user.password})
-      .then(function(response) {
-        if ( !response.data.user ) {
-          $scope.authError = 'Email or Password not right';
-        }else{
-          $state.go('app.home');
-        }
-      }, function(x) {
-        $scope.authError = 'Server Error';
-      });
+        authenticate($scope.credentials, function(authenticated) {
+            if (authenticated) {
+                console.log("Login succeeded")
+                $scope.authError = false;
+                $rootScope.authenticated = true;
+                authService.setAuthenticated(true);
+                $state.go('app.home');
+            } else {
+                console.log("Login failed")
+                $scope.authError = true;
+                $rootScope.authenticated = false;
+                authService.setAuthenticated(false);
+            }
+        })
     };
   }])
 ;

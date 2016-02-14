@@ -56,11 +56,6 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
         }
 
         @Override
-        public String getPassword() {
-            return getPassword();
-        }
-
-        @Override
         public boolean isAccountNonExpired() {
             return true;
         }

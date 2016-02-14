@@ -4,6 +4,7 @@ import com.easymargining.replication.eurex.domain.model.Trade;
 import com.easymargining.replication.eurex.domain.repository.ITradeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,30 +14,25 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@RequestMapping(value = "/api/positions")
 public class PositionController {
 
     @Autowired
     private ITradeRepository tradeRepository;
 
-    @RequestMapping(value = "/position/all")
+    @RequestMapping(value = "/list")
     public List<Trade> getPositions() {
         return tradeRepository.findAll();
     }
 
-    @RequestMapping(value = "/position/{portfolioId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{portfolioId}", method = RequestMethod.GET)
     public List<Trade> getPositionsByPortfolio(@PathVariable("portfolioId") String portfolioId) {
         return tradeRepository.findByPortfolioId(portfolioId);
     }
 
-    @RequestMapping(value = "/position/add")
-    public Trade addPosition(Trade trade) {
-        log.info("Add position asked for position : " + trade );
-        tradeRepository.save(trade);
-        return trade;
-    }
-
-    @RequestMapping(value = "/position/save", method = RequestMethod.POST)
-    public Trade savePosition(@RequestBody Trade trade) {
+    @RequestMapping(value = "/position/add", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public Trade addPosition(@RequestBody Trade trade) {
         log.info("Save position asked for position : " + trade );
         tradeRepository.save(trade);
         return trade;

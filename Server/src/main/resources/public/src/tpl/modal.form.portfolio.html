@@ -2,14 +2,17 @@
   <div class="row">
     <div class="col-sm-12">
       <h3 class="m-t-none m-b font-thin">Create your portfolio</h3>
+      <div class="text-danger wrapper text-center" ng-show="portfolioCreationError">
+        {{portfolioCreationError}}
+      </div>
       <form role="form">
         <div class="form-group">
           <label>Portfolio Name : </label>
-          <input type="email" class="form-control" placeholder="Enter your portfolio name">
+          <input class="form-control" placeholder="Enter your portfolio name" ng-model="portfolio.name" required>
         </div>
         <div class="form-group">
           <label>Portfolio Description : </label>
-          <input type="password" class="form-control" placeholder="(Optionnal) enter your description">
+          <input class="form-control" placeholder="(Optionnal) enter your description">
         </div>
         <div class="checkbox m-t-lg">
             <button type="submit" class="btn btn-primary" ng-click="ok()"><strong>Create</strong></button>

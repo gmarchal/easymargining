@@ -1,14 +1,28 @@
 'use strict';
 
 /* Controllers */
-app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items', function($scope, $modalInstance, items) {
-    $scope.items = items;
-    $scope.selected = {
-      item: $scope.items[0]
-    };
+app.controller('ModalInstanceCtrl', ['$rootScope', '$scope', '$modalInstance', '$http', 'items',
+                function($rootScope, $scope, $modalInstance, $http, items) {
+
+    $scope.portfolio = {};
 
     $scope.ok = function () {
-      $modalInstance.close($scope.selected.item);
+
+        angular.extend($scope.portfolio, {ownerId: $rootScope.principal.username});
+        console.log("Create new portfolio : " + $scope.portfolio);
+        console.log($scope.portfolio);
+        console.log($rootScope);
+
+        // Create Portfolio
+        $http.post('/api/portfolio/add', $scope.portfolio)
+        .then(
+            function(response) {
+                //Success Callback
+                $modalInstance.close();
+            }, function(response) {
+                //Failure Callback
+                $scope.portfolioCreationError = 'Unable to create portfolio for reason : ';
+            });
     };
 
     $scope.cancel = function () {
@@ -80,8 +94,8 @@ app.controller('DatepickerDemoCtrl', ['$scope', function($scope) {
   }])
   ; 
   
-app.controller('EurexSimulationCtrl', ['$scope', '$filter', '$http', 'editableOptions', 'editableThemes', 
-  function($scope, $filter, $http, editableOptions, editableThemes){
+app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$http', 'editableOptions', 'editableThemes',
+  function(authService, $scope, $filter, $http, editableOptions, editableThemes){
     editableThemes.bs3.inputClass = 'input-sm';
     editableThemes.bs3.buttonsClass = 'btn-sm';
     editableOptions.theme = 'bs3';
@@ -97,7 +111,7 @@ app.controller('EurexSimulationCtrl', ['$scope', '$filter', '$http', 'editableOp
 
 	// Event Management
     $scope.loadPosition = function(){
-		$http.get("/position/"+$scope.portfolioSelected._id)
+		$http.get("/api/positions/"+$scope.portfolioSelected._id)
             .success(function(data) {
                 $scope.positions=data;
             });
@@ -114,8 +128,8 @@ app.controller('EurexSimulationCtrl', ['$scope', '$filter', '$http', 'editableOp
     });
 
     //Init
-    //$http.get("/portfolio/all")
-    $http.get("/src/data/portfolios.json")
+    $http.get("/api/portfolio/list/"+authService.getPrincipal().username)
+    //$http.get("/src/data/portfolios.json")
         .success(function(data) {
             $scope.portfolios=data;
             // Set the default portfolio

@@ -9,8 +9,11 @@
               {{authError}}
           </div>
           <div class="list-group list-group-sm">
+              <div class="list-group-item">
+                  <input placeholder="Fist Name" class="form-control no-border" ng-model="user.firstName" required>
+              </div>
             <div class="list-group-item">
-              <input placeholder="Name" class="form-control no-border" ng-model="user.name" required>
+              <input placeholder="Last Name" class="form-control no-border" ng-model="user.lastName" required>
             </div>
             <div class="list-group-item">
               <input type="email" placeholder="Email" class="form-control no-border" ng-model="user.email" required>
