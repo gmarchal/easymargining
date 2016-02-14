@@ -48,7 +48,11 @@ https://desktop.github.com/
 - tar xvzf mongodb-linux-x86_64-rhel62-3.2.1.tgz
 - Installation description on : http://www.tokiwinter.com/mongodb-installation-basic-configuration/
 
-## MongDb Config
+# Windows CMD
+c:\Homeware\easymargining>mongod --port 27017 --dbpath "c:\\Homeware\\MongoDB\\data\\db"
+C:\Users\Gilles Marchal>mongo -port 27017
+
+# MongDb Config
 vi /home/esmuat01/conf/mongodb.conf
 fork=true
 auth=true
@@ -60,7 +64,7 @@ logpath = /home/esmuat01/log/mongodb/mongod.log
 logappend = true
 journal = true
 
-## Script MongoDb
+# Script MongoDb
 ./mongo --port 1234
 use esmdb
 db.createUser(
@@ -70,3 +74,27 @@ db.createUser(
      roles: [ "readWrite", "dbAdmin" ]
    }
 )
+
+# Installation NodeJs & bower 
+npm install -g bower
+bower install
+
+# Template 
+bower install startbootstrap-sb-admin-2
+
+#Passport installation
+npm install passport
+npm install passport-http-oauth
+
+
+#Xeditable AngularJs Component
+https://vitalets.github.io/angular-xeditable/#editable-row
+# Angular Datatables
+http://l-lin.github.io/angular-datatables/#/gettingStarted
+
+
+#Template :
+
+http://themeforest.net/item/material-design-admin-with-angularjs/full_screen_preview/13582227
+
+http://themeforest.net/item/angulr-bootstrap-admin-web-app-with-angularjs/8437259?s_phrase=&s_rank=2
