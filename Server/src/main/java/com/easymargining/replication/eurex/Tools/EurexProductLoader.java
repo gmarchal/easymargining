@@ -22,8 +22,12 @@ public class EurexProductLoader {
         try {
             log.info("Load Settlement Price definition ...");
 
+            // Small File "Server/src/main/resources/marketData/20150603//ETD/00stlpricepubli20150603eodx.zip"
+            // Big File "D:/gmarchal/eurex-data/marketdata/20151127/ETD/00THEOINSTPUBLI20151127NISERIESEODX0001_0005.TXT.ZIP"
             List<EurexSettlementPriceDefinition> definitions =
-                    parser.parse(new File("Server/src/main/resources/marketData/20150603//ETD/00stlpricepubli20150603eodx.zip").toURI().toURL());
+                    parser.parse(new File("D:/gmarchal/eurex-data/marketdata/20151127/ETD/00THEOINSTPUBLI20151127NISERIESEODX0001_0005.TXT.ZIP").toURI().toURL());
+
+            log.info("End of Loading Settlement Price definition ...");
 
             definitions.forEach(
                     (eurexSettlementPriceDefinition) -> {
@@ -41,7 +45,7 @@ public class EurexProductLoader {
                     }
             );
 
-            log.info("End of Loading of Settlement Price definition");
+            log.info("End of printing : Settlement Price definition");
 
         } catch (IOException e) {
             e.printStackTrace();
