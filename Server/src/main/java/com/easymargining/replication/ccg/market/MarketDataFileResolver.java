@@ -39,7 +39,7 @@ public class MarketDataFileResolver {
         try {
             url = new ClassPathResource(template).getURL();
         } catch (IOException e) {
-            log.error("Error during URL creation for template : <file:" + template + ">" , e);
+            //log.error("Error during URL creation for template : <file:" + template + ">" , e);
         }
         return url;
     }

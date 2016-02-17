@@ -3,6 +3,8 @@ package com.easymargining.replication.eurex.domain.model;
 import lombok.*;
 import org.threeten.bp.LocalDate;
 
+import java.io.Serializable;
+
 /**
  * Created by Gilles Marchal on 16/02/2016.
  */
@@ -12,7 +14,7 @@ import org.threeten.bp.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class Product implements Serializable  {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,13 +27,13 @@ public class Product {
 
     private Integer contractMonth;
 
-    private int versionNumber;
+    private Integer versionNumber;
 
     private String settlementType;
 
     private String optionType;          //Call or Put
 
-    private double exercisePrice;
+    private Double exercisePrice;
 
     private String exerciseStyleFlag;
 
