@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-@EnableMongoRepositories("com.easymargining.replication.eurex.domain.repository")
+//@EnableMongoRepositories("com.easymargining.replication.eurex.domain.repository")
 public class UserRepositoryUserDetailsService implements UserDetailsService {
 
     private final IUserRepository userRepository;

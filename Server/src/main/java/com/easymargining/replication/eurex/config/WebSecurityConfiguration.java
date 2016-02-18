@@ -107,12 +107,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                              "/src/img/**", "/src/js/**", "/src/l10n/**", "/src/tpl/blocks/**",
                              "/src/tpl/app.html", "/src/tpl/page_404.html", "/src/tpl/page_forgotpwd.html",
                              "/src/tpl/page_signin.html", "/src/tpl/page_signup.html", "/src/index.html",
-                             "/api/users/current").permitAll()
+                             "/api/users/current", "/api/users/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/src/index.html#/access/signin")
-                    .defaultSuccessUrl("/src/index.htlm")
+                    .defaultSuccessUrl("/src/index.html")
                 .and()
                 .httpBasic().and().csrf()
                 .csrfTokenRepository(csrfTokenRepository()).and()

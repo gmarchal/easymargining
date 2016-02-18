@@ -7,4 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * Created by Gilles Marchal on 16/02/2016.
  */
 public interface IProductRepository  extends MongoRepository<Product, String> {
+
+    Product findByProductId(String productId);
+
 }

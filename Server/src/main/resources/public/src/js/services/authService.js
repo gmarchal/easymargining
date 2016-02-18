@@ -1,25 +1,82 @@
 'use strict';
 
 angular.module('authService', [])
-	.service('authService', ['$http', function ($http) {
+    .constant('AUTH_EVENTS', {
+        loginSuccess: 'auth-login-success',
+        loginFailure: 'auth-login-failed',
+        logoutSuccess: 'auth-logout-success',
+        sessionTimeout: 'auth-session-timeout',
+        notAuthenticated: 'auth-not-authenticated',
+        notAuthorized: 'auth-not-authorized' })
+    .constant('USER_ROLES', {
+        all: '*',
+        admin: 'admin',
+        editor: 'editor',
+        guest: 'guest'})
+    .service('Session', function() {
+            this.create = function (userId, userFirstName, userLastName, userRole) {
+                this.userId = userId;
+                this.userFirstName = userFirstName;
+                this.userLastName = userLastName;
+                this.userRole = userRole;
+            }
 
-    var principal = {};
-    var authenticated = false;
+            this.destroy = function() {
+                this.userId = null;
+                this.userFirstName = null;
+                this.userLastName = null;
+                this.userRole = null;
+            }
+    })
+	.factory('authService', ['$http', 'Session', function ($http, Session) {
 
-    this.getPrincipal = function () {
-        return principal;
-    }
+        var authService = {};
 
-    this.setPrincipal = function (newPrincipal) {
-        principal = newPrincipal;
-    }
+        authService.authenticate = function(credentials, callback) {
 
-    this.isAuthenticated = function () {
-            return authenticated;
-    }
+            var headers = credentials ? {
+                authorization : "Basic "
+                        + btoa(credentials.username + ":"
+                                + credentials.password)
+            } : {};
 
-    this.setAuthenticated = function (newAuthenticated) {
-        authenticated = newAuthenticated;
-    }
+            $http.get('/api/users/current', {
+                headers : headers
+            }).success(function(data) {
+                if (data.name) {
+                    console.log(data);
+                    // Session.create()
+                    //$rootScope.authenticated = true;
+                    //$rootScope.principal = data.principal;
+                    //authService.setPrincipal(data.principal);
+                    //authService.setAuthenticated(true);
+                } else {
+                    console.log(data);
+                    //$rootScope.authenticated = false;
+                    //authService.setAuthenticated(false);
+                }
+                callback && callback(true);
+            }).error(function() {
+                //$rootScope.authenticated = false;
+                //authService.setAuthenticated(false);
+                callback && callback(false);
+            });
 
-}]);
+        }
+
+        authService.isAuthenticated = function() {
+            return !!Session.username;
+        }
+
+        authService.isAuthorized = function(authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+                authorizedRoles = [authorizedRoles];
+            }
+            return (authService.isAuthenticated() &&
+                    authorizedRoles.indexOf(Session.userRole) !== -1);
+        };
+
+        return authService;
+    }]);
+
+

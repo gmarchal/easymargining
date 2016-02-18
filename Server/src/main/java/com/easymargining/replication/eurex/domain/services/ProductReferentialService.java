@@ -2,6 +2,7 @@ package com.easymargining.replication.eurex.domain.services;
 
 import com.easymargining.replication.eurex.domain.model.Product;
 import com.easymargining.replication.eurex.domain.repository.IProductRepository;
+import com.easymargining.replication.eurex.domain.repository.IUserRepository;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexProductDefinition;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexScenarioPricesParser;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,19 @@ import java.util.List;
  */
 @Slf4j
 @Service
-@EnableMongoRepositories("com.easymargining.replication.eurex.domain.repository")
+//@EnableMongoRepositories("com.easymargining.replication.eurex.domain.repository")
 public class ProductReferentialService {
 
-    public static final int BULK_INSERT_SIZE = 1000;
+    private final int BULK_INSERT_SIZE = 1000;
 
     @Autowired
     private IProductRepository productRepository;
+
+    /*
+    @Autowired
+    public ProductReferentialService(IProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }*/
 
     public void storeProducts(List<Product> products) {
         log.info("ProductReferentialService::storeProducts( " + products.size() + " )");

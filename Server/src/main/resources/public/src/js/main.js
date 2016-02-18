@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window',
-    function(              $scope,   $translate,   $localStorage,   $window ) {
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 'authService',
+    function(              $scope,   $translate,   $localStorage,   $window, authService ) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       if(isIE){ angular.element($window.document.body).addClass('ie');}
@@ -73,6 +73,14 @@ angular.module('app')
           var ua = $window['navigator']['userAgent'] || $window['navigator']['vendor'] || $window['opera'];
           // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
           return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+      }
+
+      // Authentication
+      $scope.currentUser = null;
+      $scope.userRoles
+      $scope.isAuthenticated = authService.isAuthenticated();
+      $scope.setCurrentUser = function (user) {
+        $scope.currentUser = user;
       }
 
   }]);

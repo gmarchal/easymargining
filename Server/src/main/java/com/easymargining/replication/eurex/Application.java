@@ -48,15 +48,20 @@ public class Application {
         log.info("Server started - URL : http://localhost:" +
                 ctx.getEnvironment().getProperty("server.port"));
 
+        /*
         // Initialize Product Referential
         try {
+            String userDir = System.getProperties().getProperty("user.dir");
+
+
             LocalDate s_valuationDate = LocalDate.of(2015, 6, 3);
             List<URL> list = new ArrayList<URL>();
-            list.add(new File("C:/Homeware/workspace-eurex/easymargining/Server/src/main/resources/marketData/20150603/ETD/00theoinstpubli20150603aaa.txt").toURI().toURL());
+            list.add(new File(userDir + "/Server/src/main/resources/marketData/20150603/ETD/00theoinstpubli20150603aaa.txt").toURI().toURL());
             new ProductReferentialService().loadProducts(list, s_valuationDate);
         } catch( IOException ex) {
             ex.printStackTrace();
         }
+        */
     }
 
     @Bean

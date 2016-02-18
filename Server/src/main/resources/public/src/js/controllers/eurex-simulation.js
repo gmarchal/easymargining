@@ -1,17 +1,16 @@
 'use strict';
 
 /* Controllers */
-app.controller('ModalInstanceCtrl', ['$rootScope', '$scope', '$modalInstance', '$http', 'items',
-                function($rootScope, $scope, $modalInstance, $http, items) {
+app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$http', 'items',
+                function($scope, $modalInstance, $http, items) {
 
     $scope.portfolio = {};
 
     $scope.ok = function () {
 
-        angular.extend($scope.portfolio, {ownerId: $rootScope.principal.username});
+        angular.extend($scope.portfolio, {ownerId: $scope.currentUser.username});
         console.log("Create new portfolio : " + $scope.portfolio);
         console.log($scope.portfolio);
-        console.log($rootScope);
 
         // Create Portfolio
         $http.post('/api/portfolio/add', $scope.portfolio)
@@ -128,7 +127,7 @@ app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$htt
     });
 
     //Init
-    $http.get("/api/portfolio/list/"+authService.getPrincipal().username)
+    $http.get("/api/portfolio/list/"+$scope.currentUser.username)
     //$http.get("/src/data/portfolios.json")
         .success(function(data) {
             $scope.portfolios=data;
