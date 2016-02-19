@@ -14,10 +14,13 @@ angular.module('authService', [])
         editor: 'editor',
         guest: 'guest'})
     .service('Session', function() {
-            this.create = function (userId, userFirstName, userLastName, userRole) {
+            this.create = function (userId, userFirstName, userLastName, userEmail, userRole) {
+                console.log("Create Session with : " + userId + ", " + userFirstName +
+                            ", " + userLastName + ", " + userEmail + ", " + userRole);
                 this.userId = userId;
                 this.userFirstName = userFirstName;
                 this.userLastName = userLastName;
+                this.userEmail = userEmail;
                 this.userRole = userRole;
             }
 
@@ -25,10 +28,11 @@ angular.module('authService', [])
                 this.userId = null;
                 this.userFirstName = null;
                 this.userLastName = null;
+                this.userEmail = null;
                 this.userRole = null;
             }
     })
-	.factory('authService', ['$http', 'Session', function ($http, Session) {
+	.factory('authService', ['$http', '$window', 'Session', function ($http, $window, Session) {
 
         var authService = {};
 
@@ -45,20 +49,20 @@ angular.module('authService', [])
             }).success(function(data) {
                 if (data.name) {
                     console.log(data);
-                    // Session.create()
-                    //$rootScope.authenticated = true;
-                    //$rootScope.principal = data.principal;
-                    //authService.setPrincipal(data.principal);
-                    //authService.setAuthenticated(true);
+                    Session.create(data.principal.id,
+                                    data.principal.firstName,
+                                    data.principal.lastName,
+                                    data.principal.email,
+                                    data.principal.authorities);
+                    $window.sessionStorage.currentUser = data.principal;
                 } else {
                     console.log(data);
-                    //$rootScope.authenticated = false;
-                    //authService.setAuthenticated(false);
                 }
-                callback && callback(true);
+                callback && callback(data);
             }).error(function() {
-                //$rootScope.authenticated = false;
-                //authService.setAuthenticated(false);
+                // Erase the currentUser if the user fails to log in
+                delete $window.sessionStorage.currentUser;
+
                 callback && callback(false);
             });
 

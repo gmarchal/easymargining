@@ -1,14 +1,14 @@
 'use strict';
 
 /* Controllers */
-app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$http', 'items',
-                function($scope, $modalInstance, $http, items) {
+app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$http', 'currentUser',
+                function($scope, $modalInstance, $http, currentUser) {
 
     $scope.portfolio = {};
 
     $scope.ok = function () {
 
-        angular.extend($scope.portfolio, {ownerId: $scope.currentUser.username});
+        angular.extend($scope.portfolio, {ownerId: currentUser.id});
         console.log("Create new portfolio : " + $scope.portfolio);
         console.log($scope.portfolio);
 
@@ -31,16 +31,14 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$http', 'items
   ; 
 app.controller('ModalPortfolioCreationCtrl', ['$scope', '$modal', '$log', function($scope, $modal, $log) {
     
-	$scope.items = ['item1', 'item2', 'item3'];
-    
 	$scope.open = function (size) {
       var modalInstance = $modal.open({
         templateUrl: 'myPortfolioCreationModalContent.html',
         controller: 'ModalInstanceCtrl',
         size: size,
         resolve: {
-          items: function () {
-            return $scope.items;
+          currentUser: function () {
+            return $scope.currentUser;
           }
         }
       });
@@ -127,7 +125,7 @@ app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$htt
     });
 
     //Init
-    $http.get("/api/portfolio/list/"+$scope.currentUser.username)
+    $http.get("/api/portfolio/list/"+$scope.currentUser.id)
     //$http.get("/src/data/portfolios.json")
         .success(function(data) {
             $scope.portfolios=data;
@@ -137,9 +135,9 @@ app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$htt
 		
 		
 	$scope.computeMargin = function(){
-        $http.get("/ComputeEtdMargin/"+$scope.portfolioSelected._id)
+        $http.get("/api/margin/computeEtd/"+$scope.portfolioSelected._id)
             .success(function(data) {
-                //console.log(data)
+                console.log(data)
                 //$scope.marginResult=data;
             });
     };

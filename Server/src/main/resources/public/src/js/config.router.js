@@ -5,10 +5,26 @@
  */
 angular.module('app')
   .run(
-    [ '$rootScope', '$state', '$stateParams',
-      function ($rootScope,   $state,   $stateParams) {
+    [ '$rootScope', '$state', '$stateParams', 'AUTH_EVENTS', 'authService',
+      function ($rootScope,   $state,   $stateParams, AUTH_EVENTS, authService) {
           $rootScope.$state = $state;
-          $rootScope.$stateParams = $stateParams;        
+          $rootScope.$stateParams = $stateParams;
+
+          /*
+          $rootScope.$on('$stateChangeStart', function (event, next) {
+                var authorizedRoles = next.data.authorizedRoles;
+                if (!authService.isAuthorized(authorizedRoles)) {
+                      event.preventDefault();
+                      if (authService.isAuthenticated()) {
+                        // user is not allowed
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                      } else {
+                        // user is not logged in
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                      }
+                }
+          });
+          */
       }
     ]
   )

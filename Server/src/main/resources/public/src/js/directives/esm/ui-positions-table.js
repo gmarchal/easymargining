@@ -47,7 +47,7 @@ angular.module('app')
          			{ id: 'T' , name: 'Alternate'},
          		];
 
-		$scope.exerciseStyleFlag = [
+		$scope.exerciseStyleFlags = [
 				{ id: 'AMERICAN' , name: 'AMERICAN'},
 				{ id: 'EUROPEAN' , name: 'EUROPEAN'},
 			];
@@ -76,13 +76,21 @@ angular.module('app')
 				return selected.length ? selected[0].name : 'Not set';
 			};
 
-		$scope.showSettlementTypes = function(p) {
+		$scope.showExerciseStyle = function(p) {
                 var selected = [];
                 if(p.productId) {
-                    selected = $filter('filter')($scope.settlementTypes, {id: p.productSettlementType});
+                    selected = $filter('filter')($scope.exerciseStyleFlags, {id: p.exerciseStyleFlag});
                 }
                 return selected.length ? selected[0].name : 'Not set';
             };
+
+        $scope.showSettlementTypes = function(p) {
+                        var selected = [];
+                        if(p.productId) {
+                            selected = $filter('filter')($scope.settlementTypes, {id: p.productSettlementType});
+                        }
+                        return selected.length ? selected[0].name : 'Not set';
+                    };
 			
 		// Save Trade
 		$scope.saveTrade = function(position, _id) {
@@ -93,7 +101,7 @@ angular.module('app')
 			position.portfolioId = $scope.portfolioId;
 			return $http({
 						method: 'POST',
-						url: '/position/save',
+						url: '/api/positions/add',
 						data: position
 					});
 		};
@@ -104,7 +112,7 @@ angular.module('app')
 			$scope.positions.splice(index, 1);
 			return $http({
 						method: 'POST',
-						url: '/position/remove',
+						url: '/api/positions/remove',
 						data: positionsToRemove
 					});
 		};

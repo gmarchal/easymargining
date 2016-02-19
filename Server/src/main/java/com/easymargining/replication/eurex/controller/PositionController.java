@@ -30,7 +30,7 @@ public class PositionController {
         return tradeRepository.findByPortfolioId(portfolioId);
     }
 
-    @RequestMapping(value = "/position/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Trade addPosition(@RequestBody Trade trade) {
         log.info("Save position asked for position : " + trade );
@@ -38,14 +38,14 @@ public class PositionController {
         return trade;
     }
 
-    @RequestMapping(value = "/position/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public Trade removePosition(@RequestBody Trade trade) {
         log.info("Remove position asked for position : " + trade );
         tradeRepository.delete(trade);
         return trade;
     }
 
-    @RequestMapping(value = "/position/removes", method = RequestMethod.POST)
+    @RequestMapping(value = "/removes", method = RequestMethod.POST)
     public boolean removePositions(@RequestBody List<Trade> trades) {
         tradeRepository.delete(trades);
         return true;

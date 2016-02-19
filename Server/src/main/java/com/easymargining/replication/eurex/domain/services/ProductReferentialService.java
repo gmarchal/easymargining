@@ -2,12 +2,10 @@ package com.easymargining.replication.eurex.domain.services;
 
 import com.easymargining.replication.eurex.domain.model.Product;
 import com.easymargining.replication.eurex.domain.repository.IProductRepository;
-import com.easymargining.replication.eurex.domain.repository.IUserRepository;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexProductDefinition;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexScenarioPricesParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Service;
 import org.threeten.bp.LocalDate;
 
@@ -73,5 +71,9 @@ public class ProductReferentialService {
             this.storeProducts(eurexProducts);
             eurexProducts.clear();
         }
+    }
+
+    public List<Product> findByEffectiveDate(LocalDate effectiveDate) {
+        return productRepository.findByEffectiveDate(effectiveDate);
     }
 }

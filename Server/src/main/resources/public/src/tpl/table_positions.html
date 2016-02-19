@@ -41,9 +41,8 @@
 			</span>
 	  </td>
 	  <td class="v-middle">
-		<span editable-text="trade.exerciseStyleFlag" e-name="exerciseStyleFlag" e-form="rowform" e-required>
-				{{ trade.exerciseStyleFlag }}
-			</span>
+		  <span editable-select="trade.exerciseStyleFlag" e-name="exerciseStyleFlag" e-form="rowform"
+				e-ng-options="s.id as s.name for s in exerciseStyleFlags">{{ showExerciseStyle(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		<span editable-text="trade.quantity" e-name="quantity" e-form="rowform" e-required>

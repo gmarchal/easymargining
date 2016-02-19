@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
+@RequestMapping(value = "/api/margin")
 public class MarginController {
 
     @Autowired
     EurexPrimaMarginService marginService;
 
-    @RequestMapping(value = "/ComputeEtdMargin/{portfolioId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/computeEtd/{portfolioId}", method = RequestMethod.GET)
     public MarginResult computeEtdMargin(@PathVariable("portfolioId") String portfolioId) {
         return marginService.computeEtdMargin(portfolioId);
     }
