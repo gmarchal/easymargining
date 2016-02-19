@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 'authService',
-    function(              $scope,   $translate,   $localStorage,   $window, authService ) {
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 'Session', 'authService',
+    function(              $scope,   $translate,   $localStorage, $window, Session, authService ) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       if(isIE){ angular.element($window.document.body).addClass('ie');}
@@ -76,11 +76,7 @@ angular.module('app')
       }
 
       // Authentication
-      $scope.currentUser = null;
-      $scope.userRoles
+      $scope.currentUser = Session.getCurrentUser();
       $scope.isAuthenticated = authService.isAuthenticated();
-      $scope.setCurrentUser = function (user) {
-        $scope.currentUser = user;
-      }
 
   }]);

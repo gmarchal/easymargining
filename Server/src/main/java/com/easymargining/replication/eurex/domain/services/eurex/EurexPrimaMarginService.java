@@ -23,6 +23,7 @@ import com.opengamma.margining.eurex.prisma.replication.data.EurexMarketDataLoad
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequest;
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.sesame.trade.TradeWrapper;
+import com.opengamma.util.money.Currency;
 import com.opengamma.util.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,8 +113,12 @@ public class EurexPrimaMarginService {
 
         log.info("Result :  " + outResult.toString());
 
+        MarginResult result = new MarginResult();
 
-        return new MarginResult(outResult.toString());
+        result.setImResult(imResults.getPortfolioResults().getValues().get("Total", EurexPrismaReplicationRequests.portfolioMeasures().im()).getValue().getAmount(Currency.EUR));
+        result.setHistoVarResult(imResults.getPortfolioResults().getValues().get("Total", EurexPrismaReplicationRequests.portfolioMeasures().var("PFI01_HP2_T0-99999~FILTERED_HISTORICAL_VAR_2")).getValue().getAmount(Currency.EUR));
+
+        return result;
     }
 
     /**

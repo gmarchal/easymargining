@@ -13,26 +13,57 @@ angular.module('authService', [])
         admin: 'admin',
         editor: 'editor',
         guest: 'guest'})
-    .service('Session', function() {
+    .service('Session', [ '$window', function($window) {
+
+            var currentUser = {};
+            restoreSession();
+
             this.create = function (userId, userFirstName, userLastName, userEmail, userRole) {
                 console.log("Create Session with : " + userId + ", " + userFirstName +
                             ", " + userLastName + ", " + userEmail + ", " + userRole);
-                this.userId = userId;
-                this.userFirstName = userFirstName;
-                this.userLastName = userLastName;
-                this.userEmail = userEmail;
-                this.userRole = userRole;
+
+                currentUser = {
+                    userId: userId,
+                    userFirstName: userFirstName,
+                    userLastName: userLastName,
+                    userEmail: userEmail,
+                    userRole: userRole
+                }
+
+                persistSession();
             }
 
             this.destroy = function() {
-                this.userId = null;
-                this.userFirstName = null;
-                this.userLastName = null;
-                this.userEmail = null;
-                this.userRole = null;
+                // Erase the currentUser if the user fails to log in
+                this.currentUser = null;
+                delete $window.sessionStorage.currentUser;
             }
-    })
-	.factory('authService', ['$http', '$window', 'Session', function ($http, $window, Session) {
+
+            this.getCurrentUser = function() {
+                return currentUser;
+            }
+
+            //Persist to session storage
+            function persistSession() {
+                $window.sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+
+            //Restore to session storage
+            function restoreSession() {
+                currentUser = JSON.parse($window.sessionStorage.getItem('currentUser'));
+                if (currentUser == null) {
+                    //Initialize to empty
+                    currentUser = {
+                        userId: "",
+                        userFirstName: "",
+                        userLastName: "",
+                        userEmail: "",
+                        userRole: []
+                    }
+                }
+            }
+    }])
+	.factory('authService', ['$http', 'Session', function ($http, Session) {
 
         var authService = {};
 
@@ -54,22 +85,19 @@ angular.module('authService', [])
                                     data.principal.lastName,
                                     data.principal.email,
                                     data.principal.authorities);
-                    $window.sessionStorage.currentUser = data.principal;
                 } else {
                     console.log(data);
                 }
                 callback && callback(data);
             }).error(function() {
-                // Erase the currentUser if the user fails to log in
-                delete $window.sessionStorage.currentUser;
-
+                Session.destroy();
                 callback && callback(false);
             });
 
         }
 
         authService.isAuthenticated = function() {
-            return !!Session.username;
+            return !!Session.currentUser;
         }
 
         authService.isAuthorized = function(authorizedRoles) {

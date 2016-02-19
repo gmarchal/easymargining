@@ -3,54 +3,29 @@ angular.module('app')
     return {
       restrict: 'EA',
 	  scope: {
-		  positions: '=',
-		  portfolioId: '=',
-		  valuationDate: '=',
+		  //positions: '=',
+		  //portfolioId: '=',
+		  //valuationDate: '=',
 	  },
 	  replace: true,
 	  templateUrl: 'tpl/table_positions.html',
       link: function(scope, elem, attrs) {
-		  $http.get('data/positions.json').success(function(data) {
-                scope.positions = data;
-            });
+		  //$http.get('data/positions.json').success(function(data) {
+          //      scope.positions = data;
+          //});
       },
-	  controller: function($scope, editableOptions, editableThemes) {
+	  controller: function($scope, editableOptions, editableThemes, PositionDataFactory) {
         editableThemes.bs3.inputClass = 'input-sm';
         editableThemes.bs3.buttonsClass = 'btn-sm';
         editableOptions.theme = 'bs3';
 
-		$scope.productIds = [
-			{ id: 'ORDX' },
-			{ id: 'OGB1' },
-			{ id: 'VVU' },
-		];
-
-		$scope.optionTypes = [
-			{ id: 'C', name: 'Call'},
-			{ id: 'P', name: 'Put'},
-		];
-
-		$scope.instrumentTypes = [
-          			{ id: 'Future' , name: 'Future'},
-          			{ id: 'Option' , name: 'Option'},
-          			{ id: 'Flex Option' , name: 'Flex Option'}
-          		];
-
-        $scope.settlementTypes = [
-         			{ id: 'C' , name: 'Cash Settlement'},
-         			{ id: 'E' , name: 'Physical Settlement'},
-         			{ id: 'D' , name: 'Derivative'},
-         			{ id: 'N' , name: 'Notional Settlement'},
-         			{ id: 'P' , name: 'Payment-versus-payment'},
-         			{ id: 'S' , name: 'Stock'},
-         			{ id: 'T' , name: 'Cascade'},
-         			{ id: 'T' , name: 'Alternate'},
-         		];
-
-		$scope.exerciseStyleFlags = [
-				{ id: 'AMERICAN' , name: 'AMERICAN'},
-				{ id: 'EUROPEAN' , name: 'EUROPEAN'},
-			];
+        $scope.portfolioId = PositionDataFactory.portfolioId;
+        $scope.positions = PositionDataFactory.positions;
+		$scope.productIds = PositionDataFactory.productIds;
+		$scope.optionTypes = PositionDataFactory.optionTypes;
+		$scope.instrumentTypes = PositionDataFactory.instrumentTypes;
+        $scope.settlementTypes = PositionDataFactory.settlementTypes;
+		$scope.exerciseStyleFlags = PositionDataFactory.exerciseStyleFlags;
 
 		$scope.showProductIds = function(p) {
 			var selected = [];
@@ -61,36 +36,36 @@ angular.module('app')
 		};
 
 		$scope.showInstrumentTypes = function(p) {
-				var selected = [];
-				if(p.instrumentType) {
-					selected = $filter('filter')($scope.instrumentTypes, {id: p.instrumentType});
-				}
-				return selected.length ? selected[0].name : 'Not set';
-			};
+            var selected = [];
+            if(p.instrumentType) {
+                selected = $filter('filter')($scope.instrumentTypes, {id: p.instrumentType});
+            }
+            return selected.length ? selected[0].name : 'Not set';
+        };
 
 		$scope.showOptionTypes = function(p) {
-				var selected = [];
-				if(p.productId) {
-					selected = $filter('filter')($scope.optionTypes, {id: p.optionType});
-				}
-				return selected.length ? selected[0].name : 'Not set';
-			};
+            var selected = [];
+            if(p.productId) {
+                selected = $filter('filter')($scope.optionTypes, {id: p.optionType});
+            }
+            return selected.length ? selected[0].name : 'Not set';
+        };
 
 		$scope.showExerciseStyle = function(p) {
-                var selected = [];
-                if(p.productId) {
-                    selected = $filter('filter')($scope.exerciseStyleFlags, {id: p.exerciseStyleFlag});
-                }
-                return selected.length ? selected[0].name : 'Not set';
-            };
+            var selected = [];
+            if(p.productId) {
+                selected = $filter('filter')($scope.exerciseStyleFlags, {id: p.exerciseStyleFlag});
+            }
+            return selected.length ? selected[0].name : 'Not set';
+        };
 
         $scope.showSettlementTypes = function(p) {
-                        var selected = [];
-                        if(p.productId) {
-                            selected = $filter('filter')($scope.settlementTypes, {id: p.productSettlementType});
-                        }
-                        return selected.length ? selected[0].name : 'Not set';
-                    };
+            var selected = [];
+            if(p.productId) {
+                selected = $filter('filter')($scope.settlementTypes, {id: p.productSettlementType});
+            }
+            return selected.length ? selected[0].name : 'Not set';
+        };
 			
 		// Save Trade
 		$scope.saveTrade = function(position, _id) {
@@ -133,6 +108,30 @@ angular.module('app')
 			console.log($scope.inserted);
 			$scope.positions.unshift($scope.inserted);
 		};
+
+		$scope.$watch(function() {
+            return PositionDataFactory.portfolioId;
+            }, function(value, last) {
+                if (value) {
+                    console.log(value)
+                    $scope.portfolioId = PositionDataFactory.portfolioId
+                } else {
+                    $scope.portfolioId = null;
+                }
+            }
+        );
+
+        $scope.$watch(function() {
+            return PositionDataFactory.positions;
+            }, function(value, last) {
+                if (value) {
+                    console.log(value)
+                    $scope.positions = PositionDataFactory.positions
+                } else {
+                    $scope.positions = [];
+                }
+            }
+        );
 	  }
     };
   });

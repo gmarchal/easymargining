@@ -86,7 +86,7 @@
                 <img src="img/a0.jpg" alt="...">
                 <i class="on md b-white bottom"></i>
               </span>
-              <span class="hidden-sm hidden-md">{{ principal.firstName }}.{{ principal.lastName }}</span> <b class="caret"></b>
+              <span class="hidden-sm hidden-md">{{ $scope.currentUser.userFirstName }}.{{ $scope.currentUser.userLastName }}</span> <b class="caret"></b>
             </a>
             <!-- dropdown -->
             <ul class="dropdown-menu animated fadeInRight w"> 
@@ -102,10 +102,10 @@
                 <a ui-sref="app.docs">Help</a>
               </li>
               <li class="divider"></li>
-              <li ng-show="authenticated">
+              <li ng-show="$scope.isAuthenticated">
                 <a ui-sref="lockme">Lock me</a>
               </li>
-              <li ng-show="!authenticated">
+              <li ng-show="!$scope.isAuthenticated">
                 <a ui-sref="access.signin">Login</a>
               </li>
             </ul>

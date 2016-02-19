@@ -15,5 +15,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class MarginResult implements Serializable {
 
-    private String imResult;
+    private Double imResult;
+
+    private Double histoVarResult;
+
+
 }

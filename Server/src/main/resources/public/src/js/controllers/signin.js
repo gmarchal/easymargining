@@ -16,7 +16,6 @@ app.controller('SigninFormController',
             if (data.authenticated) {
                 console.log("Login succeeded")
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                $scope.setCurrentUser(data.principal);
                 $scope.authError = false;
                 $state.go('app.home');
             } else {

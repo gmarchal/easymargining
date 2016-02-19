@@ -1,14 +1,14 @@
 'use strict';
 
 /* Controllers */
-app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$http', 'currentUser',
-                function($scope, $modalInstance, $http, currentUser) {
+app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$http', 'currentUser', 'portfolios',
+                function($scope, $modalInstance, $http, currentUser, portfolios) {
 
     $scope.portfolio = {};
 
     $scope.ok = function () {
 
-        angular.extend($scope.portfolio, {ownerId: currentUser.id});
+        angular.extend($scope.portfolio, {ownerId: currentUser.userId});
         console.log("Create new portfolio : " + $scope.portfolio);
         console.log($scope.portfolio);
 
@@ -17,6 +17,7 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$http', 'curre
         .then(
             function(response) {
                 //Success Callback
+                portfolios.unshift($scope.portfolio);
                 $modalInstance.close();
             }, function(response) {
                 //Failure Callback
@@ -39,6 +40,9 @@ app.controller('ModalPortfolioCreationCtrl', ['$scope', '$modal', '$log', functi
         resolve: {
           currentUser: function () {
             return $scope.currentUser;
+          },
+          portfolios: function () {
+            return $scope.portfolios;
           }
         }
       });
@@ -91,11 +95,8 @@ app.controller('DatepickerDemoCtrl', ['$scope', function($scope) {
   }])
   ; 
   
-app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$http', 'editableOptions', 'editableThemes',
-  function(authService, $scope, $filter, $http, editableOptions, editableThemes){
-    editableThemes.bs3.inputClass = 'input-sm';
-    editableThemes.bs3.buttonsClass = 'btn-sm';
-    editableOptions.theme = 'bs3';
+app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$http', 'PositionDataFactory',
+  function(authService, $scope, $filter, $http, PositionDataFactory ){
 
     $scope.d1_1 = [ [0, 50] ];
     $scope.d1_2 = [ [0, 50] ];
@@ -105,12 +106,16 @@ app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$htt
 	//init
 	$scope.portfolios=[];
 	$scope.portfolioSelected = {};
+	$scope.marginError = false;
+	$scope.marginErrorMessage = "";
+	$scope.marginResult = {};
 
 	// Event Management
     $scope.loadPosition = function(){
+        PositionDataFactory.positions = [];
 		$http.get("/api/positions/"+$scope.portfolioSelected._id)
             .success(function(data) {
-                $scope.positions=data;
+                PositionDataFactory.positions = data;
             });
     };
 
@@ -118,19 +123,22 @@ app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$htt
         return $scope.portfolioSelected && $scope.portfolioSelected._id;
     }, function(value, last) {
         if (value) {
+            PositionDataFactory.portfolioId = $scope.portfolioSelected._id
             $scope.loadPosition();
         } else {
-            $scope.positions=[];
+            PositionDataFactory.positions = [];
         }
     });
 
     //Init
-    $http.get("/api/portfolio/list/"+$scope.currentUser.id)
+    $http.get("/api/portfolio/list/"+$scope.currentUser.userId)
     //$http.get("/src/data/portfolios.json")
         .success(function(data) {
             $scope.portfolios=data;
             // Set the default portfolio
-            $scope.portfolioSelected=$scope.portfolios[0];
+            $scope.portfolioSelected = $scope.portfolios[0];
+            PositionDataFactory.portfolioId = $scope.portfolioSelected._id;
+            console.log(PositionDataFactory.portfolioId);
         });
 		
 		
@@ -138,7 +146,18 @@ app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$htt
         $http.get("/api/margin/computeEtd/"+$scope.portfolioSelected._id)
             .success(function(data) {
                 console.log(data)
-                //$scope.marginResult=data;
+                $scope.marginResult = data;
+                $scope.marginError = false;
+                $scope.marginErrorMessage = "";
+            })
+            .error(function(data, status) {
+                console.error('Error', status, data);
+                $scope.marginResult = {
+                    imResult: 0,
+                    histoVarResult: 0,
+                };
+                $scope.marginError = true;
+                $scope.marginErrorMessage = data.message;
             });
     };
 }]);

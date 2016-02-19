@@ -67,7 +67,7 @@
 				<p class="m-b">Modify your position for the simulation</p>
 				<progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
 				  <div class="row">
-				  	<ui-positions-table class="col-sm-12" portfolioId="0"></ui-positions-table>
+				  	<ui-positions-table class="col-sm-12" ></ui-positions-table>
 				  </div>
 				<div class="row">
 					<div class="col-sm-12">
@@ -78,10 +78,18 @@
 			  </div>
 			</tab>
 			<tab heading="Results" disabled="step2.$invalid" active="steps.step3" select="steps.percent=100">
-			  <p class="m-b">Congraduations! You got the last step.</p>
+			  <p class="m-b">Congratulations! You got the last step.</p>
 			  <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
-                <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Detail for the simulation</div>
+				<div class="panel panel-default" ng-show="marginError">
+					<div class="panel-heading font-bold">Error : </div>
+					<div class="panel-body">
+						<div class="text-danger wrapper text-center">
+							{{marginErrorMessage}}
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading font-bold">Detail for the simulation</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -119,38 +127,32 @@
                                     <thead>
                                     <tr>
                                         <th>Initial Margin Components</th>
-                                        <th style="width:70px;">Amount</th>
+                                        <th>Amount</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td>MtM Portfolio : </td>
                                         <td class="text-success">
-                                            <i class="fa fa-level-up"></i> 40€
+                                            40€
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Liquidity Add-On</td>
                                         <td class="text-success">
-                                            <i class="fa fa-level-up"></i> 40€
+                                            40€
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Market Risk Component</td>
                                         <td class="text-success">
-                                            <i class="fa fa-level-up"></i> 40€
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>App downloads</td>
-                                        <td class="text-success">
-                                            <i class="fa fa-level-up"></i> 40€
+                                            40€
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><strong>Initial Margin Total :</strong></td>
                                         <td class="text-success">
-                                            <i class="fa fa-level-up"></i> 40€
+                                            {{ marginResult.imResult | number:0 }}&nbsp;EUR
                                         </td>
                                     </tr>
                                     </tbody>
