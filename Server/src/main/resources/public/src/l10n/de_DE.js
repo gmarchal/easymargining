@@ -15,6 +15,9 @@
 },
 "aside" : {
   "nav" : {
+    "ADMINISTRATION" : "Administration",
+    "SIMULATION" : "Simulation",
+  	"REPORTING" : "Reporting",
     "HEADER" : "Navigation",
     "DASHBOARD" : "Armaturenbrett",
     "CALENDAR" : "Kalender",

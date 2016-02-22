@@ -15,6 +15,7 @@
 },
 "aside" : {
   "nav" : {
+    "ADMINISTRATION" : "Administration",
     "SIMULATION" : "Simulation",
 	"REPORTING" : "Reporting",
 	"HEADER" : "Navigation",

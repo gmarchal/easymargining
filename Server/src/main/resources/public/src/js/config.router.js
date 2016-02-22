@@ -53,6 +53,11 @@ angular.module('app')
                   templateUrl: 'tpl/home.html',
                   resolve: load(['js/controllers/home.js'])
               })
+              .state('app.admin', {
+                    url: '/admin',
+                    templateUrl: 'tpl/admin.html',
+                    resolve: load(['js/controllers/admin.js'])
+              })
 			  .state('app.eurex-simulation', {
                   url: '/eurex-simulation',
                   templateUrl: 'tpl/app_eurex-simulation.html',

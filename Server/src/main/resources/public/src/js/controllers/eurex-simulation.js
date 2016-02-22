@@ -95,8 +95,8 @@ app.controller('DatepickerDemoCtrl', ['$scope', function($scope) {
   }])
   ; 
   
-app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$http', 'PositionDataFactory',
-  function(authService, $scope, $filter, $http, PositionDataFactory ){
+app.controller('EurexSimulationCtrl', ['Session', '$scope', '$filter', '$http', 'PositionDataFactory',
+  function(Session, $scope, $filter, $http, PositionDataFactory ){
 
     $scope.d1_1 = [ [0, 50] ];
     $scope.d1_2 = [ [0, 50] ];
@@ -131,8 +131,8 @@ app.controller('EurexSimulationCtrl', ['authService', '$scope', '$filter', '$htt
     });
 
     //Init
-    $http.get("/api/portfolio/list/"+$scope.currentUser.userId)
-    //$http.get("/src/data/portfolios.json")
+    //$http.get("/api/portfolio/list/"+$scope.currentUser.userId)
+    $http.get("/api/portfolio/list/"+Session.getCurrentUser().userId)
         .success(function(data) {
             $scope.portfolios=data;
             // Set the default portfolio

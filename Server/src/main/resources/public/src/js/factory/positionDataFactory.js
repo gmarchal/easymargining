@@ -5,10 +5,20 @@ angular.module('app')
     var portfolioId = null;
 
     var productIds = [
-    			{ id: 'ORDX' },
-    			{ id: 'OGB1' },
-    			{ id: 'VVU' },
+    			{ eurexCode: 'ORDX' },
+    			{ eurexCode: 'OGB1' },
+    			{ eurexCode: 'VVU' },
     		];
+    /*
+    var productIds = [];
+    $http.get("/api/product/alldef")
+        .success(function(data) {
+            console.log(data);
+            productIds=data;
+        })
+        .error(function(data, status) {
+            console.error('Error', status, data);
+        });*/
 
     var optionTypes = [
     			{ id: 'C', name: 'Call'},
@@ -46,4 +56,11 @@ angular.module('app')
         settlementTypes: settlementTypes,
         exerciseStyleFlags: exerciseStyleFlags
      }
+  }])
+  .factory('ProductReferentialFactory', ['$http', 'Session', function ($http, Session) {
+      var factory = {};
+      factory.getProductIds = function(){
+          return $http.get("/api/product/alldef");
+      };
+      return factory;
   }]);

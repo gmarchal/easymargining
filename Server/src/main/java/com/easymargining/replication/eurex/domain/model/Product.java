@@ -1,9 +1,10 @@
 package com.easymargining.replication.eurex.domain.model;
 
 import lombok.*;
-import org.threeten.bp.LocalDate;
+import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * Created by Gilles Marchal on 16/02/2016.
@@ -17,6 +18,9 @@ import java.io.Serializable;
 public class Product implements Serializable  {
 
     private static final long serialVersionUID = 1L;
+
+    @Id
+    private String _id;
 
     private LocalDate effectiveDate;
 

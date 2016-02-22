@@ -20,8 +20,6 @@ public class EurexProductDefinitionLoader {
             List<EurexProductDefinition> productDefinitions =
                     EurexProductDefinitionParser.parse(new File("").toURI().toURL());
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

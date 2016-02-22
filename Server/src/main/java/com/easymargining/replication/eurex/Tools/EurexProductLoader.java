@@ -6,11 +6,11 @@ import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexProd
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexScenarioPricesParser;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexSettlementPricesParser;
 import lombok.extern.slf4j.Slf4j;
-import org.threeten.bp.LocalDate;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +52,8 @@ public class EurexProductLoader {
                     (eurexProductDefinition) -> {
                         // Bulk insert
                         eurexProducts.add(new Product (
-                                s_valuationDate,
+                                null,
+                                s_valuationDate, //Date.from(s_valuationDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
                                 eurexProductDefinition.getProductId(),
                                 eurexProductDefinition.getContractYear(),
                                 eurexProductDefinition.getContractMonth(),

@@ -3,7 +3,6 @@ package com.easymargining.replication.eurex.domain.services.security;
 import com.easymargining.replication.eurex.domain.model.User;
 import com.easymargining.replication.eurex.domain.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-//@EnableMongoRepositories("com.easymargining.replication.eurex.domain.repository")
 public class UserRepositoryUserDetailsService implements UserDetailsService {
 
     private final IUserRepository userRepository;

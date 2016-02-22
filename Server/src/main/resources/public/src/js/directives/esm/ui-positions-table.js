@@ -14,14 +14,18 @@ angular.module('app')
           //      scope.positions = data;
           //});
       },
-	  controller: function($scope, editableOptions, editableThemes, PositionDataFactory) {
+	  controller: function($scope, editableOptions, editableThemes, PositionDataFactory, ProductReferentialFactory) {
         editableThemes.bs3.inputClass = 'input-sm';
         editableThemes.bs3.buttonsClass = 'btn-sm';
         editableOptions.theme = 'bs3';
 
         $scope.portfolioId = PositionDataFactory.portfolioId;
         $scope.positions = PositionDataFactory.positions;
-		$scope.productIds = PositionDataFactory.productIds;
+		//$scope.productIds = PositionDataFactory.productIds;
+	    ProductReferentialFactory.getProductIds()
+	                             .success(function(data, status){
+                                    $scope.productIds = data;
+                                 });;
 		$scope.optionTypes = PositionDataFactory.optionTypes;
 		$scope.instrumentTypes = PositionDataFactory.instrumentTypes;
         $scope.settlementTypes = PositionDataFactory.settlementTypes;
@@ -30,9 +34,9 @@ angular.module('app')
 		$scope.showProductIds = function(p) {
 			var selected = [];
 			if(p.productId) {
-				selected = $filter('filter')($scope.productIds, {id: p.productId});
+				selected = $filter('filter')($scope.productIds, {eurexCode: p.productId});
 			}
-			return selected.length ? selected[0].id : 'Not set';
+			return selected.length ? selected[0].eurexCode : 'Not set';
 		};
 
 		$scope.showInstrumentTypes = function(p) {
@@ -96,7 +100,7 @@ angular.module('app')
 		$scope.addTrade = function() {
 			$scope.inserted = {
 				portfolioId: $scope.portfolioId,
-				productId: $scope.productIds.length ? $scope.productIds[0].id : 'Not set',      // First ProductId
+				productId: $scope.productIds.length ? $scope.productIds[0].eurexCode : 'Not set',      // First ProductId
 				instrumentType: $scope.instrumentTypes[1].id,                                   // Option
 				optionType: $scope.optionTypes.length ? $scope.optionTypes[0].id : 'Not set',   // Call
 				expiryDate:  Date.now(),                                                        // ExpiryDate = Now + 3M
@@ -129,6 +133,19 @@ angular.module('app')
                     $scope.positions = PositionDataFactory.positions
                 } else {
                     $scope.positions = [];
+                }
+            }
+        );
+
+        $scope.$watch(function() {
+            return PositionDataFactory.productIds;
+            }, function(value, last) {
+                if (value) {
+                    console.log(value)
+                    $scope.productIds = PositionDataFactory.productIds
+                } else {
+                    console.log('Event on productIds.')
+                    $scope.productIds = [];
                 }
             }
         );

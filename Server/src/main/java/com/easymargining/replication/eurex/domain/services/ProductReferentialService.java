@@ -1,16 +1,18 @@
 package com.easymargining.replication.eurex.domain.services;
 
 import com.easymargining.replication.eurex.domain.model.Product;
+import com.easymargining.replication.eurex.domain.repository.IProductDefinitionRepository;
 import com.easymargining.replication.eurex.domain.repository.IProductRepository;
+import com.easymargining.tools.eurex.EurexProductDefinitionParser;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexProductDefinition;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexScenarioPricesParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.threeten.bp.LocalDate;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +21,15 @@ import java.util.List;
  */
 @Slf4j
 @Service
-//@EnableMongoRepositories("com.easymargining.replication.eurex.domain.repository")
 public class ProductReferentialService {
 
     private final int BULK_INSERT_SIZE = 1000;
 
     @Autowired
     private IProductRepository productRepository;
+
+    @Autowired
+    private IProductDefinitionRepository productDefRepository;
 
     /*
     @Autowired
@@ -38,6 +42,21 @@ public class ProductReferentialService {
         productRepository.save(products);
     }
 
+    public void loadEurexProductDefinition(List<URL> files, LocalDate effectiveDate) {
+        log.info("ProductReferentialService::loadEurexProductDefinition( " + files.toString() + ", " + effectiveDate + " )");
+        files.forEach( (file) -> {
+
+            List<com.easymargining.replication.eurex.domain.model.EurexProductDefinition> productDefinitions = null;
+            try {
+                productDefinitions = EurexProductDefinitionParser.parse(file);
+                productDefRepository.save(productDefinitions);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
+
     public void loadProducts(List<URL> files, LocalDate effectiveDate) throws IOException {
         log.info("ProductReferentialService::loadProducts( " + files.toString() + ", " + effectiveDate + " )");
         List<EurexProductDefinition> productDefinitions = EurexScenarioPricesParser.parse(files);
@@ -47,6 +66,7 @@ public class ProductReferentialService {
                 (eurexProductDefinition) -> {
                     // Bulk insert
                     eurexProducts.add(new Product (
+                            null,
                             effectiveDate,
                             eurexProductDefinition.getProductId(),
                             eurexProductDefinition.getContractYear(),
@@ -73,7 +93,23 @@ public class ProductReferentialService {
         }
     }
 
+    public List<Product> findDistinctProductByEffectiveDate(LocalDate effectiveDate) {
+        return productRepository.findDistinctProductByEffectiveDate(effectiveDate);
+    }
+
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
     public List<Product> findByEffectiveDate(LocalDate effectiveDate) {
         return productRepository.findByEffectiveDate(effectiveDate);
+    }
+
+    public List<com.easymargining.replication.eurex.domain.model.EurexProductDefinition> findAllProductDefs() {
+        return productDefRepository.findAll();
+    }
+
+    public List<com.easymargining.replication.eurex.domain.model.EurexProductDefinition> findProductWithCriteria(String productType, String like) {
+        return productDefRepository.findByTypeAndProductNameLikeOrEurexCodeLike(productType, like, like);
     }
 }
