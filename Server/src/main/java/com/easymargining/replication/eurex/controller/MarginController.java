@@ -1,6 +1,6 @@
 package com.easymargining.replication.eurex.controller;
 
-import com.easymargining.replication.eurex.domain.model.MarginResult;
+import com.easymargining.replication.eurex.domain.model.results.MarginResult;
 import com.easymargining.replication.eurex.domain.services.eurex.EurexPrimaMarginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

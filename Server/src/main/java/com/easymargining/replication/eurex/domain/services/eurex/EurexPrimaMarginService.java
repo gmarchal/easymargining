@@ -1,8 +1,11 @@
 package com.easymargining.replication.eurex.domain.services.eurex;
 
-import com.easymargining.replication.eurex.domain.model.MarginResult;
+import com.easymargining.replication.eurex.domain.model.results.LiquidationGroupMarginResult;
+import com.easymargining.replication.eurex.domain.model.results.MarginResult;
 import com.easymargining.replication.eurex.domain.model.Trade;
+import com.easymargining.replication.eurex.domain.model.results.PortfolioMarginResult;
 import com.easymargining.replication.eurex.domain.repository.ITradeRepository;
+import com.easymargining.replication.eurex.domain.services.marketdata.EurexMarketDataEnvironment;
 import com.google.common.collect.Table;
 import com.opengamma.margining.core.MarginEnvironment;
 import com.opengamma.margining.core.MarginEnvironmentFactory;
@@ -23,13 +26,14 @@ import com.opengamma.margining.eurex.prisma.replication.data.EurexMarketDataLoad
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequest;
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.sesame.trade.TradeWrapper;
-import com.opengamma.util.money.Currency;
+import com.opengamma.util.money.CurrencyAmount;
 import com.opengamma.util.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.threeten.bp.LocalDate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,18 +55,20 @@ public class EurexPrimaMarginService {
         List<Trade> trades = tradeRepository.findByPortfolioId(portfolioId);
         log.info ("Number of trades loaded  : " + trades.size());
 
-        StringBuilder outResult = new StringBuilder();
-
+        /*
         // Initialize environment with data
         MarginEnvironment environment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
-
         // Use file resolver utility to discover data from standard Eurex directory structure
         MarketDataFileResolver fileResolver = new MarketDataFileResolver("marketData", s_valuationDate);
-
         // Create ETD data load request, pointing to classpath, and load
         EurexEtdMarketDataLoadRequest etdDataLoadRequest = MarketDataLoaders.etdRequest(fileResolver);
         EurexMarketDataLoadRequest loadRequest = EurexMarketDataLoadRequest.etdMarketDataRequest(s_valuationDate, etdDataLoadRequest);
         environment.getMarginData().loadData(loadRequest);
+        */
+
+        // Load MarketData
+        MarginEnvironment environment = EurexMarketDataEnvironment.getInstance().getMarginEnvironment();
+
 
         // Obtain portfolio, loaded from a trade file on the classpath
         OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
@@ -89,11 +95,14 @@ public class EurexPrimaMarginService {
         String stringPvTable = TradeMeasureResultFormatter.formatter()
                 .truncateAfter(200)
                 .format(tradePvResults);
+
+        StringBuilder outResult = new StringBuilder();
         outResult.append("PV results:\n").append(stringPvTable);
 
         // Run IM request
         log.info("Running IM request");
         MarginResults imResults = calculator.calculate(portfolio, imRequest);
+
 
         // Print results
         String imResultTable = PortfolioMeasureResultFormatter.formatter()
@@ -113,10 +122,26 @@ public class EurexPrimaMarginService {
 
         log.info("Result :  " + outResult.toString());
 
-        MarginResult result = new MarginResult();
 
-        result.setImResult(imResults.getPortfolioResults().getValues().get("Total", EurexPrismaReplicationRequests.portfolioMeasures().im()).getValue().getAmount(Currency.EUR));
-        result.setHistoVarResult(imResults.getPortfolioResults().getValues().get("Total", EurexPrismaReplicationRequests.portfolioMeasures().var("PFI01_HP2_T0-99999~FILTERED_HISTORICAL_VAR_2")).getValue().getAmount(Currency.EUR));
+        // Build Output Result.
+        MarginResult result = new MarginResult();
+        List<LiquidationGroupMarginResult> liquidationGroupMarginResults = null;
+        CurrencyAmount[] currencyAmounts =
+                imResults.getPortfolioResults().getValues().get(
+                        "Total",
+                        EurexPrismaReplicationRequests.portfolioMeasures().im()).getValue().getCurrencyAmounts();
+        for (int i=0 ; i< currencyAmounts.length; i++) {
+            currencyAmounts[i].getCurrency();
+            currencyAmounts[i].getAmount();
+
+            liquidationGroupMarginResults = new ArrayList();
+            result.setPortfolioMarginResults(new ArrayList());
+            result.getPortfolioMarginResults().add(
+                    new PortfolioMarginResult(currencyAmounts[i].getCurrency().getCode(),
+                                        currencyAmounts[i].getAmount(),
+                                        liquidationGroupMarginResults));
+        }
+        // ---
 
         return result;
     }

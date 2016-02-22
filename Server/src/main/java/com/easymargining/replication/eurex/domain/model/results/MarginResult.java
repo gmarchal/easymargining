@@ -1,8 +1,9 @@
-package com.easymargining.replication.eurex.domain.model;
+package com.easymargining.replication.eurex.domain.model.results;
 
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Gilles Marchal on 21/01/2016.
@@ -15,9 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class MarginResult implements Serializable {
 
-    private Double imResult;
-
-    private Double histoVarResult;
-
+    // List of IMResult by currency.
+    private List<PortfolioMarginResult> portfolioMarginResults;
 
 }
