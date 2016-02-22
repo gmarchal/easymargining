@@ -1,0 +1,43 @@
+Trade Model
+===========
+
+If it is not possible to load :doc:`portfolios <../../common/api/loading_portfolios>` from the
+:doc:`supported file formats <../data/trade_parsers>` then trades may be constructed programmatically.
+These can then be wrapped into a ``MarginPortfolio`` which can be passed to the API as normal.
+An example of doing this with an FRA is provided in ``EurexPrismaBasicApiIntegrationClient``.
+
+The easiest way to determine how trades should be constructed is to explore the trade objects
+returned by the built-in parsers of the supported file formats.
+Documentation on the trade model API is provided in the Javadocs.
+
+The supported trade types are implemented by the Java classes detailed below:
+
+===================== =================================== ====================================
+Product               Trade Class                         Related Classes
+===================== =================================== ====================================
+Interest Rate Swap    ``InterestRateSwapTrade``           ``InterestRateSwapSecurity``,
+                                                          ``FixedInterestRateSwapLeg``,
+                                                          ``FloatingInterestRateSwapLeg``
+Inflation Swap        ``ZeroCouponInflationSwapTrade``    ``ZeroCouponInflationSwapSecurity``,
+                                                          ``FixedInflationSwapLeg``,
+                                                          ``InflationIndexSwapLeg``
+FRA                   ``ForwardRateAgreementTrade``       ``ForwardRateAgreementSecurity``
+All ETDs              ``ClearedEtdTrade``                 ``ClearedEtdSecurity``
+Sensitivities         ``SensitivitiesTrade``              ``SensitivitiesSecurity``
+===================== =================================== ====================================
+
+Note that, for consistency, all products are represented by a *trade* which wraps a *security*.
+The details of the contract are always in the *security* object.
+
+Once a list of trades has been constructed, a ``MarginPortfolio`` can be constructed:
+
+.. code-block:: java
+
+  List<TradeWrapper<?>> trades = constructTrades();
+  MarginPortfolio portfolio = ImmutableMarginPortfolio.ofTrades(trades);
+
+This portfolio can then be used with the APIs exactly as in the other examples.
+
+The example code in ``EurexPrismaBasicApiIntegrationClient`` demonstrates programmitic 
+trade construction. For more information on the trade model, see the 
+`OG Platform Javadocs <http://javadocs.opengamma.com/platform/2.21.0/>`_.

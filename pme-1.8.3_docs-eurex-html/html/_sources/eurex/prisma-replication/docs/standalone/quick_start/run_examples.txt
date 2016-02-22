@@ -1,0 +1,74 @@
+Running the Examples
+====================
+
+The examples project contains code which demonstrates how to use Eurex Clearing PME to perform calculations.
+It also contains the sample market data required by the calculations. The steps to set up the examples project are
+detailed in :doc:`Setting up a Development Environment <set_up_development_environment>`.
+
+The example code includes a number of example classes. They are standard Java classes with ``main`` methods
+so they can be run from an IDE. The examples output their calculation results to the console,
+formatted as ASCII tables.
+
+Calculation of Initial Margin for OTC Trades
+--------------------------------------------
+
+The class which demonstrates calculation of Initial Margin for OTC trades is ``EurexPrismaOtcMarginClient``.
+This calculates Present Value for each trade and a full set of measures for the portfolio including Initial Margin.
+
+This example requires at least 3GB of memory so the following argument should passed to ``java`` when running::
+
+    -Xmx3g
+
+Calculation of Initial Margin for ETD Trades
+--------------------------------------------
+
+The class which demonstrates calculation of Initial Margin for ETD trades is ``EurexPrismaEtdMarginClient``.
+This calculates Present Value for each trade and a full set of measures for the portfolio including
+Initial Margin and Historical VAR.
+
+Calculation of Cash Flows
+-------------------------
+
+The class which demonstrates calculation of cash flows is ``EurexPrismaCashFlowClient``. This calculates cash flows for
+both legs of a swap.
+
+This example requires at least 3GB of memory so the following argument should passed to ``java`` when running::
+
+    -Xmx3g
+
+Basic API Integration Example
+-----------------------------
+
+The example class ``EurexPrismaBasicApiIntegrationClient`` follows the same pattern as the previous examples,
+but rather than parsing files to load holidays, fixings and market data, this data is provided
+directly via the API from within the example itself. This demonstrates creating the relevant
+business objects directly and can provide a starting point for integrating with a data source other
+than flat files.
+
+This example requires at least 3GB of memory so the following argument should passed to ``java`` when running::
+
+    -Xmx3g
+
+
+
+Running from the Command Line
+-----------------------------
+
+The class ``EurexPrismaCommandLineExample`` demonstrates how to use Eurex Clearing PME to run calculations
+from the command line. It calculates Present Value for each trade and a range of measures including Initial Margin
+for the portfolio. It requires three arguments:
+
+* ``-d`` valuation date in the format ``yyyy-MM-dd``, e.g. ``2015-06-03``
+* ``-m`` path to a directory containing market data
+* ``-p`` path to the file defining the portfolio
+
+The following arguments can be used run the command line example with the sample data
+included in the examples project::
+
+    -d 2015-06-03 -p src/main/resources/trade/etdTrades.csv -m src/main/resources/marketData
+
+This assumes the working directory is the root directory of the examples project.
+
+This example requires at least 3GB of memory so the following argument should passed to ``java`` when running::
+
+    -Xmx3g

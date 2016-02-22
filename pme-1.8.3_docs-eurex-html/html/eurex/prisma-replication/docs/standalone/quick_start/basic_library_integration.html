@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basic Library Integration | Eurex Clearing PME</title>
+    <link rel="shortcut icon" href="../../../../../_static/opengamma-favicon.ico"/>
+    <link rel="stylesheet" href="../../../../../_static/css/main.css">
+    <link rel="stylesheet" href="../../../../../_static/css/syntax.css">
+    <link rel="stylesheet" href="../../../../../_static/css/alerts.css">
+    <link rel="stylesheet" href="../../../../../_static/font-awesome-4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/docs.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <header class="top">
+  <div class="row topbar">
+    <h1 id="logo" class="logo">
+      <a href="../../../../../index.html">Eurex Clearing PME</a>
+    </h1>
+    <nav>
+      <!--
+      <ul id="navigation" class="navigation">
+        <li><a href="http://www.opengamma.com/opengamma-platform/margining">More</a></li>
+      </ul>
+      -->
+      <div class="og">
+        <div class="toggle"><button type="button" id="toggle-menu" class="button--teal">Menu</button></div>
+        <div class="og_logo"><a href="http://www.opengamma.com"><img alt="OpenGamma" src="../../../../../_static/logo_topnav.png" /></a></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+      <div id="content" class="row">
+
+        <div id="sidebar" class="sidebar">
+
+          <section>
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="toc.html">Quick Start</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="set_up_development_environment.html">Setting up a Development Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="set_up_development_environment.html#system-requirements">System requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_up_development_environment.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="run_examples.html">Running the Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#calculation-of-initial-margin-for-otc-trades">Calculation of Initial Margin for OTC Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#calculation-of-initial-margin-for-etd-trades">Calculation of Initial Margin for ETD Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#calculation-of-cash-flows">Calculation of Cash Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#basic-api-integration-example">Basic API Integration Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#running-from-the-command-line">Running from the Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Basic Library Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#margin-environment-lifecycle">Margin Environment Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-lifecycle">Data Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#third-party-libraries">Third-Party Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_library_integration.html">Advanced Library Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/toc.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/features.html">Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#margin-methodologies">Margin Methodologies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#product-scope">Product Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/system_requirements.html">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#software">Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#hardware">Hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/known_limitations.html">Known Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#etd">ETD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#otc">OTC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#market-data">Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#trades-and-positions">Trades and Positions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#margin-calculation">Margin Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data/toc.html">Input Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/trade_parsers.html">Portfolio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_etd_csv.html">Eurex ETD CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_otc_csv.html">Eurex OTC CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_sensitivities_csv.html">Eurex Sensitivities CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fpml.html">FpML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fixml.html">FIXML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/eurex_market_data.html">Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#otc-requirements">OTC Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#etd-requirements">ETD Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#cross-margining-requirements">Cross-Margining Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/fixings.html">Fixings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/holidays.html">Holidays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/standard_directory_structure.html">Standard Directory Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#individual-file-conventions">Individual File Conventions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/toc.html">Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_market_data.html">Loading Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#automatic-file-resolution">Automatic file resolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#explicit-usage">Explicit usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_portfolios.html">Loading Portfolios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_portfolios.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/performing_calculations.html">Performing Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#trade-requests">Trade Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-requests">Portfolio Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#add-ons">Add-ons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-im">Portfolio IM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#building-a-request">Building a request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#p-l-calculation-methodology">P&amp;L calculation methodology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#output-model">Output Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#error-handling-during-calculation">Error handling during calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/calculation_modes.html">Calculation Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#full-revaluation">Full Revaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#delta-approximation">Delta Approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/margin_results.html">Margin Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#portfolio-results">Portfolio Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#trade-results">Trade Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/concurrency.html">Concurrency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#cpu-utilization">CPU utilization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#custom-executor-service">Custom Executor Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#concurrent-use-of-the-api">Concurrent use of the API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/common_tasks.html">Common Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#what-if-analysis">What-If Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#multiple-days-of-market-data">Multiple Days of Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#log-configuration">Log Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/toc.html">Advanced Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/trade_model.html">Trade Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/third_party_dependencies.html">Third-Party Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          </section>
+        </div>
+
+        <main id="main" class="main">
+          
+  <div class="section" id="basic-library-integration">
+<h1>Basic Library Integration</h1>
+<div class="section" id="margin-environment-lifecycle">
+<h2>Margin Environment Lifecycle</h2>
+<p>The <code class="docutils literal"><span class="pre">MarginEnvironment</span></code> holds key references to all data holders.
+This means that this object can be allowed
+to fall out of scope and its data garbage collected.
+This is key when working with multiple days of market data, where
+it may be impossible to hold all necessary data for a batch run in heap at one
+time.</p>
+<p>However, because the Eurex Clearing PME was designed to make maximum use of
+modern multi-core and multi-CPU computers, it maintains execution threads so
+that all operations run in parallel, in a standard Java <code class="docutils literal"><span class="pre">ExecutorService</span></code>.
+This can be provided by your application, or created automatically by
+the PME.</p>
+<p>Please follow the instructions in the
+<a class="reference internal" href="../integration/concurrency.html"><em>Concurrency Guide</em></a> and use an external
+<code class="docutils literal"><span class="pre">ExecutorService</span></code> if your application creates multiple <code class="docutils literal"><span class="pre">MarginEnvironment</span></code>
+instances (see <a class="reference internal" href="../../common/overview/known_limitations.html"><em>Known Limitations</em></a>).
+If your application creates one
+<code class="docutils literal"><span class="pre">MarginEnvironment</span></code> for the lifecycle of your application, this is not
+necessary.</p>
+<p>For more information on performing multi-day analysis, see
+<a class="reference internal" href="../integration/common_tasks.html"><em>Common Use Cases</em></a> .</p>
+<p>For an overview of the system architecture, see <a class="reference internal" href="../integration/architecture.html#architecture"><span>Library Architecture</span></a>.</p>
+</div>
+<div class="section" id="data-lifecycle">
+<h2>Data Lifecycle</h2>
+<p>When integrating the PME, there will be three distinct sets of data.</p>
+<p>Market, Simulation, and Reference Data is stored internally by the
+<code class="docutils literal"><span class="pre">MarginEnvironment</span></code> and its helper classes (such as <code class="docutils literal"><span class="pre">MarginData</span></code>).
+Once you have provided this data to the <code class="docutils literal"><span class="pre">MarginEnvironment</span></code> you no longer
+need to manage it. This means you can load the data once and then run multiple
+portfolios across multiple calculations.
+However, if you are running over many days consecutively, you will need to allow the
+<code class="docutils literal"><span class="pre">MarginEnvironment</span></code> to fall out of scope between valuation dates,
+to allow this memory to be reclaimed by garbage collected.</p>
+<p>Input data that you provide (portfolios, trades, and ETD positions) are only
+used transiently by the <code class="docutils literal"><span class="pre">MarginCalculator</span></code> during a particular calculation.
+Your code must manage the lifecycle of this data, which is not held by the
+PME after a particular calculation is complete.</p>
+<p>Results generated by a call to a <code class="docutils literal"><span class="pre">MarginCalculator</span></code> are generated by the PME
+but no references are held to it. Your code is responsible for managing it,
+and it is available to the garbage collector as soon as all references you
+hold to it pass out of scope.</p>
+</div>
+<div class="section" id="third-party-libraries">
+<h2>Third-Party Libraries</h2>
+<p>Like any example of modern Java software, the Eurex Clearing PME utilizes
+a significant number of third-party Open Source libraries (including the
+OpenGamma Platform, the core of the library). While the majority of those are
+used for implementation only and thus only of concern from a development environment
+and packaging perspective, there are several that are exposed directly in the
+API that you use to integrate the PME into your applications.</p>
+<p>The Eurex PME uses <a class="reference external" href="http://www.threeten.org/">ThreeTen</a> for all date and time
+calculations. ThreeTen is a back-port and reference implementation of
+JSR-310, which is the new date and time implementation in Java 8. It was
+designed and developed by Stephen Colebourne, the author of Joda-Time (used
+in many financial services firms), who is also an OpenGamma employee. In a
+future release of the Eurex Clearing PME, when we discontinue support for
+Java 7, we will no longer have a need to use ThreeTen.</p>
+<p>The Eurex PME also makes extensive use of <a class="reference external" href="https://github.com/google/guava">Guava</a>
+and you will note that most of the collections you interact with when programming
+against the library are actually Guava collections rather than the built-in
+native Java ones.</p>
+<p>Finally, for most &#8220;POJO&#8221; implementations (where Java classes are used purely
+as structured data representations) we make extensive use of
+<a class="reference external" href="http://www.joda.org/joda-beans/">Joda-Beans</a> , also by Stephen Colebourne
+and sponsored by OpenGamma. While you can broadly ignore that we are using
+Joda-Beans, it ensures that all data structures you work with behave in
+a consistent way and all Builders are consistent in their operation.</p>
+<p>If you are developing a new application to use the PME, we highly recommend
+that you evaluate these libraries as it will make your integration and maintenance
+easy going forward, particularly for dates and times.</p>
+<p>See <a class="reference internal" href="../advanced/third_party_dependencies.html"><em>Third Party Dependencies</em></a> for a complete listing with license info.</p>
+</div>
+</div>
+
+
+        </main>
+      </div>
+
+      <footer>
+  <div class="row">
+    <div class="small-6 columns"><p>Version 1.8.3</p></div>
+    <div class="small-6 columns"><p class="copyright">&copy; 2015 OpenGamma Limited</p></div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>

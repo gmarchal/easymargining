@@ -1,0 +1,99 @@
+.. _known_limitations:
+
+=================
+Known Limitations
+=================
+
+General
+=======
+
+**Multiple margin environment instances causes memory leak**
+  Construction of multiple ``MarginEnvironment`` instances, either sequentially
+  or simultaneously, will result in a memory leak if they do not have an
+  externally provided ``ExecutorService``. If you need to create multiple
+  ``MarginEnvironment`` instances, you must manage your ``ExecutorService``
+  directly. See :ref:`concurrency` for more information.
+
+ETD
+===
+
+**Position netting**
+  ETD trades are not netted. If ETDs are provided as individual trades (i.e. 
+  multiple records for the same security) then netting will not occur and an
+  incorrect margin will be calculated. In particular, Liquidity Risk Adjustment
+  will be based on each individual trade rather than the overall net position for
+  that security.
+  
+OTC
+===
+
+General
+_______
+
+**Additional payments**
+  Additional payments (for example upfront or other trade fees) attached to the 
+  FpML trade specification are ignored.
+
+Swap
+____
+
+**Lump payment amounts for fixed legs**
+  For fixed legs with zero-coupon payment at trade maturity the trade model
+  does not support a lump payment amount (instead of a rate). The value in the 
+  FpML / CSV is used as the notional for the fixed leg, with the fixed rate set at
+  100% and a day count convention of 1/1 to simulate the effect of the fixed amount.
+    
+**Fixed first rates**
+  A fixed rate can be set for the first reset period of a swap floating leg, but this 
+  is currently only supported if the initial period is a stub period.  
+  
+**Rate interpolation for floating leg stub periods**
+  Forward rates for floating leg stub periods with rate interpolation are calculated 
+  according to ISDA specifications. Rate interpolation is not done once the index 
+  fixings are known, i.e. the fixing date is in the past.
+  
+**Variable notional swaps and stub periods**
+  For the combination of notional schedule and floating leg stub periods the 
+  calculation of the last stub period accrual end and hence the period length 
+  is incorrect.
+
+**Effective/termination date**
+  The effective/termination date must be the same on all legs.
+
+**Unsupported FpML features**
+  The following features provided by FpML are not supported:
+  
+  * An index rate spread schedule (i.e. a variable index spread) for floating swap legs
+  * A rate schedule (i.e. a variable fixed rate) for fixed swap legs
+  * relativeEffectiveDate/relativeTerminationDate
+  * firstPeriodStartDate
+  * effectiveDate adjustments
+  * cap/floor/rateTreatment/discounting
+  * negativeInterestRateTreatment (floor rate in model is not used)
+  
+FRA
+___
+
+**Payment date**
+  The payment date must be the same as the start date.
+
+**Payment business day convention**
+  The payment business day convention provided in FpML is not used.
+
+**Unsupported FpML features**
+  The following features provided by FpML are not supported:
+  
+  * FRA trades entered with settlement in-arrears (and discounting method ``NONE``)
+  * FRAs with an interpolated index
+  * A fixing offset of calendar days or months/years
+
+ZCIS
+____
+
+**Initial index level for inflation swaps**
+  Setting an initial index level for zero coupon inflation swaps is not supported.
+
+**Sensitivity-based input for inflation trades**
+  It is not possible to enter zero coupon inflation swap trades as a sensitivity
+  profile. However, the calculation of margin based on delta approximation for zero
+  coupon inflation swap trades is supported.

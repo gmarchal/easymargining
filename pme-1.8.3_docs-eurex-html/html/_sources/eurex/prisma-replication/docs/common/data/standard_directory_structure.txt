@@ -1,0 +1,132 @@
+Standard Directory Structure
+============================
+
+The implementation includes a utility, ``MarketDataFileResolver`` to assist with the loading of market data files into
+the environment. This is an abstraction over the individual market data files so that they can be accessed in a standard
+manner, and this allows market data load requests to be constructed without knowledge of individual file names.
+The utility requires all market data to be in standard locations and to adhere to specific naming conventions.
+
+The use of this utility is optional; if the input files cannot be placed into the standard directory structure, then the
+load requests can be constructed directly, referencing the individual files in their respective locations.
+
+However, all examples shipped as part of the Eurex Clearing PME assume this structure, and so it is a good place to start, particularly when going through the Quick Start.
+
+.. note::
+   Market data files can either be locally stored or on a remote/network file store.
+   Loading from a network store may have significant performance impact on
+   load operations, but typically those only take place once per day or application load.
+
+
+Directory Layout
+----------------
+
+The directory hierarchy is on three levels:
+
+* base directory
+* market data date (``yyyyMMdd`` format)
+* file type (``ETD``, ``fixings`` or ``OTC``)
+
+An example directory layout for June 3rd, 2015 would be as follows::
+
+  +-- market_data
+      +-- 20150603
+          +-- ETD/
+          +-- fixings/
+          +-- OTC/
+
+The individual files expected within these directories are covered below.
+
+Individual File Conventions
+---------------------------
+
+Here we list the files that are expected in the above directories.
+
+Some general notes on the tables below:
+
+* All files can be in either plain text, zip or gzip format.
+  
+  * Zip files should have extension ``.zip``
+  
+  * Gzip files should have extension ``.gz``
+  
+  * All other extensions are interpretted as plain text
+   
+* Filename formats are case insensitive. e.g. ``theoinst20150603.txt`` would be a valid 
+  theoretical instrument file name
+  
+* Where referenced, ``VALDATE`` should be of the format ``yyyyMMdd``. (e.g. ``20150603``).
+
+* Unless explicitly specified, only a single file matching the format should exist in
+  the relevant directory.
+
+ETD files
+~~~~~~~~~
+
+The resolver will expect to find all of the following files in the ``ETD`` directory.
+
+Multiple instances of the *Theoretical Prices and Instrument Configuration* may exist
+in the directory. All will be read and loaded.
+
++------------------------+-------------------------------------------------+
+| Filename Format        | Description                                     |
++========================+=================================================+
+| ``*THEOINST*VALDATE*`` | Theoretical Prices and Instrument Configuration |
++------------------------+-------------------------------------------------+
+| ``*STLPRICE*VALDATE*`` | Settlement Prices                               |
++------------------------+-------------------------------------------------+
+| ``*RISKMEAS*VALDATE*`` | Risk Measure Configuration                      |
++------------------------+-------------------------------------------------+
+| ``*MRKTRISK*VALDATE*`` | Risk Measure Aggregation Configuration          |
++------------------------+-------------------------------------------------+
+| ``*MRKTCAPA*VALDATE*`` | Market Capacity Configuration                   |
++------------------------+-------------------------------------------------+
+| ``*LIQUFACT*VALDATE*`` | Liquidity Factor Configuration                  |
++------------------------+-------------------------------------------------+
+| ``*FOREXCRT*VALDATE*`` | FX Rates Configuration                          |
++------------------------+-------------------------------------------------+
+
+
+OTC files
+~~~~~~~~~
+
+The resolver will expect to find all of the following files in the ``OTC`` directory.
+
++-------------------+----------------------------------+
+| Filename Format   | Description                      |
++===================+==================================+
+| ``*210*VALDATE*`` | Interest Rate Curves Report      |
++-------------------+----------------------------------+
+| ``*202*VALDATE*`` | Risk Factor Report               |
++-------------------+----------------------------------+
+| ``*220*VALDATE*`` | Liquidity Tables                 |
++-------------------+----------------------------------+
+| ``*221*VALDATE*`` | Initial Margin Configuration Set |
++-------------------+----------------------------------+
+| ``*299*VALDATE*`` | Holiday Calendar Report          |
++-------------------+----------------------------------+
+
+Additionally, the resolver will expect to find a fixings file in the ``fixings`` directory.
+
++--------------------+----------------+
+| Filename Format    | Description    |
++====================+================+
+| ``*fixings*.csv*`` | Fixings Report |
++--------------------+----------------+
+
+
+Cross margining files
+~~~~~~~~~~~~~~~~~~~~~
+
+The resolver will expect to find all of the following files in the ``ETD`` directory.
+
++------------------------+-----------------------+
+| Filename Format        | Description           |
++========================+=======================+
+| ``*MTRLPARM*VALDATE*`` | Materiality Parameter |
++------------------------+-----------------------+
+| ``*FIMMPRIO*VALDATE*`` | FI & MM Priority      |
++------------------------+-----------------------+
+| ``*MATRTBKT*VALDATE*`` | Maturity Bucket       |
++------------------------+-----------------------+
+
+

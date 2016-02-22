@@ -1,0 +1,93 @@
+.. _margin_results:
+
+Margin Results
+==============
+
+The ``MarginResults`` interface is the common API for consuming calculation results from
+OpenGamma Margining. It presents bean-like getter methods for exposing different information in the
+result.
+
+**MarginMethodologyId**
+  An object representing the name of the margin methodology and its version. The version
+  field is defined by OpenGamma for the purpose of tracing a result object to the code version
+  that produced it.
+
+**MarginMethodologyRequest**
+  The original calculation request object.
+
+**ResultInstant**
+  The time of the calculation.
+
+**MarginTradeResults**
+  The grid of trade-level results. Results are keyed by trade (row) and measure (column). ``TradeMeasure``
+  encapsulates the fields of a measure, including measure type (PV, DELTA etc), currency, valuation date
+  and scenario id.
+
+**MarginPortfolioResults**
+  Results for portfolio level-calculations. Keyed by portfolio subset (row) and measure (column).
+
+  Note, portfolio measures will always calculate their results using all of the trade-level results
+  available. If PVs for 20 trades in a portfolio of 5000 fail, IM for the 4980 will be reported and the
+  individual trade failures will be returned.
+
+Portfolio Results
+-----------------
+
+Total IM
+~~~~~~~~
+
+The total IM includes all components of the Eurex methodology and is across all Liquidity Group Splits for the portfolio.
+
+Hierarchy Description
+~~~~~~~~~~~~~~~~~~~~~
+
+The hierarchy of the margin calculation is illustrated by the example below:
+
+.. figure:: hierarchy.png
+   :align: center
+   :figclass: align-center
+
+The following components are available within the results hierarchy:
+
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| Measure                                                              | Description                                                                                                 |
++======================================================================+=============================================================================================================+
+| IM[Total]                                                            | Total IM for the portfolio                                                                                  |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| IM[{x}]                                                              | IM for a Liquidation Group                                                                                  |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| IM[{x}_HP{n}_T0-99999]                                               | IM for a Liquidation Group Split                                                                            |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}\_HP{n}_T0-99999 liquidity]                                | Liquidity Risk Adjustment for a Liquidation Group Split                                                     |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}\_HP{n}_T0-99999 liquidity otc]                            | Liquidity Risk Adjustment for the OTC part of a Liquidation Group Split                                     |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}\_HP{n}_T0-99999 liquidity etd]                            | Liquidity Risk Adjustment for the ETD part of a Liquidation Group Split                                     |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}\_HP{n}_T0-99999 LOC]                                      | Long Option Credit for a Liquidation Group Split                                                            |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| VAR[{x}_HP{n}_T0-99999]                                              | Market Risk IM for a Liquidation Group Split                                                                |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| VAR[{x}_HP{n}_T0-99999~SIMPLE_STRESS_VAR_{n}]                        | Stress VaR for a Liquidation Group Split                                                                    |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| VAR[{x}_HP{n}_T0-99999~SIMPLE_STRESS_VAR_{n}_{m}]                    | Stress Sub VaR for a Liquidation Group Split                                                                |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}_HP{n}_T0-99999~SIMPLE_STRESS_VAR_{n}_{m} CBA]             | Correlation Break Adjustment corresponding to a Stress Sub VaR for a Liquidation Group Split                |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}_HP{n}_T0-99999~SIMPLE_STRESS_VAR_{n}_{m} CMA]             | Compression Model Adjustment corresponding to a Stress Sub VaR for a Liquidation Group Split                |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| VAR[{x}_HP{n}_T0-99999~FILTERED_HISTORICAL_VAR_{n}                   | Filtered Historical VaR for a Liquidation Group Split                                                       |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| VAR[{x}_HP{n}_T0-99999~FILTERED_HISTORICAL_VAR_{n}_{m}]              | Filtered Historical Sub VaR for a Liquidation Group Split                                                   |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}_HP{n}_T0-99999~FILTERED_HISTORICAL_VAR_{n}_{m} CBA]       | Correlation Break Adjustment corresponding to a Filtered Historical Sub VaR for a Liquidation Group Split   |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ADD_ON[{x}_HP{n}_T0-99999~FILTERED_HISTORICAL_VAR_{n}_{m} CMA]       | Compression Model Adjustment corresponding to a Filtered Historical Sub VaR for a Liquidation Group Split   |
++----------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+
+Trade Results
+-------------
+
+This result set includes all trade level results either explicitly requested or used in the calculation
+of the portfolio results. By setting the ``includeAllTradeMeasures`` in the ``EurexPrismaReplicationRequest``,
+all trade measures used in the calculation will be returned.

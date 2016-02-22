@@ -1,0 +1,100 @@
+==========================
+Frequently Asked Questions
+==========================
+
+System Requirements
+===================
+
+**Can I run the Eurex Clearing PME if I do not have a machine which meets the recommended hardware specification?**
+  Yes you can run the solution on a smaller machine. However it is recommended that you only
+  load the market data that you require, for example just OTC data or only the open interest
+  theoretical instrument file for ETD. If you do run on a machine with less memory and load
+  all the available data then you will find that the calculations are slower than expected.
+  
+**What if my operating system isn't in the list of supported systems?**
+  This is the list of operating systems that the Eurex Clearing PME has been tested on.
+  However, as a Java library it is expected to run successfully on other operating systems.
+  
+
+Market Data
+===========
+
+**Why do I have to provide my own fixings and holiday files?**
+  For licensing reasons CCPs are not able to publish the fixings and holiday data that they
+  use in their calculations. However, this data should be readily available within your own
+  firm for your valuations. CSV parsers have been provided with Eurex Clearing PME to make 
+  it easy for you to integrate this data.
+
+**Do I need to provide fixings data for all eligible products?**
+  In general you only need to provide the fixings necessary to price your trades. In particular,
+  if you do not trade zero coupon inflation swaps then you do not need to provide inflation
+  fixings.
+  
+**What holiday data do I need to provide?**
+  You will need to provide the holidays required to price your trades correctly. Providing
+  past holidays is important to make sure that pricing does not fail trying to find fixings
+  on days when they are not available.
+  
+**Inflation fixings are for the month. Why do I have to provide a day in the input file?**
+  The fixings file format expects an actual date to be provided. However it does not matter
+  which day of the month is provided as the solution will automatically sort this out. Some
+  data providers use the first day of the month whilst others use the last day of the month.
+  The parser is flexible to allow for this.
+  
+**Do I have to reload market data every time I want to calculate a margin?**
+  No you only need to load the market data once into a ``MarginEnvironment``, say at the start
+  of day. You can then run all your calculation requests against that environment.
+  
+  
+Trades and Positions
+====================
+
+**What products are supported?**
+  The Eurex Clearing PME supports all products which use the Eurex PRISMA for ETD or Eurex OTC
+  methodologies (see :ref:`product_scope`. There are
+  some known limitations to the supported OTC trades which are listed in :ref:`known_limitations`. 
+  Any ETD products in the Eurex Transparency Enabler files are supported. 
+  
+**Are any eligibility checks performed on trades?**
+  There are no specific eligibility checks performed on trades so it is possible that the
+  Eurex Clearing PME will calculate margin on an ineligible trade. The Eurex Transparency Enabler 
+  files ensure that margin can only be calculated for OTC trades in valid currencies or for
+  ETD positions on valid securities.  Checks are also performed to exclude matured trades
+  and trades with a termination date beyond the end of the provided curves.
+
+**Does the Eurex Clearing PME perform any netting?**
+  The solution does not perform any netting on ETD trades (see :ref:`known_limitations`).
+  To calculate the margin correctly for an ETD portfolio it requires it to be provided as
+  total positions. Netting will be performed of long and short positions to calculate a net
+  position if it is provided as a single record in either CSV or FIXML format.
+  
+**My trades are not available in one of the provided formats. How do I load them into the PME?**
+  The PME supports the file formats supported by Eurex but if you cannot access your trades
+  in any of these formats then you have two options; you can take the format that you 
+  do have and convert it to one of the supported formats or you can load the trades
+  by constructing the OpenGamma domain objects programmatically. For further information see
+  :ref:`loading_portfolios`.
+
+Margin Calculation
+==================
+
+**Can I use the Eurex Clearing PME to calculate variation margin?**
+  The Eurex Clearing PME calculates initial margin. Variation margin is not available as
+  an output. However, it is possible to output PV for all trades, and for premium paid up
+  front options this is equivalent to the premium margin. 
+  
+**Can I choose the currency that my margin is calculated in?**
+  You can choose to calculate your margin in either EUR or CHF.
+  
+**How can I use the Eurex Clearing PME to better understand my margin?**
+  The output from the Eurex Clearing PME provides a full breakdown of all the elements of 
+  the Eurex algorithms. It also provides some additional trade level information such as PV
+  and P&L. Therefore it is possible to understand, for example, which trades are contributing
+  most to the VaR components of the margin or what is driving the level of the Liquidity Risk.
+ 
+**I am trying to do a what-if analysis. My base portfolio is a sensitivity profile and my new trade is in trade format. What does my calculation request need to be?**
+  If any part of your portfolio is provided as a sensitivity profile then you need to 
+  use the delta approximation calculation mode (see :ref:`calculation_modes`.
+  The PME cannot combine full revaluation and delta approximation modes when calculating
+  OTC margins. Similarly if you are trying to do cross margining and have your OTC 
+  portfolio as a sensitivity profile then you will need to use delta approximation mode. 

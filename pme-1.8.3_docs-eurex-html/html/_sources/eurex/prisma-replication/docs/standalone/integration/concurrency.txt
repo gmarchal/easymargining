@@ -1,0 +1,79 @@
+.. _concurrency:
+
+===========
+Concurrency
+===========
+
+.. NOTE kirk 2015-10-29
+   Initial version was copied directly from the common core concepts file, and then
+   made more PME specific.
+
+CPU utilization
+===============
+
+The Eurex Clearing PME is designed to maximize use of the host machine's available CPU cores.
+The underlying OpenGamma technology employed in the PME has been designed
+to run risk calculations for large portfolios in a parallel manner.
+
+When performing VaR calculations by full revaluation (rather than a sensitivity-based approximation),
+the underlying risk engine is used to calculate Present Value under each CCP scenario. These results are then consumed
+by the PME in an asynchronous manner, minimizing the time
+spent on post-processing operations such as aggregation and PnL computation.
+This enables initial margin calculations to scale linearly with the number of CPU cores
+available.
+
+By default, the library will create one thread pool per ``MarginEnvironment``.
+A common heuristic is used whereby the number of threads in the pool is set to the number
+of available cores plus two. These are named using the string format ``"OG-%d"`` where
+``%d`` is an integer. All threads run in daemon mode, so will not prevent a process from terminating.
+
+.. figure:: threadpool_usage.png
+   :figclass: align-center
+   
+   Fig 1: Eclipse debug screenshot showing the active margin calculation threads
+
+Custom Executor Service
+=======================
+
+The thread pool used can be customised or overridden via the ``MarginEnvironmentFactory``.
+When using that class to build your ``MarginEnvironment``, use the ``executorService()`` method.
+
+This is particularly useful in the following contexts:
+
+* When your application makes use of multiple ``MarginEnvironment`` instances simultaneously,
+  by default each will allocate an ``ExecutorService`` that uses full CPU resources for
+  the machine. In this case you only want to have one and share them.
+* When your application has its own ``ExecutorService`` used for job dispatch and
+  execution, you should use that in the ``MarginEnvironment`` to not have contention
+  for resources between your application's computational jobs and the ``MarginEnvironment``.
+
+In both of these cases it is completely acceptable and supported to share an
+``ExecutorService`` between multiple ``MarginEnvironment`` instances, or with other
+tasks your application performs.
+
+The following example shows how to specify a custom ``ExecutorService``:
+
+.. code-block:: java
+
+  ExecutorService myExecutorService = ...;
+
+  MarginEnvironment environment = 
+      MarginEnvironmentFactory.create(new EurexPrismaReplication())
+                              .executorService(myExecutorService)
+                              .build();
+
+Concurrent use of the API
+=========================
+
+The PME provides APIs for two main purposes: data loading, and executing
+calculation requests.
+
+Once all data has been loaded into a margin environment, then the PME
+supports running multiple calculation requests against that environment 
+concurrently.
+
+Loading data into an environment that is being used concurrently by 
+another thread to run calculation requests is not supported; in this case, 
+the modifications to the environment would need to occur while excluding 
+calculation requests reading from the environment, for example using a 
+read-write lock around calls to the APIs.

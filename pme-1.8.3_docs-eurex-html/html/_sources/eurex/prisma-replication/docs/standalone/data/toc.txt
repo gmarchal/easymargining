@@ -1,0 +1,11 @@
+Input Data
+==========
+
+.. toctree::
+  :maxdepth: 2
+
+  trade_parsers
+  ../../common/data/eurex_market_data
+  ../../common/data/fixings
+  ../../common/data/holidays
+  ../../common/data/standard_directory_structure

@@ -1,0 +1,50 @@
+Market Data
+===========
+
+Eurex Clearing members are provided with access to Transparency Enabler files to allow for replication of the margin
+methodologies. An essential part of the OpenGamma implementation is the ability to load and interpret these files.
+
+We distinguish between three categories of files: OTC, ETD and cross-margining. A category of files is only required
+if the calculation involves it, either because there are OTC or ETD trades in the portfolio, or because
+cross-margining is enabled.
+
+OTC Requirements
+----------------
+
+The following Eurex files are required to calculate margin:
+
+*	``202`` - Risk Factor Report
+*	``210`` - Interest Rate Curves Report
+*	``220`` - Liquidity Tables
+*	``221`` - Initial Margin Configuration Set
+
+The format and content of these files is described in *Eurex OTC Clear Risk Methodology Description*.
+
+Index fixings and holiday calendars are also required but are not provided by Eurex. For more details, 
+see :doc:`fixings` and :doc:`holidays`.
+
+ETD Requirements
+----------------
+
+The following Eurex files are required to calculate margin:
+
+*	``forexcrt`` - FX Rates Configuration
+*	``liqufact`` - Liquidity Factor Configuration
+*	``mrktcapa`` - Market Capacity Configuration
+*	``mrktrisk`` - Risk Measure Aggregation Configuration
+*	``riskmeas`` - Risk Measure Configuration
+*	``stlprice`` - Settlement Prices
+*	``theoinst`` - Theoretical Prices and Instrument Configuration
+
+The format and content of these files is described in *Eurex Clearing Prisma – User Guide: Methodology Description*.
+
+.. _cross_margining:
+
+Cross-Margining Requirements
+----------------------------
+
+*	``fimmprio`` - FI & MM Priority File
+*	``mtrlparm`` - Materiality Parameter File
+*	``matrbkt`` - Maturity Bucket File
+
+The format and content of these files is described in *Eurex Clearing Prisma – User Guide: Cross Margining*.

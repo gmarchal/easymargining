@@ -1,0 +1,96 @@
+FpML
+====
+
+FpML v5.8 is supported for OTC trades.
+
+
+Features
+--------
+
+Counterparty selection
+**********************
+
+An FpML trade representation may reference several parties. In order that the loaded trades are constructed with the correct direction with respect to the counterparty, it is important to know which of the parties in the FpML representation is the counterparty. By default, a heuristic is applied which assumes that the counterparty is the only party referenced in the FpML representation, excluding any parties with the following identifiers:
+
+* ``EUREX``
+* ``OpenGammaId``
+
+This default behaviour can be overridden when using the FpML parser programmatically.
+
+
+Internal trade identifiers
+**************************
+
+By default, each loaded trade is given a globally unique identifier corresponding to the next value in an incrementing sequence.
+When analysis of trade-level results is required, it can be important to ensure that the results can be tied back to a specific input trade via a trade identifier.
+For this reason, a special party with the identifier ``OpenGammaId`` is supported in the FpML. A ``partyTradeIdentifier`` can be added which references this party,
+specifying a custom ``tradeId`` as shown below
+
+.. code-block:: xml
+
+  <fpml>
+    <trade>
+      <tradeHeader>
+
+        <partyTradeIdentifier>
+          <partyReference href="OpenGammaId"></partyReference>
+          <tradeId tradeIdScheme="OpenGammaId">UKRPI-2M-Lag</tradeId>
+        </partyTradeIdentifier>
+
+        ...
+
+      </tradeHeader>
+
+      ...
+
+    </trade>
+
+    <party id="OpenGammaId">
+      <partyId>OpenGammaId</partyId>
+    </party>
+
+    ...
+
+  </fpml>
+
+
+Day count conventions
+*********************
+
+The following *day count conventions* are supported:
+
+* 1/1
+* 30/360
+* 30E/360
+* 30E/360.ISDA
+* ACT/360
+* ACT/365
+* ACT/365.FIXED
+* ACT/365L
+* ACT/ACT.AFB
+* ACT/ACT.ICMA
+* ACT/ACT.ISMA
+* ACT/ACT.ISDA
+* ACT/365.ISDA
+
+
+Limitations
+-----------
+
+See :doc:`../overview/known_limitations`.
+
+API
+---
+
+The FpML parser is implemented by ``FpmlTradeParser``.
+
+The code below shows a simple example of using it directly to load trades from an FpML input file:
+
+.. code-block:: java
+
+  File fpmlFile = new File("fpml.xml");
+  ByteSource fpmlSource = Files.asByteSource(fpmlFile);
+  FpmlTradeParser.parseTrades(fpmlSource);
+
+It is also possible to construct an instance of ``FpmlTradeParser`` manually in order to
+override the default counterparty selection.

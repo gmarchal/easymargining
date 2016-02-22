@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loading Market Data | Eurex Clearing PME</title>
+    <link rel="shortcut icon" href="../../../../../_static/opengamma-favicon.ico"/>
+    <link rel="stylesheet" href="../../../../../_static/css/main.css">
+    <link rel="stylesheet" href="../../../../../_static/css/syntax.css">
+    <link rel="stylesheet" href="../../../../../_static/css/alerts.css">
+    <link rel="stylesheet" href="../../../../../_static/font-awesome-4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/docs.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <header class="top">
+  <div class="row topbar">
+    <h1 id="logo" class="logo">
+      <a href="../../../../../index.html">Eurex Clearing PME</a>
+    </h1>
+    <nav>
+      <!--
+      <ul id="navigation" class="navigation">
+        <li><a href="http://www.opengamma.com/opengamma-platform/margining">More</a></li>
+      </ul>
+      -->
+      <div class="og">
+        <div class="toggle"><button type="button" id="toggle-menu" class="button--teal">Menu</button></div>
+        <div class="og_logo"><a href="http://www.opengamma.com"><img alt="OpenGamma" src="../../../../../_static/logo_topnav.png" /></a></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+      <div id="content" class="row">
+
+        <div id="sidebar" class="sidebar">
+
+          <section>
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../standalone/quick_start/toc.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/quick_start/set_up_development_environment.html">Setting up a Development Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/set_up_development_environment.html#system-requirements">System requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/set_up_development_environment.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/quick_start/run_examples.html">Running the Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/run_examples.html#calculation-of-initial-margin-for-otc-trades">Calculation of Initial Margin for OTC Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/run_examples.html#calculation-of-initial-margin-for-etd-trades">Calculation of Initial Margin for ETD Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/run_examples.html#calculation-of-cash-flows">Calculation of Cash Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/run_examples.html#basic-api-integration-example">Basic API Integration Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/run_examples.html#running-from-the-command-line">Running from the Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/quick_start/basic_library_integration.html">Basic Library Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/basic_library_integration.html#margin-environment-lifecycle">Margin Environment Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/basic_library_integration.html#data-lifecycle">Data Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/quick_start/basic_library_integration.html#third-party-libraries">Third-Party Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/quick_start/advanced_library_integration.html">Advanced Library Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalone/overview/toc.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/features.html#margin-methodologies">Margin Methodologies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/features.html#product-scope">Product Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/features.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/overview/system_requirements.html">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/overview/system_requirements.html#software">Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/overview/system_requirements.html#hardware">Hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/overview/release_notes.html">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/known_limitations.html">Known Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/known_limitations.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/known_limitations.html#etd">ETD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/known_limitations.html#otc">OTC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/overview/faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/overview/faq.html#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/overview/faq.html#market-data">Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/overview/faq.html#trades-and-positions">Trades and Positions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/overview/faq.html#margin-calculation">Margin Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalone/data/toc.html">Input Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/data/trade_parsers.html">Portfolio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../trade_parsers/eurex_etd_csv.html">Eurex ETD CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../trade_parsers/eurex_otc_csv.html">Eurex OTC CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../trade_parsers/eurex_sensitivities_csv.html">Eurex Sensitivities CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../trade_parsers/fpml.html">FpML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../trade_parsers/fixml.html">FIXML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data/eurex_market_data.html">Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data/eurex_market_data.html#otc-requirements">OTC Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/eurex_market_data.html#etd-requirements">ETD Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/eurex_market_data.html#cross-margining-requirements">Cross-Margining Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data/fixings.html">Fixings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data/fixings.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/fixings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data/holidays.html">Holidays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data/holidays.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/holidays.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data/standard_directory_structure.html">Standard Directory Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data/standard_directory_structure.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/standard_directory_structure.html#individual-file-conventions">Individual File Conventions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../standalone/integration/toc.html">Integration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/integration/architecture.html">Library Architecture</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Loading Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-file-resolution">Automatic file resolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#explicit-usage">Explicit usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="loading_portfolios.html">Loading Portfolios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_portfolios.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="performing_calculations.html">Performing Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#trade-requests">Trade Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#portfolio-requests">Portfolio Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#add-ons">Add-ons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#portfolio-im">Portfolio IM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#building-a-request">Building a request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#p-l-calculation-methodology">P&amp;L calculation methodology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#output-model">Output Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performing_calculations.html#error-handling-during-calculation">Error handling during calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/calculation_modes.html">Calculation Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/calculation_modes.html#full-revaluation">Full Revaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/calculation_modes.html#delta-approximation">Delta Approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/integration/margin_results.html">Margin Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/margin_results.html#portfolio-results">Portfolio Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/margin_results.html#trade-results">Trade Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/integration/concurrency.html">Concurrency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/concurrency.html#cpu-utilization">CPU utilization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/concurrency.html#custom-executor-service">Custom Executor Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/concurrency.html#concurrent-use-of-the-api">Concurrent use of the API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/integration/common_tasks.html">Common Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/common_tasks.html#what-if-analysis">What-If Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/common_tasks.html#multiple-days-of-market-data">Multiple Days of Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../standalone/integration/common_tasks.html#log-configuration">Log Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalone/advanced/toc.html">Advanced Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/advanced/trade_model.html">Trade Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../standalone/advanced/third_party_dependencies.html">Third-Party Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          </section>
+        </div>
+
+        <main id="main" class="main">
+          
+  <div class="section" id="loading-market-data">
+<h1>Loading Market Data</h1>
+<p>Market data is loaded via the OpenGamma Margining load request API.</p>
+<p>For Eurex, the <code class="docutils literal"><span class="pre">EurexMarketDataLoadRequest</span></code> is used to populate the
+environment with market data. This contains three sub-requests:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">EurexEtdMarketDataLoadRequest</span></code></li>
+<li><code class="docutils literal"><span class="pre">EurexOtcMarketDataLoadRequest</span></code></li>
+<li><code class="docutils literal"><span class="pre">EurexCrossMarginDataLoadRequest</span></code></li>
+</ul>
+<p>Each references the corresponding subset of files described in
+<a class="reference internal" href="../data/eurex_market_data.html"><em>Market Data</em></a>.</p>
+<p>There are two approaches to building the individual sub-requests. If files
+are laid out on the filesystem according to the structure described in
+<a class="reference internal" href="../data/standard_directory_structure.html"><em>Standard Directory Structure</em></a>, the client can use the
+<code class="docutils literal"><span class="pre">MarketDataFileResolver</span></code> to build the sub-requests automatically.</p>
+<p>If files are not laid out this way, the sub-requests must be built
+directly by the client. In this approach, the location of each
+file must be explicitly specified by the user. This gives the user the
+flexibility to arrange the files on disk in whatever way is most
+convenient.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When OTC trades are in the portfolio, rate fixings and holidays must be loaded before submitting a <code class="docutils literal"><span class="pre">EurexMarketDataLoadRequest</span></code> as they are needed for initializing the Liquidity Adjustment calculation.</p>
+</div>
+<div class="section" id="automatic-file-resolution">
+<h2>Automatic file resolution</h2>
+<p>If files are laid out on the filesystem according to the
+<a class="reference internal" href="../data/standard_directory_structure.html"><em>standard conventions</em></a>,
+the <code class="docutils literal"><span class="pre">MarketDataFileResolver</span></code> can be used to build the individual
+sub-requests.</p>
+<p>This example demonstrates the loading of OTC data using the resolver:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">MarginEnvironment</span> <span class="n">environment</span> <span class="o">=</span> <span class="o">...;</span>
+<span class="n">MarketDataFileResolver</span> <span class="n">fileResolver</span> <span class="o">=</span>
+  <span class="k">new</span> <span class="n">MarketDataFileResolver</span><span class="o">(</span><span class="s">&quot;data/marketData&quot;</span><span class="o">,</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2015</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+
+<span class="c1">//loads fixings and holidays into MarginData</span>
+<span class="n">MarketDataLoaders</span><span class="o">.</span><span class="na">loadGeneralData</span><span class="o">(</span><span class="n">environment</span><span class="o">.</span><span class="na">getMarginData</span><span class="o">(),</span> <span class="n">fileResolver</span><span class="o">);</span>
+
+<span class="c1">//builds an otc sub-request</span>
+<span class="n">EurexOtcMarketDataLoadRequest</span> <span class="n">otcDataLoadRequest</span> <span class="o">=</span>
+  <span class="n">MarketDataLoaders</span><span class="o">.</span><span class="na">otcRequest</span><span class="o">(</span><span class="n">fileResolver</span><span class="o">);</span>
+<span class="c1">//builds the main load request with only OTC data</span>
+<span class="n">EurexMarketDataLoadRequest</span> <span class="n">loadRequest</span> <span class="o">=</span>
+  <span class="n">EurexMarketDataLoadRequest</span><span class="o">.</span><span class="na">otcMarketDataRequest</span><span class="o">(</span><span class="n">s_valuationDate</span><span class="o">,</span> <span class="n">otcDataLoadRequest</span><span class="o">);</span>
+<span class="c1">//pass to MarginData</span>
+<span class="n">environment</span><span class="o">.</span><span class="na">getMarginData</span><span class="o">().</span><span class="na">loadData</span><span class="o">(</span><span class="n">loadRequest</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>ETD and cross-margining sub-requests would be built similarly.</p>
+</div>
+<div class="section" id="explicit-usage">
+<h2>Explicit usage</h2>
+<p>If the input files cannot be placed into the standard directory
+structure required to use these static utilities, then the load
+requests can be constructed directly, referencing the individual
+files in their respective locations. This is done by passing all
+of the necessary URLs to each sub-request:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">URL</span> <span class="n">baseMarketDataFile</span> <span class="o">=</span> <span class="o">...;</span>
+<span class="n">URL</span> <span class="n">riskFactorReport</span> <span class="o">=</span> <span class="o">...;</span>
+<span class="n">URL</span> <span class="n">varParameters</span> <span class="o">=</span> <span class="o">...;</span>
+<span class="n">URL</span> <span class="n">liquidityParamsFile</span> <span class="o">=</span> <span class="o">...;</span>
+<span class="n">EurexOtcMarketDataLoadRequest</span> <span class="n">subRequest</span> <span class="o">=</span>
+    <span class="n">EurexOtcMarketDataLoadRequest</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">baseMarketDataFile</span><span class="o">,</span>
+                                     <span class="n">riskFactorReport</span><span class="o">,</span>
+                                     <span class="n">varParameters</span><span class="o">,</span>
+                                     <span class="n">liquidityParamsFile</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>The data may also come from a source other than files.
+See the example code in <code class="docutils literal"><span class="pre">EurexPrismaBasicApiIntegrationClient</span></code> for more information.</p>
+</div>
+<div class="section" id="error-handling-during-loading">
+<h2>Error handling during loading</h2>
+<div class="section" id="prerequisite-fixings-and-holidays">
+<h3>Prerequisite fixings and holidays</h3>
+<p>As mentioned above, when dealing with OTC trades in the portfolio,
+loading rate fixings and holidays are required before the user can
+successfully submit a <code class="docutils literal"><span class="pre">EurexMarketDataLoadRequest</span></code>.
+If this data is not present the user will be presented with an error similar to:</p>
+<div class="highlight-python"><div class="highlight"><pre>com.opengamma.OpenGammaRuntimeException: Missing data required to build hedge portfolio.
+ Holiday calendars for must be loaded before loading Eurex market data
+</pre></div>
+</div>
+</div>
+<div class="section" id="missing-eurex-input-files">
+<h3>Missing Eurex input files</h3>
+<p>If Eurex market data input files are missing, an exception will be raised. In addition to the stack trace,
+the error message will point the user to the problem:</p>
+<div class="highlight-python"><div class="highlight"><pre>com.opengamma.DataNotFoundException:
+No file found in /testData/marketData/20150603/OTC for template 299 on 20150603
+</pre></div>
+</div>
+<p>In this case, the 299 - Holiday Calendar Report file is missing.
+The different expected input files are described in
+<a class="reference internal" href="../data/standard_directory_structure.html"><em>Standard Directory Structure</em></a>.</p>
+</div>
+<div class="section" id="currencies-and-indices-that-are-not-used">
+<h3>Currencies and indices that are not used</h3>
+<p>The hedge portfolio used for the Liquidity Adjustment anticipates all possible currencies and indices.
+If the user&#8217;s portfolio does not contain some of these currency and index combinations, then it is likely
+that their provided fixings file will also be missing those combinations.</p>
+<p>The system can tolerate this missing data also long as it is not needed by the portfolio later. In this
+case there would be trade level pricing errors that would come back in the results set.
+This is described in
+<a class="reference internal" href="performing_calculations.html"><em>Performing Calculations</em></a>.</p>
+<p>However, the system will print warning messages to the user such as:</p>
+<div class="highlight-python"><div class="highlight"><pre>WARN  c.o.s.m.b.MarketDataEnvironmentFactory -
+Failed to build time series TimeSeriesRequirement{
+ marketDataId=RawId{id=Bundle[ISDA~CHF-LIBOR-BBA-6M],
+ marketDataType=class java.lang.Double, fieldName=Market_Value},
+ marketDataTime=MarketDataTime{time=null, date=null, dateRange=[2014-06-03,2015-06-05],
+ type=TIME_SERIES}}
+</pre></div>
+</div>
+<p>These warnings may be disregarded, but can be helpful when necessary data truly is missing.</p>
+</div>
+</div>
+</div>
+
+
+        </main>
+      </div>
+
+      <footer>
+  <div class="row">
+    <div class="small-6 columns"><p>Version 1.8.3</p></div>
+    <div class="small-6 columns"><p class="copyright">&copy; 2015 OpenGamma Limited</p></div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>

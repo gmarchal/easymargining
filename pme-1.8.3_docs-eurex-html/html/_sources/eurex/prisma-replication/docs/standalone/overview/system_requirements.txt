@@ -1,0 +1,31 @@
+System Requirements
+===================
+
+Software
+--------
+
+Eurex Clearing PME is a standalone Java library. It requires Java SE 7 or later. However, for new application development, we highly recommend using Java 8, as it will be required in a future version of the Eurex Clearing PME. Java 7 will be supported until at least November 2016.
+
+Supported operating systems include, but are not limited to:
+
+* Microsoft Windows 7 and later
+* Apple Mac OS X Yosemite and later
+* Microsoft Windows Server 2008 R2 and later
+* Linux (Fedora 21 or later; CentOS 6 or later)
+
+Hardware
+--------
+
+The library has been designed to operate within certain performance targets, on commodity server hardware, with 8 GB of Java heap space and a market data environment fully populated with a single day's OTC and ETD data.
+Each complete day of loaded market data requires around 4 GB of heap space, although it may not be necessary to load the full set of data depending on the portfolios being analysed. For example, the large ``theoinst`` file providing theoretical prices for ETDs may be filtered before being loaded to exclude ETDs which will not be required.
+
+Runtime performance is parallelized, and so is highly dependant on the number and speed of the CPU cores available to the library, particularly for OTC trades in a full-revaluation calculation configuration.
+
+OpenGamma regularly runs performance benchmarks on what we have found to be a typical server used by our customers for production, server-side implementations. This hardware specification is:
+
+* 16 cores (2 Intel Xeon E5-2650 CPUs, each with 8 cores running at 2.0GHz)
+* 8 GB of heap (4 GB allocated to one day's total OTC, ETD, and Cross-Margining market data, plus 4 GB working space)
+
+This configuration permits calculation of IM on a 1,000 swap portfolio (full revaluation) in under 15 seconds, and calculation of IM on a 1,000 ETD portfolio in under a second.
+
+It is possible to use the library in a more memory-constrained environment, but performance may be less than optimal depending on the working heap space available.

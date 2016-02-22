@@ -1,0 +1,103 @@
+Eurex OTC CSV
+=============
+
+The standard Eurex Clearing CSV format is supported for OTC trades. This is a standard CSV file with a header row.
+
+Fields
+------
+
+Each row in the CSV input file corresponds to a single trade, with the exception of variable-notional swaps.
+There are several fields which define properties of the overall trade, plus a set of fields that are repeated for each leg.
+
+The following required fields define properties of the overall trade:
+
++---------------------+-------------------+----------+-------------------------+
+| Column Name         | Format            | Optional | Description             |
++=====================+===================+==========+=========================+
+| ``internalTradeId`` | Text              | No       |                         |
++---------------------+-------------------+----------+-------------------------+
+| ``tradeType``       | Text              | No       | IRS, OIS, VNS, ZCIS     |
++---------------------+-------------------+----------+-------------------------+
+| ``currency``        | ISO code          | No       | EUR, CHF, GBP, USD, JPY |
++---------------------+-------------------+----------+-------------------------+
+| ``effectiveDate``   | Date - dd/MM/yyyy | No       |                         |
++---------------------+-------------------+----------+-------------------------+
+| ``terminationDate`` | Date - dd/MM/yyyy | No       |                         |
++---------------------+-------------------+----------+-------------------------+
+
+The following fields are repeated for each leg:
+
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| Column Name                  | Format              | Optional | Description                                                                   |
++==============================+=====================+==========+===============================================================================+
+| ``legType``                  | Text                | No       | fixedLeg, floatingLeg                                                         |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``legSpread``                | Number              | Yes      | The rate for a fixed leg (as a percentage), or spread for a floating leg      |
+|                              |                     |          | (in basis points)                                                             |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``legIndex``                 | Text                | Yes      | Will default to index for Trade Type and Currency. No default is provided     |
+|                              |                     |          | for ZCIS trades so must be entered for these trades                           |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``interestFixedAmount``      | Number              | Yes      | Known interest amount for a fixed leg. Must be provided if ``legSpread`` is   |
+|                              |                     |          | not used for the fixed leg.                                                   |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``notional``                 | Number              | No       |                                                                               |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``paymentPeriod``            | e.g. 3M for 3 month | Yes      | For float leg will determine index. Will default to standard for the currency |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``PeriodStartVNS``           | Date - dd/mm/yyyy   | Yes      | For VNS only                                                                  |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``compounding``              |                     | Yes      | Will default to none                                                          |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``compoundingIndexPeriod``   |                     | Yes      | Will default to payment period                                                |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``stub``                     |                     | Yes      | Will default to short initial if not provided                                 |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``firstRate``                |                     | Yes      | Rate to apply to the first period of the trade                                |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``firstInterpolationTenor``  |                     | Yes      |                                                                               |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``secondInterpolationTenor`` |                     | Yes      |                                                                               |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``dayCountMethod``           |                     | Yes      | Will apply default for leg and rate type                                      |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``businessDayConvention``    |                     | Yes      | Will default to modified following                                            |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``paymentCalendar``          |                     | Yes      | Will use calendar for currency plus any additional calendar provided          |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``adjustment``               |                     | Yes      | Will default to business day convention                                       |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+| ``rollMethod``               |                     | Yes      | Will default to none                                                          |
++------------------------------+---------------------+----------+-------------------------------------------------------------------------------+
+
+This means that the same per-leg column headers will occur twice. The ``legType`` field is used to indicate the start
+of a leg, and the fields which follow are interpreted to correspond to that leg.
+
+For variable-notional swaps, one row is required for each change in notional.
+If the swap includes a stub period then this must be indicated on the first row.
+
+
+Limitations
+-----------
+
+See :doc:`../overview/known_limitations`.
+
+Example
+-------
+
+The following CSV file describes a simple fixed/float interest rate swap::
+
+  internalTradeID,tradeType,currency,effectiveDate,terminationDate,legType,legSpread,legIndex,interestFixedAmount,notional,paymentPeriod,periodStartVNS,compounding,compoundingIndexPeriod,stub,firstRate,firstInterpolationTenor,secondInterpolationTenor,dayCountMethod,businessDayConvention,paymentCalendar,adjustment,rollMethod,legType,legSpread,legIndex,interestFixedAmount,notional,paymentPeriod,periodStartVNS,compounding,compoundingIndexPeriod,stub,firstRate,firstInterpolationTenor,secondInterpolationTenor,dayCountMethod,businessDayConvention,paymentCalendar,adjustment,rollMethod
+  a,IRS,EUR,09/06/2015,09/06/2031,floatingLeg,,EURIBOR,,100000000,1M,,,,,,,,ACT/360,MODFOLLOWING,EUTA,ADJUSTED,Standard,fixedLeg,0.65,,,100000000,3M,,,,,,,,30/360,MODFOLLOWING,EUTA,ADJUSTED,Standard
+
+API
+---
+
+The OTC CSV parser is implemented by ``EurexOtcTradeFileReader``.
+
+The code below shows a simple example of using it directly to load trades from a CSV input file:
+
+.. code-block:: java
+
+  Reader otcReader = new BufferedReader(new FileReader("otc.csv"));
+  EurexOtcTradeFileReader.parse(otcReader);

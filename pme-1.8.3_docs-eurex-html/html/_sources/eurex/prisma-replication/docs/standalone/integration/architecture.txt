@@ -1,0 +1,21 @@
+.. _architecture:
+
+Library Architecture
+--------------------
+
+The Eurex Clearing PME library contains a set of *core interfaces* through which the full functionality is exposed.
+The primary interfaces are:
+
+* ``MarginEnvironment``, which owns the data that has been loaded, and allows calculations to be performed on this data. The other core interfaces are accessed through this environment.
+* ``MarginData``, providing the API for loading data.
+* ``MarginCalculator``, providing the API for performing calculations.
+
+The logical structure of the library is illustrated in the architecture diagram below.
+
+.. figure:: eurex_architecture.png
+   :align: center
+   :figclass: align-center
+
+   Fig 1: Eurex Clearing PME Architecture
+
+The library uses the OpenGamma Platform for its OTC market risk calculations, which in turn relies on several third-party dependencies.

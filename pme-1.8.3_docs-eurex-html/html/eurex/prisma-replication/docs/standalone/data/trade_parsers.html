@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio | Eurex Clearing PME</title>
+    <link rel="shortcut icon" href="../../../../../_static/opengamma-favicon.ico"/>
+    <link rel="stylesheet" href="../../../../../_static/css/main.css">
+    <link rel="stylesheet" href="../../../../../_static/css/syntax.css">
+    <link rel="stylesheet" href="../../../../../_static/css/alerts.css">
+    <link rel="stylesheet" href="../../../../../_static/font-awesome-4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/docs.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <header class="top">
+  <div class="row topbar">
+    <h1 id="logo" class="logo">
+      <a href="../../../../../index.html">Eurex Clearing PME</a>
+    </h1>
+    <nav>
+      <!--
+      <ul id="navigation" class="navigation">
+        <li><a href="http://www.opengamma.com/opengamma-platform/margining">More</a></li>
+      </ul>
+      -->
+      <div class="og">
+        <div class="toggle"><button type="button" id="toggle-menu" class="button--teal">Menu</button></div>
+        <div class="og_logo"><a href="http://www.opengamma.com"><img alt="OpenGamma" src="../../../../../_static/logo_topnav.png" /></a></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+      <div id="content" class="row">
+
+        <div id="sidebar" class="sidebar">
+
+          <section>
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quick_start/toc.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/set_up_development_environment.html">Setting up a Development Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/set_up_development_environment.html#system-requirements">System requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/set_up_development_environment.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/run_examples.html">Running the Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-initial-margin-for-otc-trades">Calculation of Initial Margin for OTC Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-initial-margin-for-etd-trades">Calculation of Initial Margin for ETD Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-cash-flows">Calculation of Cash Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#basic-api-integration-example">Basic API Integration Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#running-from-the-command-line">Running from the Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/basic_library_integration.html">Basic Library Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#margin-environment-lifecycle">Margin Environment Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#data-lifecycle">Data Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#third-party-libraries">Third-Party Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/advanced_library_integration.html">Advanced Library Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/toc.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/features.html">Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#margin-methodologies">Margin Methodologies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#product-scope">Product Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/system_requirements.html">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#software">Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#hardware">Hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/known_limitations.html">Known Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#etd">ETD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#otc">OTC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#market-data">Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#trades-and-positions">Trades and Positions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#margin-calculation">Margin Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="toc.html">Input Data</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Portfolio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_etd_csv.html">Eurex ETD CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_otc_csv.html">Eurex OTC CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_sensitivities_csv.html">Eurex Sensitivities CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fpml.html">FpML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fixml.html">FIXML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/eurex_market_data.html">Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#otc-requirements">OTC Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#etd-requirements">ETD Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#cross-margining-requirements">Cross-Margining Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/fixings.html">Fixings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/holidays.html">Holidays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/standard_directory_structure.html">Standard Directory Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#individual-file-conventions">Individual File Conventions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/toc.html">Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_market_data.html">Loading Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#automatic-file-resolution">Automatic file resolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#explicit-usage">Explicit usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_portfolios.html">Loading Portfolios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_portfolios.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/performing_calculations.html">Performing Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#trade-requests">Trade Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-requests">Portfolio Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#add-ons">Add-ons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-im">Portfolio IM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#building-a-request">Building a request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#p-l-calculation-methodology">P&amp;L calculation methodology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#output-model">Output Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#error-handling-during-calculation">Error handling during calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/calculation_modes.html">Calculation Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#full-revaluation">Full Revaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#delta-approximation">Delta Approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/margin_results.html">Margin Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#portfolio-results">Portfolio Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#trade-results">Trade Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/concurrency.html">Concurrency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#cpu-utilization">CPU utilization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#custom-executor-service">Custom Executor Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#concurrent-use-of-the-api">Concurrent use of the API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/common_tasks.html">Common Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#what-if-analysis">What-If Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#multiple-days-of-market-data">Multiple Days of Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#log-configuration">Log Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/toc.html">Advanced Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/trade_model.html">Trade Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/third_party_dependencies.html">Third-Party Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          </section>
+        </div>
+
+        <main id="main" class="main">
+          
+  <div class="section" id="portfolio">
+<span id="portfolio-toc"></span><h1>Portfolio</h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Portfolios can be imported from data files in several supported formats.</p>
+<p><strong>ETD formats</strong></p>
+<p>ETD position files can be imported from the following formats:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../common/trade_parsers/eurex_etd_csv.html"><em>Eurex ETD CSV</em></a></li>
+<li><a class="reference internal" href="../../common/trade_parsers/fixml.html"><em>FIXML</em></a></li>
+</ul>
+<p id="otc-trade-formats"><strong>OTC formats</strong></p>
+<p>OTC trade files can be imported from the following formats:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../common/trade_parsers/eurex_otc_csv.html"><em>Eurex OTC CSV</em></a></li>
+<li><a class="reference internal" href="../../common/trade_parsers/fpml.html"><em>FpML</em></a></li>
+</ul>
+<p><strong>Sensitivity-based formats</strong></p>
+<p>It is also possible to represent one or more OTC trades as sensitivities to risk factors, rather than providing
+trade definitions. These can be loaded from the following file format:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../common/trade_parsers/eurex_sensitivities_csv.html"><em>Eurex Sensitivities CSV</em></a></li>
+</ul>
+<p><strong>Loading programmatically</strong></p>
+<p>For more advanced use cases, it is also possible to build portfolios
+by constructing OpenGamma domain objects programmatically. This gives
+the user full access to functionality supported by the trade model.
+For further information, see <a class="reference internal" href="../advanced/trade_model.html"><em>Trade Model</em></a>.</p>
+</div>
+
+
+        </main>
+      </div>
+
+      <footer>
+  <div class="row">
+    <div class="small-6 columns"><p>Version 1.8.3</p></div>
+    <div class="small-6 columns"><p class="copyright">&copy; 2015 OpenGamma Limited</p></div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>

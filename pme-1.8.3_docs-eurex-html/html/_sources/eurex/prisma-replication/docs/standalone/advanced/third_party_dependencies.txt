@@ -1,0 +1,183 @@
+Third-Party Dependencies
+========================
+
+.. BEGIN COMMENT ---
+   See https://opengamma.atlassian.net/browse/MGN-862 for more detail
+   Ultimately this document should be produced automatically via a gradle or maven plugin,
+   but we encountered several roadblocks attempting to automate this and had to rely upon
+   a hybrid automated/manual process that is outlined below.
+   . ..
+   One problem was that the gradle plugins for dependency and license reporting were just
+   not mature. Several were tried out and none of them met out needs.
+   . ..
+   We were able to generate a pom.xml to mavenize the project and gain access to more
+   mature tools such as the maven license plugin, the maven dependency plugin and the maven site plugin
+   This should work in theory, but it is a bit messy using gradle to build a pom then
+   running this plugins. Additionally there were some problems that will require further
+   debugging to get the site plugin or license plug to work properly. Even if that is achieved,
+   the output from the plugin (xml for license, html for site) would still need to be
+   transformed into .rst to be included in this documentation set. The effort to achieve this
+   is better spent getting margining running on Strata.
+   . ..
+   1) Started with csv extracted from https://developers.opengamma.com/about/third-party-open-source-projects
+   2) Used pom.xml generated from Chris's work (described in the jira) to mavenize the project
+   3) Used mvn dependency:tree to generate an accurate, up to date list of dependencies
+   4) Filtered this list of dependencies (got rid of test deps), reformatted and sorted
+   5) Manually compared list from maven to the baseline in step 1. Removed, added or updated versions as necessary
+   6) Used mvn license:download-licenses -Dlicense.useMissingFile to generate an up to date xml
+      file with current licenses (OG-Margining/eurex/prisma-replication/target/generated-resources/licenses.xml)
+   7) Compared list from step 6 with original list from step 1.
+      Updated license details as appropriate. (see attached csv)
+   8) Used sed to get rid of any commas or colons in the data in the csv file.
+   9) Used cut -d, -f1,4 to pluck out the columns needed and then did a sed 's/:/,/g' to expand the group, artifact, version
+   10) Embedded csv into rst file as a csv file.
+   END COMMENT ----
+
+.. csv-table:: Third-Party Dependencies
+  :header: "GroupId","ArtifactId","Version","License(s)"
+  :widths: 20, 20, 20, 80
+
+  antlr,antlr,2.7.7,BSD License
+  aopalliance,aopalliance,1.0,Public Domain
+  asm,asm,3.1,New BSD License
+  ch.qos.logback,logback-classic,1.0.13,Eclipse Public License v1.0; LGPL
+  ch.qos.logback,logback-core,1.0.13,Eclipse Public License v1.0; LGPL
+  colt,colt,1.2.0,Colt License (not hep.aida package)
+  com.beust,jcommander,1.48,Apache Software License v2.0
+  com.chaschev,chutils,1.4,Apache Software License v2.0
+  com.codahale.metrics,metrics-core,3.0.1,Apache Software License v2.0
+  com.codahale.metrics,metrics-ganglia,3.0.1,Apache Software License v2.0
+  com.google.code.findbugs,jsr305,1.3.9,Apache Software License v2.0
+  com.google.guava,guava,14.0.1,Apache Software License v2.0
+  com.google.inject.extensions,guice-multibindings,3.0,Apache Software License v2.0
+  com.google.inject,guice,3.0,Apache Software License v2.0
+  com.googlecode.json-simple,json-simple,1.1,Apache Software License v2.0
+  com.jolbox,bonecp,0.7.1.RELEASE,Apache Software License v2.0
+  com.miglayout,miglayout,3.7.3.1,BSD
+  com.n3twork.druid,alphanum,1.0.3,LGPL
+  com.opengamma.external.blpapi,blpapi,3.7.1.1,Bloomerg MIT style
+  com.opengamma.external.json,json,1.0.0.v20101106,Eclipse Public License v1.0
+  com.opengamma.<all>,"<all>", "<all>",Apache Software License v2.0
+  com.sleepycat,je,4.0.92,Sleepycat License
+  com.sun.jersey,jersey-client,1.17.1,CDDL v1.1; GPL2 w/ CPE
+  com.sun.jersey,jersey-core,1.17.1,CDDL v1.1; GPL2 w/ CPE
+  com.sun.jersey,jersey-server,1.17.1,CDDL v1.1; GPL2 w/ CPE
+  com.sun.jersey,jersey-servlet,1.17.1,CDDL v1.1; GPL2 w/ CPE
+  com.sun.jersey.contribs,jersey-multipart,1.17.1,CDDL v1.1; GPL2 w/ CPE
+  com.sun.jersey.contribs,jersey-spring,1.17.1,CDDL v1.1; GPL2 w/ CPE
+  com.thoughtworks.paranamer,paranamer,2.6,BSD
+  com.yahoo.platform.yui,yuicompressor,2.4.7,BSD License
+  commons-beanutils,commons-beanutils,1.8.3,Apache Software License v2.0
+  commons-cli,commons-cli,1.2,Apache Software License v2.0
+  commons-codec,commons-codec,1.8,Apache Software License v2.0
+  commons-collections,commons-collections,3.2.1,Apache Software License v2.0
+  commons-io,commons-io,2.4,Apache Software License v2.0
+  commons-lang,commons-lang,2.6,Apache Software License v2.0
+  commons-pool,commons-pool,1.6,Apache Software License v2.0
+  concurrent,concurrent,1.3.4,Public domain Sun Microsoystems
+  de.odysseus.juel,juel-api,2.2.6,Apache Software License v2.0
+  de.odysseus.juel,juel-impl,2.2.6,Apache Software License v2.0
+  dom4j,dom4j,1.6.1,Dom4J (5 clause BSD style with due credit)
+  info.ganglia.gmetric4j,gmetric4j,1.0.3,MIT License
+  it.unimi.dsi,fastutil,6.5.6,Apache Software License v2.0
+  javax.inject,javax.inject,1,Apache Software License v2.0
+  javax.jms,jms-api,1.1-rev-1,CDDL + GPLv2 with classpath exception
+  javax.management.j2ee,javax.management.j2ee-api,1.1.1,CDDL + GPLv2 with classpath exception
+  javax.servlet,javax.servlet-api,3.0.1,CDDL + GPLv2 with classpath exception
+  javax.transaction,jta,1.1,License for JTA
+  javax.xml.stream,stax-api,1.0-2,COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0; GNU General Public Library
+  net.sf.ehcache,ehcache-core,2.6.3,Apache Software License v2.0
+  net.sf.opencsv,opencsv,2.3,Apache Software License v2.0
+  net.sf.saxon,Saxon-HE,9.4,Mozilla Public License Version 1.0
+  net.sourceforge.jtransforms,jtransforms,2.4.0,GPL; LGPL; Mozilla Public License
+  org.acplt,oncrpc,1.0.7,LGPL
+  org.antlr,ST4,4.0.7,BSD licence
+  org.antlr,antlr,3.5,BSD licence
+  org.antlr,antlr-runtime,3.5,BSD licence
+  org.antlr,stringtemplate,3.2.1,BSD licence
+  org.apache.activemq,activemq-core,5.7.0,Apache Software License v2.0
+  org.apache.activemq,activemq-pool,5.7.0,Apache Software License v2.0
+  org.apache.activemq,kahadb,5.7.0,Apache Software License v2.0
+  org.apache.commons,commons-compress,1.0,Apache Software License v2.0
+  org.apache.commons,commons-csv,1.0,Apache Software License v2.0
+  org.apache.commons,commons-math,2.1,Apache Software License v2.0
+  org.apache.httpcomponents,httpclient,4.3.4,Apache Software License v2.0
+  org.apache.httpcomponents,httpcore,4.3.2,Apache Software License v2.0
+  org.apache.httpcomponents,httpcore-nio,4.3.2,Apache Software License v2.0
+  org.apache.poi,poi,3.9,Apache Software License v2.0
+  org.apache.shiro,shiro-core,1.2.3,Apache Software License v2.0
+  org.apache.shiro,shiro-web,1.2.3,Apache Software License v2.0
+  org.beanshell,bsh,2.0b4,LGPL
+  org.codehaus.groovy,groovy-all,2.1.5,Apache Software License v2.0
+  org.codehaus.woodstox,stax2-api,3.1.1,The BSD License
+  org.codehaus.woodstox,woodstox-core-asl,4.2.0,Apache Software License v2.0
+  org.eclipse.jetty,jetty-client,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-continuation,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-http,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-io,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-jmx,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-jndi,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-plus,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-security,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-server,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-servlet,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-servlets,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-util,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-webapp,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty,jetty-xml,8.1.11.v20130520,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty.orbit,javax.activation,1.1.0.v201105071233,Apache Software License v2.0; Eclipse Public License v1.0
+  org.eclipse.jetty.orbit,javax.mail.glassfish,1.4.1.v201005082020,Apache Software License v2.0; Eclipse Public License v1.0
+  org.freemarker,freemarker,2.3.19,BSD-style license
+  org.fudgemsg,fudge-java,0.3.9.20,Apache Software License v2.0
+  org.fudgemsg,fudge-proto,0.3.9.7,Apache Software License v2.0
+  org.fusesource.hawtbuf,hawtbuf,1.9,Apache Software License v2.0
+  org.fusesource.hawtdispatch,hawtdispatch,1.11,Apache Software License v2.0
+  org.fusesource.hawtdispatch,hawtdispatch-transport,1.11,Apache Software License v2.0
+  org.fusesource.mqtt-client,mqtt-client,1.3,Apache Software License v2.0
+  org.hibernate,hibernate-core,3.5.2-Final,LGPL
+  org.hibernate,hibernate-ehcache,3.5.2-Final,LGPL
+  org.jasypt,jasypt,1.9.0,Apache Software License v2.0
+  org.javassist,javassist,3.16.1-GA,Apache Software License v2.0; LGPL v2.1; Mozilla Public License v1.1
+  org.jdeferred,jdeferred-core,1.1.1,Apache Software License v2.0
+  org.jdesktop,appframework,1.0.3,LGPL v2.1
+  org.jdesktop,swing-worker,1.1,LGPL v2.1
+  org.jdom,jdom,1.1,"JDOM license similar to Apache License"
+  org.joda,joda-beans,1.6,Apache Software License v2.0
+  org.joda,joda-convert,1.7,Apache Software License v2.0
+  org.jolokia,jolokia-core,1.1.3,Apache Software License v2.0
+  org.jvnet,mimepull,1.6,Dual license consisting of the CDDL v1.1 and GPL v2
+  org.mindrot,jbcrypt,0.3m,ISC/BSD License
+  org.mongodb,mongo-java-driver,2.11.2,Apache Software License v2.0
+  org.quartz-scheduler,quartz,1.8.5,Apache Software License v2.0
+  org.reflections,reflections,0.9.9-RC1,WTFPL
+  org.slf4j,jcl-over-slf4j,1.7.5,MIT License
+  org.slf4j,log4j-over-slf4j,1.7.5,Apache Software Licenses
+  org.slf4j,slf4j-api,1.7.7,MIT License
+  org.springframework,spring-aop,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-beans,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-context,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-context-support,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-core,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-expression,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-jdbc,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-jms,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-orm,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-test,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-tx,3.2.3.RELEASE,Apache Software License v2.0
+  org.springframework,spring-web,3.2.3.RELEASE,Apache Software License v2.0
+  org.swinglabs.swingx,swingx-action,1.6.5,LGPL v2.1
+  org.swinglabs.swingx,swingx-autocomplete,1.6.5,LGPL v2.1
+  org.swinglabs.swingx,swingx-common,1.6.5,LGPL v2.1
+  org.swinglabs.swingx,swingx-core,1.6.5,LGPL v2.1
+  org.swinglabs.swingx,swingx-graphics,1.6.5,LGPL v2.1
+  org.swinglabs.swingx,swingx-painters,1.6.5,LGPL v2.1
+  org.swinglabs.swingx,swingx-plaf,1.6.5,LGPL v2.1
+  org.testng,testng,6.9.4,Apache Software License v2.0
+  org.threeten,threetenbp,0.8.1,New BSD License
+  redis.clients,jedis,2.1.0,Jedis License
+  xalan,xalan,2.7.0,Apache Software License v2.0
+  xerces,xercesImpl,2.8.0,Apache Software License v2.0
+  xml-apis,xml-apis,1.3.03,Apache Software License v2.0
+  xml-resolver,xml-resolver,1.2,Apache Software License v2.0
+  xom,xom,1.2.5,LGPL v2.1
+

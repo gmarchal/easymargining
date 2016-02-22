@@ -1,0 +1,31 @@
+Advanced Library Integration
+============================
+
+While many basic use cases can be satisfied just through library integration involving
+files, there are many advanced use cases for the Eurex PME that benefit from deeper
+integration with OpenGamma Margining APIs.
+
+Specifically, the following common requirements are candidates for going beyond
+basic library integration:
+
+* Low-latency pre-trade analysis, where the cost of trade serialization
+  and deserialization is undesirable.
+* Cases where there are existing sources of index fixing and holiday data,
+  where serialization to and from files may not be desirable.
+* Historical or future analysis, where multiple market data contexts must be
+  maintained and the valuation date varied.
+
+It is always recommended that basic library integration is performed first
+to ensure that you have a clean base-line to ensure numerical accuracy
+and help isolate regressions. In addition, Eurex and OpenGamma support
+personnel may ask for portfolios for methodology and technical support
+to ensure reproducibility of any variations.
+
+While the examples and javadocs distributed with the PME provide additional
+documentation on precisely how to perform many of these actions, please
+see the following sections of the documentation for key areas of
+advanced library integration:
+
+* :doc:`Trade Model<../advanced/trade_model>` and portfolio API
+* :doc:`Historical Fixings<../../common/data/fixings>` data format and API
+* :doc:`Holiday Calendars<../../common/data/holidays>` data format and API

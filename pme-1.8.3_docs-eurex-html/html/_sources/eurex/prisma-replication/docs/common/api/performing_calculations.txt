@@ -1,0 +1,152 @@
+Performing Calculations
+=======================
+
+Trade Requests
+--------------
+
+A request for trade present value can be built as such:
+
+.. code-block:: java
+
+   TradeMeasure pv = EurexPrismaRatesReplicationRequests.tradeMeasures()
+                                                .pv()
+                                                .currency(MarginCurrency.TRADE)
+                                                .build();
+
+Which can be added as:
+
+.. code-block:: java
+
+   EurexPrismaRatesReplicationRequest pvRequest = EurexPrismaRatesReplicationRequests.request(valuationDate)
+                                                                     .tradeMeasures(pv)
+                                                                     .build();
+
+Portfolio Requests
+------------------
+
+The following details the mechanisms for building up a Eurex Prisma Replication request for computation of Initial Margin and the various constituent add-ons required to fully replicate the margin process. See the Eurex Clearing documentation for details on the methodology.
+
+
+Add-ons
+-------
+
+The following add-ons are automatically returned for a portfolio request:
+
+**Correlation Break Adjustment**
+
+There is a Correlation Break Adjustment applied to each sub series (Eurex defines no adjustment for stress scenarios so they will return 0).
+
+**Liquidity addons**
+
+A liquidity addon is applied based on the costs of a hedging portfolio.
+
+**Compression Model Adjustment**
+
+There is a Compression Model Adjustment applied to each sub series.
+
+**Long Option Credit**
+
+Provides any adjustments/credit for long options for each sub series.
+
+
+Portfolio IM
+------------
+
+The portfolio IM is based on the **im** ``PortfolioMeasure``:
+
+.. code-block:: java
+
+   PortfolioMeasure im = EurexPrismaReplicationRequests.portfolioMeasures().im();
+
+Building a request
+------------------
+
+The above portfolio measure is then added to a EurexPrismaReplicationRequest.
+
+.. code-block:: java
+
+   EurexPrismaReplicationRequest imRequest = EurexPrismaReplicationRequests.request(businessDate)
+                                                                           .portfolioMeasures(im)
+                                                                           .build();
+
+P&L calculation methodology
+---------------------------
+
+By default, the P&L series is calculated by calculating the PV for each trade for each scenario and comparing to the base PV. It is also
+possible to generate the P&L series by using the sensitivity profile (bucketed delta only at this point) applied to
+the scenarios provided by the clearing house.
+
+See :doc:`Calculation Modes <../overview/calculation_modes>` for more information on which modes are available
+
+.. code-block:: java
+
+   EurexPrismaReplicationRequest imRequest = EurexPrismaReplicationRequests.request(businessDate)
+                                                                           .portfolioMeasures(im)
+                                                                           .pnlCalculatorMethodology(PnlCalculatorMethodology.DELTA)
+                                                                           .build();
+
+Output Model
+------------
+
+Once market data and the portfolio have been loaded and the user has submitted a ``EurexPrismaReplicationRequest``,
+the engine will begin calculation or trade level and portfolio measures.
+
+The user receives a ``MarginResults`` object back from the calculation.
+Within this object are the ``MarginPortfolioResults`` and the ``MarginTradeResults``.
+
+.. code-block:: java
+
+  private MarginResults calculateResults(MarginEnvironment environment,
+      EurexPrismaReplicationRequest request,
+      MarginPortfolio marginPortfolio) {
+
+    MarginCalculator calculator = environment.getMarginCalculator();
+    return calculator.calculate(marginPortfolio, request);
+  }
+
+(see :ref:`Margin Results <margin_results>` for more information on the output)
+
+Error handling during calculation
+---------------------------------
+
+If there are runtime problems in valuing trades within the portfolio (for example a missing rate reset,
+curve or price), the errors will be collected and reported back in the final results.
+The ``MarginPortfolioResults`` contains a Table with any failures per trade and trade measure.
+
+Because these trades could not be successfully valued, they do not contribute to the overall portfolio level
+measures. It is therefore critical to inspect the ``MarginPortfolioResults.getPortfolioResults().getTradeErrors()``.
+It will be empty if there are no errors, but if values are present they should be investigate to ensure that the
+portfolio is properly analyzed.
+
+Trade level failures in the results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The code below shows how one could iterate over any tradeErrors present on the portfolio results.
+
+.. code-block:: java
+
+  private void noteAnyInvalidTrades(MarginResults marginResults) {
+    MarginPortfolioResults portfolioResults = marginResults.getPortfolioResults();
+    if (portfolioResults != null) {
+      Table<TradeWrapper<?>, TradeMeasure, Result<?>> table = portfolioResults.getTradeErrors();
+      for (TradeWrapper<?> trade : table.rowKeySet()) {
+        for (TradeMeasure measure : table.columnKeySet()) {
+          Result<?> failure = table.get(trade, measure);
+          s_logger.warn("Found trade failure: " + failure.getFailureMessage());
+        }
+      }
+    }
+  }
+
+Specific failure cases
+~~~~~~~~~~~~~~~~~~~~~~
+
+A common case, for example, would be a missing reset. In this case the code above would produce an
+error message along the lines of::
+
+  WARN  c.o.m.e.prisma.cli.common.CliLogger -
+  Found trade failure: No time series data available for RawId{id=Bundle[ISDA~USD-LIBOR-BBA-3M],
+  marketDataType=class java.lang.Double, fieldName=Market_Value}/[2014-06-03,2015-06-09]
+
+
+This would tell the user that there was a missing 3M USD LIBOR fixing in the data.

@@ -1,0 +1,95 @@
+Setting up a Development Environment
+====================================
+
+System requirements
+-------------------
+
+The following software is required to run Eurex Clearing PME.
+
+* **Java 7 or 8 SDK**
+* **Apache Maven** (3.2+)
+
+Installation
+------------
+
+Eurex Clearing PME
+~~~~~~~~~~~~~~~~~~
+
+Eurex Clearing PME is distributed as a zip file containing a Maven repository. The zip file is named
+``ogp4m-[version]_eurex-repository.zip``. The repository contains the code and resources necessary
+to run Eurex Clearing PME. All other required dependencies are available from Maven Central.
+
+You can use the Maven repository by extracting the contents of the zip file and adding
+the following block to the ``<repositories>`` section of your Maven ``settings.xml`` file:
+
+.. code-block:: xml
+
+    <repository>
+        <id>eurex-pme</id>
+        <url>file://[path to extracted repository]</url>
+    </repository>
+
+A full ``settings.xml`` may look as follows:
+
+.. code-block:: xml
+
+    <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    
+      <profiles>
+        <profile>
+          <id>eurex-pme-profile</id>
+            <repositories>
+              <repository>
+                <id>eurex-pme</id>
+                <url>file://[path to extracted repository]</url>
+              </repository>
+            </repositories>
+        </profile>
+      </profiles>
+    
+      <activeProfiles>
+        <activeProfile>eurex-pme-profile</activeProfile>
+      </activeProfiles>
+    
+    </settings>
+
+The ``settings.xml`` file should be placed under ``$M2_HOME/conf/settings.xml`` or ``${user.home}/.m2/settings.xml``.
+See https://maven.apache.org/settings.html for further details.
+
+Examples
+~~~~~~~~
+
+There are examples available which demonstrate how to use Eurex Clearing PME. They are distributed as a zip file
+containing a Maven project. The zip file is named ``ogp4m-[version]_eurex-prisma-replication-examples.zip``.
+After unzipping the file, open a terminal in the project root directory and execute::
+
+    mvn install
+
+Maven will build the examples project and print a success message::
+
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time: ...
+    [INFO] Finished at: ...
+    [INFO] Final Memory: ...
+    [INFO] ------------------------------------------------------------------------
+
+Importing the examples project into IntelliJ
+********************************************
+
+From the ``File`` menu select ``Open...`` and choose the file ``pom.xml`` from the examples project directory.
+
+Importing the examples project into Eclipse
+*******************************************
+
+* Ensure the m2eclipse plugin is installed
+* From the ``File`` menu select ``Import...``
+* Select ``Existing Maven Projects``
+* Click ``Next >``
+* Choose the examples project directory
+* Click ``Select All``
+* Click ``Finish``

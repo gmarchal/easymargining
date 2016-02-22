@@ -1,0 +1,48 @@
+.. _portfolio_toc:
+
+Portfolio
+=========
+
+.. toctree::
+  :hidden:
+
+  ../../common/trade_parsers/eurex_etd_csv
+  ../../common/trade_parsers/eurex_otc_csv
+  ../../common/trade_parsers/eurex_sensitivities_csv
+  ../../common/trade_parsers/fpml
+  ../../common/trade_parsers/fixml
+
+Portfolios can be imported from data files in several supported formats.
+
+.. use bold type to denote headers, avoiding these appearing in the toc
+
+**ETD formats**
+
+ETD position files can be imported from the following formats:
+
+* :doc:`../../common/trade_parsers/eurex_etd_csv`
+* :doc:`../../common/trade_parsers/fixml`
+
+.. _otc_trade_formats:
+
+**OTC formats**
+
+OTC trade files can be imported from the following formats:
+
+* :doc:`../../common/trade_parsers/eurex_otc_csv`
+* :doc:`../../common/trade_parsers/fpml`
+
+**Sensitivity-based formats**
+
+It is also possible to represent one or more OTC trades as sensitivities to risk factors, rather than providing
+trade definitions. These can be loaded from the following file format:
+
+* :doc:`../../common/trade_parsers/eurex_sensitivities_csv`
+
+**Loading programmatically**
+
+
+For more advanced use cases, it is also possible to build portfolios
+by constructing OpenGamma domain objects programmatically. This gives
+the user full access to functionality supported by the trade model.
+For further information, see :doc:`../advanced/trade_model`.

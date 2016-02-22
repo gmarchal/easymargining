@@ -1,0 +1,131 @@
+Loading Market Data
+===================
+
+Market data is loaded via the OpenGamma Margining load request API.
+
+For Eurex, the ``EurexMarketDataLoadRequest`` is used to populate the
+environment with market data. This contains three sub-requests:
+
+- ``EurexEtdMarketDataLoadRequest``
+- ``EurexOtcMarketDataLoadRequest``
+- ``EurexCrossMarginDataLoadRequest``
+
+Each references the corresponding subset of files described in 
+:doc:`../data/eurex_market_data`.
+
+There are two approaches to building the individual sub-requests. If files
+are laid out on the filesystem according to the structure described in 
+:doc:`../data/standard_directory_structure`, the client can use the 
+``MarketDataFileResolver`` to build the sub-requests automatically.
+
+If files are not laid out this way, the sub-requests must be built 
+directly by the client. In this approach, the location of each 
+file must be explicitly specified by the user. This gives the user the
+flexibility to arrange the files on disk in whatever way is most
+convenient.
+
+.. note::
+
+  When OTC trades are in the portfolio, rate fixings and holidays must be loaded before submitting a ``EurexMarketDataLoadRequest`` as they are needed for initializing the Liquidity Adjustment calculation.
+
+
+Automatic file resolution
+-------------------------
+
+If files are laid out on the filesystem according to the 
+:doc:`standard conventions <../data/standard_directory_structure>`,
+the ``MarketDataFileResolver`` can be used to build the individual
+sub-requests.
+
+This example demonstrates the loading of OTC data using the resolver: 
+
+.. code-block:: java
+
+  MarginEnvironment environment = ...;
+  MarketDataFileResolver fileResolver =
+    new MarketDataFileResolver("data/marketData", LocalDate.of(2015, 6, 3));
+  
+  //loads fixings and holidays into MarginData
+  MarketDataLoaders.loadGeneralData(environment.getMarginData(), fileResolver);
+  
+  //builds an otc sub-request
+  EurexOtcMarketDataLoadRequest otcDataLoadRequest = 
+    MarketDataLoaders.otcRequest(fileResolver);
+  //builds the main load request with only OTC data
+  EurexMarketDataLoadRequest loadRequest = 
+    EurexMarketDataLoadRequest.otcMarketDataRequest(s_valuationDate, otcDataLoadRequest);
+  //pass to MarginData
+  environment.getMarginData().loadData(loadRequest);
+  
+ETD and cross-margining sub-requests would be built similarly.
+
+Explicit usage
+--------------
+
+If the input files cannot be placed into the standard directory 
+structure required to use these static utilities, then the load 
+requests can be constructed directly, referencing the individual 
+files in their respective locations. This is done by passing all
+of the necessary URLs to each sub-request:
+
+.. code-block:: java
+
+  URL baseMarketDataFile = ...;
+  URL riskFactorReport = ...;
+  URL varParameters = ...;
+  URL liquidityParamsFile = ...;
+  EurexOtcMarketDataLoadRequest subRequest = 
+      EurexOtcMarketDataLoadRequest.of(baseMarketDataFile, 
+                                       riskFactorReport, 
+                                       varParameters, 
+                                       liquidityParamsFile);
+
+The data may also come from a source other than files.
+See the example code in ``EurexPrismaBasicApiIntegrationClient`` for more information.
+
+Error handling during loading
+-----------------------------
+
+Prerequisite fixings and holidays
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+As mentioned above, when dealing with OTC trades in the portfolio,
+loading rate fixings and holidays are required before the user can
+successfully submit a ``EurexMarketDataLoadRequest``.
+If this data is not present the user will be presented with an error similar to::
+
+  com.opengamma.OpenGammaRuntimeException: Missing data required to build hedge portfolio.
+   Holiday calendars for must be loaded before loading Eurex market data
+
+Missing Eurex input files
+~~~~~~~~~~~~~~~~~~~~~~~~~
+If Eurex market data input files are missing, an exception will be raised. In addition to the stack trace,
+the error message will point the user to the problem::
+
+  com.opengamma.DataNotFoundException:
+  No file found in /testData/marketData/20150603/OTC for template 299 on 20150603
+
+In this case, the 299 - Holiday Calendar Report file is missing.
+The different expected input files are described in
+:doc:`../../common/data/standard_directory_structure`.
+
+Currencies and indices that are not used
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The hedge portfolio used for the Liquidity Adjustment anticipates all possible currencies and indices.
+If the user's portfolio does not contain some of these currency and index combinations, then it is likely
+that their provided fixings file will also be missing those combinations.
+
+The system can tolerate this missing data also long as it is not needed by the portfolio later. In this
+case there would be trade level pricing errors that would come back in the results set.
+This is described in
+:doc:`./performing_calculations`.
+
+However, the system will print warning messages to the user such as::
+
+ WARN  c.o.s.m.b.MarketDataEnvironmentFactory -
+ Failed to build time series TimeSeriesRequirement{
+  marketDataId=RawId{id=Bundle[ISDA~CHF-LIBOR-BBA-6M],
+  marketDataType=class java.lang.Double, fieldName=Market_Value},
+  marketDataTime=MarketDataTime{time=null, date=null, dateRange=[2014-06-03,2015-06-05],
+  type=TIME_SERIES}}
+
+These warnings may be disregarded, but can be helpful when necessary data truly is missing.

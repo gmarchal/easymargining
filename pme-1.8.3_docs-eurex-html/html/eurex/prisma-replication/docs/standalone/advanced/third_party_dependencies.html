@@ -1,0 +1,937 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Third-Party Dependencies | Eurex Clearing PME</title>
+    <link rel="shortcut icon" href="../../../../../_static/opengamma-favicon.ico"/>
+    <link rel="stylesheet" href="../../../../../_static/css/main.css">
+    <link rel="stylesheet" href="../../../../../_static/css/syntax.css">
+    <link rel="stylesheet" href="../../../../../_static/css/alerts.css">
+    <link rel="stylesheet" href="../../../../../_static/font-awesome-4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/docs.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <header class="top">
+  <div class="row topbar">
+    <h1 id="logo" class="logo">
+      <a href="../../../../../index.html">Eurex Clearing PME</a>
+    </h1>
+    <nav>
+      <!--
+      <ul id="navigation" class="navigation">
+        <li><a href="http://www.opengamma.com/opengamma-platform/margining">More</a></li>
+      </ul>
+      -->
+      <div class="og">
+        <div class="toggle"><button type="button" id="toggle-menu" class="button--teal">Menu</button></div>
+        <div class="og_logo"><a href="http://www.opengamma.com"><img alt="OpenGamma" src="../../../../../_static/logo_topnav.png" /></a></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+      <div id="content" class="row">
+
+        <div id="sidebar" class="sidebar">
+
+          <section>
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quick_start/toc.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/set_up_development_environment.html">Setting up a Development Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/set_up_development_environment.html#system-requirements">System requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/set_up_development_environment.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/run_examples.html">Running the Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-initial-margin-for-otc-trades">Calculation of Initial Margin for OTC Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-initial-margin-for-etd-trades">Calculation of Initial Margin for ETD Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-cash-flows">Calculation of Cash Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#basic-api-integration-example">Basic API Integration Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#running-from-the-command-line">Running from the Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/basic_library_integration.html">Basic Library Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#margin-environment-lifecycle">Margin Environment Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#data-lifecycle">Data Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#third-party-libraries">Third-Party Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/advanced_library_integration.html">Advanced Library Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/toc.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/features.html">Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#margin-methodologies">Margin Methodologies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#product-scope">Product Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/system_requirements.html">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#software">Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#hardware">Hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/known_limitations.html">Known Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#etd">ETD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#otc">OTC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#market-data">Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#trades-and-positions">Trades and Positions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#margin-calculation">Margin Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data/toc.html">Input Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/trade_parsers.html">Portfolio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_etd_csv.html">Eurex ETD CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_otc_csv.html">Eurex OTC CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_sensitivities_csv.html">Eurex Sensitivities CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fpml.html">FpML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fixml.html">FIXML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/eurex_market_data.html">Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#otc-requirements">OTC Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#etd-requirements">ETD Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#cross-margining-requirements">Cross-Margining Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/fixings.html">Fixings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/holidays.html">Holidays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/standard_directory_structure.html">Standard Directory Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#individual-file-conventions">Individual File Conventions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/toc.html">Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_market_data.html">Loading Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#automatic-file-resolution">Automatic file resolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#explicit-usage">Explicit usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_portfolios.html">Loading Portfolios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_portfolios.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/performing_calculations.html">Performing Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#trade-requests">Trade Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-requests">Portfolio Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#add-ons">Add-ons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-im">Portfolio IM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#building-a-request">Building a request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#p-l-calculation-methodology">P&amp;L calculation methodology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#output-model">Output Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#error-handling-during-calculation">Error handling during calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/calculation_modes.html">Calculation Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#full-revaluation">Full Revaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#delta-approximation">Delta Approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/margin_results.html">Margin Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#portfolio-results">Portfolio Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#trade-results">Trade Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/concurrency.html">Concurrency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#cpu-utilization">CPU utilization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#custom-executor-service">Custom Executor Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#concurrent-use-of-the-api">Concurrent use of the API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/common_tasks.html">Common Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#what-if-analysis">What-If Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#multiple-days-of-market-data">Multiple Days of Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#log-configuration">Log Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="toc.html">Advanced Topics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trade_model.html">Trade Model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Third-Party Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          </section>
+        </div>
+
+        <main id="main" class="main">
+          
+  <div class="section" id="third-party-dependencies">
+<h1>Third-Party Dependencies</h1>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">Third-Party Dependencies</caption>
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">GroupId</th>
+<th class="head">ArtifactId</th>
+<th class="head">Version</th>
+<th class="head">License(s)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>antlr</td>
+<td>antlr</td>
+<td>2.7.7</td>
+<td>BSD License</td>
+</tr>
+<tr class="row-odd"><td>aopalliance</td>
+<td>aopalliance</td>
+<td>1.0</td>
+<td>Public Domain</td>
+</tr>
+<tr class="row-even"><td>asm</td>
+<td>asm</td>
+<td>3.1</td>
+<td>New BSD License</td>
+</tr>
+<tr class="row-odd"><td>ch.qos.logback</td>
+<td>logback-classic</td>
+<td>1.0.13</td>
+<td>Eclipse Public License v1.0; LGPL</td>
+</tr>
+<tr class="row-even"><td>ch.qos.logback</td>
+<td>logback-core</td>
+<td>1.0.13</td>
+<td>Eclipse Public License v1.0; LGPL</td>
+</tr>
+<tr class="row-odd"><td>colt</td>
+<td>colt</td>
+<td>1.2.0</td>
+<td>Colt License (not hep.aida package)</td>
+</tr>
+<tr class="row-even"><td>com.beust</td>
+<td>jcommander</td>
+<td>1.48</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>com.chaschev</td>
+<td>chutils</td>
+<td>1.4</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>com.codahale.metrics</td>
+<td>metrics-core</td>
+<td>3.0.1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>com.codahale.metrics</td>
+<td>metrics-ganglia</td>
+<td>3.0.1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>com.google.code.findbugs</td>
+<td>jsr305</td>
+<td>1.3.9</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>com.google.guava</td>
+<td>guava</td>
+<td>14.0.1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>com.google.inject.extensions</td>
+<td>guice-multibindings</td>
+<td>3.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>com.google.inject</td>
+<td>guice</td>
+<td>3.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>com.googlecode.json-simple</td>
+<td>json-simple</td>
+<td>1.1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>com.jolbox</td>
+<td>bonecp</td>
+<td>0.7.1.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>com.miglayout</td>
+<td>miglayout</td>
+<td>3.7.3.1</td>
+<td>BSD</td>
+</tr>
+<tr class="row-odd"><td>com.n3twork.druid</td>
+<td>alphanum</td>
+<td>1.0.3</td>
+<td>LGPL</td>
+</tr>
+<tr class="row-even"><td>com.opengamma.external.blpapi</td>
+<td>blpapi</td>
+<td>3.7.1.1</td>
+<td>Bloomerg MIT style</td>
+</tr>
+<tr class="row-odd"><td>com.opengamma.external.json</td>
+<td>json</td>
+<td>1.0.0.v20101106</td>
+<td>Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>com.opengamma.&lt;all&gt;</td>
+<td>&lt;all&gt;</td>
+<td>&lt;all&gt;</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>com.sleepycat</td>
+<td>je</td>
+<td>4.0.92</td>
+<td>Sleepycat License</td>
+</tr>
+<tr class="row-even"><td>com.sun.jersey</td>
+<td>jersey-client</td>
+<td>1.17.1</td>
+<td>CDDL v1.1; GPL2 w/ CPE</td>
+</tr>
+<tr class="row-odd"><td>com.sun.jersey</td>
+<td>jersey-core</td>
+<td>1.17.1</td>
+<td>CDDL v1.1; GPL2 w/ CPE</td>
+</tr>
+<tr class="row-even"><td>com.sun.jersey</td>
+<td>jersey-server</td>
+<td>1.17.1</td>
+<td>CDDL v1.1; GPL2 w/ CPE</td>
+</tr>
+<tr class="row-odd"><td>com.sun.jersey</td>
+<td>jersey-servlet</td>
+<td>1.17.1</td>
+<td>CDDL v1.1; GPL2 w/ CPE</td>
+</tr>
+<tr class="row-even"><td>com.sun.jersey.contribs</td>
+<td>jersey-multipart</td>
+<td>1.17.1</td>
+<td>CDDL v1.1; GPL2 w/ CPE</td>
+</tr>
+<tr class="row-odd"><td>com.sun.jersey.contribs</td>
+<td>jersey-spring</td>
+<td>1.17.1</td>
+<td>CDDL v1.1; GPL2 w/ CPE</td>
+</tr>
+<tr class="row-even"><td>com.thoughtworks.paranamer</td>
+<td>paranamer</td>
+<td>2.6</td>
+<td>BSD</td>
+</tr>
+<tr class="row-odd"><td>com.yahoo.platform.yui</td>
+<td>yuicompressor</td>
+<td>2.4.7</td>
+<td>BSD License</td>
+</tr>
+<tr class="row-even"><td>commons-beanutils</td>
+<td>commons-beanutils</td>
+<td>1.8.3</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>commons-cli</td>
+<td>commons-cli</td>
+<td>1.2</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>commons-codec</td>
+<td>commons-codec</td>
+<td>1.8</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>commons-collections</td>
+<td>commons-collections</td>
+<td>3.2.1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>commons-io</td>
+<td>commons-io</td>
+<td>2.4</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>commons-lang</td>
+<td>commons-lang</td>
+<td>2.6</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>commons-pool</td>
+<td>commons-pool</td>
+<td>1.6</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>concurrent</td>
+<td>concurrent</td>
+<td>1.3.4</td>
+<td>Public domain Sun Microsoystems</td>
+</tr>
+<tr class="row-even"><td>de.odysseus.juel</td>
+<td>juel-api</td>
+<td>2.2.6</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>de.odysseus.juel</td>
+<td>juel-impl</td>
+<td>2.2.6</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>dom4j</td>
+<td>dom4j</td>
+<td>1.6.1</td>
+<td>Dom4J (5 clause BSD style with due credit)</td>
+</tr>
+<tr class="row-odd"><td>info.ganglia.gmetric4j</td>
+<td>gmetric4j</td>
+<td>1.0.3</td>
+<td>MIT License</td>
+</tr>
+<tr class="row-even"><td>it.unimi.dsi</td>
+<td>fastutil</td>
+<td>6.5.6</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>javax.inject</td>
+<td>javax.inject</td>
+<td>1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>javax.jms</td>
+<td>jms-api</td>
+<td>1.1-rev-1</td>
+<td>CDDL + GPLv2 with classpath exception</td>
+</tr>
+<tr class="row-odd"><td>javax.management.j2ee</td>
+<td>javax.management.j2ee-api</td>
+<td>1.1.1</td>
+<td>CDDL + GPLv2 with classpath exception</td>
+</tr>
+<tr class="row-even"><td>javax.servlet</td>
+<td>javax.servlet-api</td>
+<td>3.0.1</td>
+<td>CDDL + GPLv2 with classpath exception</td>
+</tr>
+<tr class="row-odd"><td>javax.transaction</td>
+<td>jta</td>
+<td>1.1</td>
+<td>License for JTA</td>
+</tr>
+<tr class="row-even"><td>javax.xml.stream</td>
+<td>stax-api</td>
+<td>1.0-2</td>
+<td>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0; GNU General Public Library</td>
+</tr>
+<tr class="row-odd"><td>net.sf.ehcache</td>
+<td>ehcache-core</td>
+<td>2.6.3</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>net.sf.opencsv</td>
+<td>opencsv</td>
+<td>2.3</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>net.sf.saxon</td>
+<td>Saxon-HE</td>
+<td>9.4</td>
+<td>Mozilla Public License Version 1.0</td>
+</tr>
+<tr class="row-even"><td>net.sourceforge.jtransforms</td>
+<td>jtransforms</td>
+<td>2.4.0</td>
+<td>GPL; LGPL; Mozilla Public License</td>
+</tr>
+<tr class="row-odd"><td>org.acplt</td>
+<td>oncrpc</td>
+<td>1.0.7</td>
+<td>LGPL</td>
+</tr>
+<tr class="row-even"><td>org.antlr</td>
+<td>ST4</td>
+<td>4.0.7</td>
+<td>BSD licence</td>
+</tr>
+<tr class="row-odd"><td>org.antlr</td>
+<td>antlr</td>
+<td>3.5</td>
+<td>BSD licence</td>
+</tr>
+<tr class="row-even"><td>org.antlr</td>
+<td>antlr-runtime</td>
+<td>3.5</td>
+<td>BSD licence</td>
+</tr>
+<tr class="row-odd"><td>org.antlr</td>
+<td>stringtemplate</td>
+<td>3.2.1</td>
+<td>BSD licence</td>
+</tr>
+<tr class="row-even"><td>org.apache.activemq</td>
+<td>activemq-core</td>
+<td>5.7.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.apache.activemq</td>
+<td>activemq-pool</td>
+<td>5.7.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.apache.activemq</td>
+<td>kahadb</td>
+<td>5.7.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.apache.commons</td>
+<td>commons-compress</td>
+<td>1.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.apache.commons</td>
+<td>commons-csv</td>
+<td>1.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.apache.commons</td>
+<td>commons-math</td>
+<td>2.1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.apache.httpcomponents</td>
+<td>httpclient</td>
+<td>4.3.4</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.apache.httpcomponents</td>
+<td>httpcore</td>
+<td>4.3.2</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.apache.httpcomponents</td>
+<td>httpcore-nio</td>
+<td>4.3.2</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.apache.poi</td>
+<td>poi</td>
+<td>3.9</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.apache.shiro</td>
+<td>shiro-core</td>
+<td>1.2.3</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.apache.shiro</td>
+<td>shiro-web</td>
+<td>1.2.3</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.beanshell</td>
+<td>bsh</td>
+<td>2.0b4</td>
+<td>LGPL</td>
+</tr>
+<tr class="row-odd"><td>org.codehaus.groovy</td>
+<td>groovy-all</td>
+<td>2.1.5</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.codehaus.woodstox</td>
+<td>stax2-api</td>
+<td>3.1.1</td>
+<td>The BSD License</td>
+</tr>
+<tr class="row-odd"><td>org.codehaus.woodstox</td>
+<td>woodstox-core-asl</td>
+<td>4.2.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty</td>
+<td>jetty-client</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty</td>
+<td>jetty-continuation</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty</td>
+<td>jetty-http</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty</td>
+<td>jetty-io</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty</td>
+<td>jetty-jmx</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty</td>
+<td>jetty-jndi</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty</td>
+<td>jetty-plus</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty</td>
+<td>jetty-security</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty</td>
+<td>jetty-server</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty</td>
+<td>jetty-servlet</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty</td>
+<td>jetty-servlets</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty</td>
+<td>jetty-util</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty</td>
+<td>jetty-webapp</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty</td>
+<td>jetty-xml</td>
+<td>8.1.11.v20130520</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.eclipse.jetty.orbit</td>
+<td>javax.activation</td>
+<td>1.1.0.v201105071233</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-odd"><td>org.eclipse.jetty.orbit</td>
+<td>javax.mail.glassfish</td>
+<td>1.4.1.v201005082020</td>
+<td>Apache Software License v2.0; Eclipse Public License v1.0</td>
+</tr>
+<tr class="row-even"><td>org.freemarker</td>
+<td>freemarker</td>
+<td>2.3.19</td>
+<td>BSD-style license</td>
+</tr>
+<tr class="row-odd"><td>org.fudgemsg</td>
+<td>fudge-java</td>
+<td>0.3.9.20</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.fudgemsg</td>
+<td>fudge-proto</td>
+<td>0.3.9.7</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.fusesource.hawtbuf</td>
+<td>hawtbuf</td>
+<td>1.9</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.fusesource.hawtdispatch</td>
+<td>hawtdispatch</td>
+<td>1.11</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.fusesource.hawtdispatch</td>
+<td>hawtdispatch-transport</td>
+<td>1.11</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.fusesource.mqtt-client</td>
+<td>mqtt-client</td>
+<td>1.3</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.hibernate</td>
+<td>hibernate-core</td>
+<td>3.5.2-Final</td>
+<td>LGPL</td>
+</tr>
+<tr class="row-even"><td>org.hibernate</td>
+<td>hibernate-ehcache</td>
+<td>3.5.2-Final</td>
+<td>LGPL</td>
+</tr>
+<tr class="row-odd"><td>org.jasypt</td>
+<td>jasypt</td>
+<td>1.9.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.javassist</td>
+<td>javassist</td>
+<td>3.16.1-GA</td>
+<td>Apache Software License v2.0; LGPL v2.1; Mozilla Public License v1.1</td>
+</tr>
+<tr class="row-odd"><td>org.jdeferred</td>
+<td>jdeferred-core</td>
+<td>1.1.1</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.jdesktop</td>
+<td>appframework</td>
+<td>1.0.3</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-odd"><td>org.jdesktop</td>
+<td>swing-worker</td>
+<td>1.1</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-even"><td>org.jdom</td>
+<td>jdom</td>
+<td>1.1</td>
+<td>JDOM license similar to Apache License</td>
+</tr>
+<tr class="row-odd"><td>org.joda</td>
+<td>joda-beans</td>
+<td>1.6</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.joda</td>
+<td>joda-convert</td>
+<td>1.7</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.jolokia</td>
+<td>jolokia-core</td>
+<td>1.1.3</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.jvnet</td>
+<td>mimepull</td>
+<td>1.6</td>
+<td>Dual license consisting of the CDDL v1.1 and GPL v2</td>
+</tr>
+<tr class="row-odd"><td>org.mindrot</td>
+<td>jbcrypt</td>
+<td>0.3m</td>
+<td>ISC/BSD License</td>
+</tr>
+<tr class="row-even"><td>org.mongodb</td>
+<td>mongo-java-driver</td>
+<td>2.11.2</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.quartz-scheduler</td>
+<td>quartz</td>
+<td>1.8.5</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.reflections</td>
+<td>reflections</td>
+<td>0.9.9-RC1</td>
+<td>WTFPL</td>
+</tr>
+<tr class="row-odd"><td>org.slf4j</td>
+<td>jcl-over-slf4j</td>
+<td>1.7.5</td>
+<td>MIT License</td>
+</tr>
+<tr class="row-even"><td>org.slf4j</td>
+<td>log4j-over-slf4j</td>
+<td>1.7.5</td>
+<td>Apache Software Licenses</td>
+</tr>
+<tr class="row-odd"><td>org.slf4j</td>
+<td>slf4j-api</td>
+<td>1.7.7</td>
+<td>MIT License</td>
+</tr>
+<tr class="row-even"><td>org.springframework</td>
+<td>spring-aop</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.springframework</td>
+<td>spring-beans</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.springframework</td>
+<td>spring-context</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.springframework</td>
+<td>spring-context-support</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.springframework</td>
+<td>spring-core</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.springframework</td>
+<td>spring-expression</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.springframework</td>
+<td>spring-jdbc</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.springframework</td>
+<td>spring-jms</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.springframework</td>
+<td>spring-orm</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.springframework</td>
+<td>spring-test</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.springframework</td>
+<td>spring-tx</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>org.springframework</td>
+<td>spring-web</td>
+<td>3.2.3.RELEASE</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.swinglabs.swingx</td>
+<td>swingx-action</td>
+<td>1.6.5</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-odd"><td>org.swinglabs.swingx</td>
+<td>swingx-autocomplete</td>
+<td>1.6.5</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-even"><td>org.swinglabs.swingx</td>
+<td>swingx-common</td>
+<td>1.6.5</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-odd"><td>org.swinglabs.swingx</td>
+<td>swingx-core</td>
+<td>1.6.5</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-even"><td>org.swinglabs.swingx</td>
+<td>swingx-graphics</td>
+<td>1.6.5</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-odd"><td>org.swinglabs.swingx</td>
+<td>swingx-painters</td>
+<td>1.6.5</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-even"><td>org.swinglabs.swingx</td>
+<td>swingx-plaf</td>
+<td>1.6.5</td>
+<td>LGPL v2.1</td>
+</tr>
+<tr class="row-odd"><td>org.testng</td>
+<td>testng</td>
+<td>6.9.4</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>org.threeten</td>
+<td>threetenbp</td>
+<td>0.8.1</td>
+<td>New BSD License</td>
+</tr>
+<tr class="row-odd"><td>redis.clients</td>
+<td>jedis</td>
+<td>2.1.0</td>
+<td>Jedis License</td>
+</tr>
+<tr class="row-even"><td>xalan</td>
+<td>xalan</td>
+<td>2.7.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>xerces</td>
+<td>xercesImpl</td>
+<td>2.8.0</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>xml-apis</td>
+<td>xml-apis</td>
+<td>1.3.03</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-odd"><td>xml-resolver</td>
+<td>xml-resolver</td>
+<td>1.2</td>
+<td>Apache Software License v2.0</td>
+</tr>
+<tr class="row-even"><td>xom</td>
+<td>xom</td>
+<td>1.2.5</td>
+<td>LGPL v2.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+        </main>
+      </div>
+
+      <footer>
+  <div class="row">
+    <div class="small-6 columns"><p>Version 1.8.3</p></div>
+    <div class="small-6 columns"><p class="copyright">&copy; 2015 OpenGamma Limited</p></div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>

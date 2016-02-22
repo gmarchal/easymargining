@@ -1,0 +1,60 @@
+.. _calculation_modes:
+
+Calculation Modes
+=================
+
+The Eurex Clearing implementation supports two different ways of calculating the P&L vectors required to produce
+initial margin, each with their own strengths.
+
+These modes apply only to OTC calculations; ETD calculations always use full revaluation from the daily reference prices
+loaded into the environment.
+
+
+Full Revaluation
+----------------
+
+The underlying OpenGamma Platform provides all the pricing and risk capabilities required to value OTC trades from their
+definitions. The default calculation mode is to use this functionality in conjunction with the full scenario data loaded
+from the Eurex Clearing Transparency Enabler files, to value each trade under each scenario. The P&L vectors required for
+initial margin are calculated by subtracting the base valuation from the valuation under each scenario.
+
+While this is the most accurate approach, it is also the most calculation-intensive for OTC trades.
+
+.. _delta_approximation:
+
+Delta Approximation
+-------------------
+
+An alternative to full revaluation is to estimate the P&L under each scenario directly from the first-order
+sensitivities to each risk factor. P&L vectors are produced by considering the shocks applied to the risk factors under
+each scenario.
+
+There are two ways to use delta approximation: in conjunction with the full trade definitions, or from sensitivities.
+
+Using trade definitions
+~~~~~~~~~~~~~~~~~~~~~~~
+
+When trade definitions are provided, the underlying OpenGamma Platform is used to calculate the sensitivities in the
+base scenario.
+
+The use of the full trade definition also means the trade can be valued. This allows an additional term to be
+incorporated into the P&L calculation to estimate the effect on P&L due to currency exposure, leading to slightly more
+accurate results than using delta approximation with sensitivities.
+
+For further details on available otc formats, see :ref:`OTC Formats <otc_trade_formats>`.
+
+Using sensitivities
+~~~~~~~~~~~~~~~~~~~
+
+The implementation supports the import of sensitivities to risk factors in place of full trade details.
+These may be the the sensitivities of a single trade, or the aggregated sensitivities of many trades.
+
+Sensitivities are the fastest way to obtain results as they can be used directly to estimate the P&L under each scenario.
+However, it is not possible to value the trades they represent, so the effect on the P&L due to the currency exposure,
+which can be included when using the full trade definition with delta approximation, can no longer be included. This
+may lead to slightly less accurate results.
+
+Sensitivities can be combined with full trade definitions, enabling use-cases like fast what-if where a proposed trade
+is combined with the sensitivity profile of an existing portfolio.
+
+For details on the sensitivity input format, see :doc:`../trade_parsers/eurex_sensitivities_csv`.

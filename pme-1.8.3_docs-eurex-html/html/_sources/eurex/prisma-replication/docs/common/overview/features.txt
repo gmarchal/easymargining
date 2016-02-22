@@ -1,0 +1,69 @@
+Features
+========
+
+Margin Methodologies
+--------------------
+
+Implementations of the following major Eurex Clearing methodologies are supported for initial margin calculations:
+
+* Eurex PRISMA for ETD (Release 4)
+* EurexOTC (Release 6)
+* Eurex Cross Margining
+
+.. _product_scope:
+
+Product Scope
+-------------
+
+OTC
+***
+
+* Interest Rate Swaps
+* Variable Notional Swaps
+* Zero Coupon Inflation Swaps
+* Overnight Indexed Swaps
+* Forward Rate Agreements
+* Risk factor sensitivities
+
+Includes support for:
+
+* Eligible-to-clear currencies (USD, EUR, GBP, JPY, CHF)
+* Swap maturities up to 50 years (depending on currency)
+* FRAs up to 24 months
+* Standard indices and tenors
+* Fixed/Float and Float/Float
+* Stubs
+* Compounding (Flat, Straight)
+
+Exchange Traded Derivatives (ETDs)
+**********************************
+
+* Bond Futures / Future Options
+* Interest Rate Futures / Future Options
+* Swap Futures
+* Single Stock Futures / Options
+* Stock Index Futures / Options
+* Any additional cleared ETDs specified in the Eurex Transparency Enabler File formats, using the same pricing and margin calculation methodology as those above.
+
+Outputs
+-------
+
+The implementation is built on the OpenGamma Platform, and as such provides access to other trade and portfolio measures.
+
+* Present Value
+* P&L series
+* Filtered Historical VaR
+* Stress VaR
+* Correlation Break Adjustment
+* Compression Model Adjustment
+* Liquidity Risk
+* Long Option Credit
+
+These results are available at any of the following points in the portfolio hierarchy, as applicable:
+
+* Trade
+* Scenario
+* Scenario subsample
+* Liquidation Group Split
+* Liquidation Group
+* Portfolio

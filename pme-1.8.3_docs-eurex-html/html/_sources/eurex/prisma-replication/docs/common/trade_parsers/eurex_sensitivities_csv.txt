@@ -1,0 +1,89 @@
+.. _eurex_sensitivities_csv:
+
+Eurex Sensitivities CSV
+=======================
+
+A CSV format is supported for inputting the sensitivities to risk factors rather than the corresponding OTC trade
+definitions. For further details on the sensitivity-based approach, see :doc:`../overview/calculation_modes`.
+
+Format
+------
+
+The CSV file must contain a header row specifying a ``Maturity`` column. The remaining column headers must
+identify the curves to which the sensitivities apply.
+The rows of the CSV file each contain sensitivities to a particular maturity bucket; each column contains
+the sensitivities for a single curve.
+
+The maturities must match those provided in the Risk Factor Report, i.e.
+1D (specified as ON), 1W, 2W, 3W, 1M, 2M, 3M, 4M, 5M, 6M, 7M, 8M, 9M, 10M, 11M, 1Y, 15M, 18M, 21M, 2Y, 3Y, 4Y, 5Y, 6Y, 7Y, 8Y, 9Y, 10Y,
+11Y, 12Y, 15Y, 20Y, 25Y, 30Y, 40Y and 50Y. The grid may contain points for all or some of these maturities.
+
+.. note::
+
+   Curve names and maturities are consistent with those in the Risk Factor Report, with the exception
+   that "ON" is used in place of "1D". This is illustrated in the example below.
+
+The sensitivity values are with respect to a 1 bp upwards shift to that point. Blank values will be assumed to mean a zero sensitivity to that point.
+
+
+Example
+-------
+
+The following is a valid sensitivities CSV file describing the sensitivities to the GBP curves::
+
+  Maturity,GBP.SONIA.ON,GBP.LIBOR.1M,GBP.LIBOR.1Y,GBP.LIBOR.3M,GBP.LIBOR.6M
+  ON,109.6348242,260.0774112,-418.6946032,-165.135269,-13.682645
+  1W,0.180994222,221.4068629,-418.6976229,-229.3523498,-19.20798355
+  2W,-0.685870085,240.6898403,-418.696544,-197.2954946,-17.23396518
+  3W,2.017203663,711.8326227,-418.6602482,585.1346469,49.17941697
+  1M,2.52365295,1321.01735,-418.6859543,1602.801945,2.142986394
+  2M,2.760956809,360.7673005,-418.6411618,0.058926351,84.10334451
+  3M,-8.990821049,343.8363423,-418.9723786,-0.433736566,-524.8828877
+  4M,-154.5734338,352.8741359,-418.7826474,-8.873867422,-7987.533831
+  5M,11.74028919,361.6274656,-418.5884908,0.565321673,442.446597
+  6M,10.42972451,109.1122665,-409.7832561,-0.835666843,-102.5619296
+  7M,32.17739596,1195.138527,-415.1949249,-19.33569118,31.20563979
+  8M,111.2220484,-513.5808152,-295.1086504,0.713996947,-9.126224265
+  9M,-597.4175703,535.5951224,-1118.25935,2.360652428,3.402952373
+  10M,-611.157218,702.8095749,-12847.10854,-32.82816523,59.8478585
+  11M,-5124.389841,-34.20966984,354.3236035,1.203367248,-3.05029726
+  1Y,11470.52526,360.6735048,-587.7112468,-32.53435043,5.499623887
+  15M,-45172.77912,399.425105,-450.1766265,-36.34373966,22.53807156
+  18M,-17151.75602,220.0584175,-451.0728531,-104.4429463,-20.11474715
+  21M,3612.73983,390.5488602,-158.5000811,-120.934938,287.986537
+  2Y,-493.2806247,-70.82721011,-297.0426461,-507.2388931,528.5715564
+  3Y,-127.1425723,-362.3034808,273.4051314,-1222.803288,954.7115396
+  4Y,-381.1745691,-742.390682,621.4048598,-1807.032021,2120.257027
+  5Y,-382.4909036,-1174.344584,1053.472134,-13940.47353,13968.9554
+  6Y,-878.2689542,-1474.536718,1570.85056,-133274.026,133410.1078
+  7Y,-300.5880999,-1806.483957,1701.50546,11436.56447,-11208.66672
+  8Y,-227.7327939,-2310.158737,2134.852072,361.8913799,-355.1412079
+  9Y,-656.9998516,-2441.091781,2790.134273,21.69814581,-21.3080622
+  10Y,-389.4213151,-3276.46478,3013.299915,4.215100471,-4.142389134
+  11Y,-424.8966138,-3174.311444,3590.421195,0.303772546,-0.298711188
+  12Y,-827.5463643,-8029.602532,8129.02009,0.021892857,-0.021505114
+  15Y,-1807.181108,-18641.04948,19003.84111,0.000529446,-0.000514757
+  20Y,-2298.977995,-25730.1273,26447.3693,-1.75E-06,0
+  25Y,-2092.218734,-26265.17487,26683.32491,-1.75E-06,0
+  30Y,-3285.751948,-40587.68954,41269.75698,-1.75E-06,0
+  40Y,-3932.422019,-55288.66312,56077.66338,-1.75E-06,0
+  50Y,-4382.937733,-234548.2709,237589.397,-1.75E-06,0
+
+Note that any risk factors can be combined into a single sensitivities file as necessary.
+
+API
+---
+
+The sensitivities CSV parser is implemented by ``EurexSensitivityFileReader``.
+
+Support for sensitivity inputs is provided through a special trade type which holds only the sensitivities.
+This allows such a trade to exist in a portfolio for margining alongside other sensitivities trades, or normal
+trade definitions.
+
+The code below shows a simple example of using it directly to load sensitivities from a CSV input file into
+the trade-based representation:
+
+.. code-block:: java
+
+  Reader sensitivitiesReader = new BufferedReader(new FileReader("sensitivities.csv"));
+  EurexSensitivityFileReader.parse(sensitivitiesReader);

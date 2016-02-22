@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setting up a Development Environment | Eurex Clearing PME</title>
+    <link rel="shortcut icon" href="../../../../../_static/opengamma-favicon.ico"/>
+    <link rel="stylesheet" href="../../../../../_static/css/main.css">
+    <link rel="stylesheet" href="../../../../../_static/css/syntax.css">
+    <link rel="stylesheet" href="../../../../../_static/css/alerts.css">
+    <link rel="stylesheet" href="../../../../../_static/font-awesome-4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/docs.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <header class="top">
+  <div class="row topbar">
+    <h1 id="logo" class="logo">
+      <a href="../../../../../index.html">Eurex Clearing PME</a>
+    </h1>
+    <nav>
+      <!--
+      <ul id="navigation" class="navigation">
+        <li><a href="http://www.opengamma.com/opengamma-platform/margining">More</a></li>
+      </ul>
+      -->
+      <div class="og">
+        <div class="toggle"><button type="button" id="toggle-menu" class="button--teal">Menu</button></div>
+        <div class="og_logo"><a href="http://www.opengamma.com"><img alt="OpenGamma" src="../../../../../_static/logo_topnav.png" /></a></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+      <div id="content" class="row">
+
+        <div id="sidebar" class="sidebar">
+
+          <section>
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="toc.html">Quick Start</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Setting up a Development Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-requirements">System requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="run_examples.html">Running the Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#calculation-of-initial-margin-for-otc-trades">Calculation of Initial Margin for OTC Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#calculation-of-initial-margin-for-etd-trades">Calculation of Initial Margin for ETD Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#calculation-of-cash-flows">Calculation of Cash Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#basic-api-integration-example">Basic API Integration Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_examples.html#running-from-the-command-line">Running from the Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="basic_library_integration.html">Basic Library Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basic_library_integration.html#margin-environment-lifecycle">Margin Environment Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_library_integration.html#data-lifecycle">Data Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_library_integration.html#third-party-libraries">Third-Party Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_library_integration.html">Advanced Library Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/toc.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/features.html">Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#margin-methodologies">Margin Methodologies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#product-scope">Product Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/system_requirements.html">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#software">Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/system_requirements.html#hardware">Hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/known_limitations.html">Known Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#etd">ETD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#otc">OTC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#market-data">Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#trades-and-positions">Trades and Positions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/faq.html#margin-calculation">Margin Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data/toc.html">Input Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/trade_parsers.html">Portfolio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_etd_csv.html">Eurex ETD CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_otc_csv.html">Eurex OTC CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_sensitivities_csv.html">Eurex Sensitivities CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fpml.html">FpML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fixml.html">FIXML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/eurex_market_data.html">Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#otc-requirements">OTC Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#etd-requirements">ETD Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#cross-margining-requirements">Cross-Margining Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/fixings.html">Fixings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/holidays.html">Holidays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/standard_directory_structure.html">Standard Directory Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#individual-file-conventions">Individual File Conventions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/toc.html">Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_market_data.html">Loading Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#automatic-file-resolution">Automatic file resolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#explicit-usage">Explicit usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_portfolios.html">Loading Portfolios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_portfolios.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/performing_calculations.html">Performing Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#trade-requests">Trade Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-requests">Portfolio Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#add-ons">Add-ons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-im">Portfolio IM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#building-a-request">Building a request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#p-l-calculation-methodology">P&amp;L calculation methodology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#output-model">Output Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#error-handling-during-calculation">Error handling during calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/calculation_modes.html">Calculation Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#full-revaluation">Full Revaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#delta-approximation">Delta Approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/margin_results.html">Margin Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#portfolio-results">Portfolio Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#trade-results">Trade Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/concurrency.html">Concurrency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#cpu-utilization">CPU utilization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#custom-executor-service">Custom Executor Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#concurrent-use-of-the-api">Concurrent use of the API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/common_tasks.html">Common Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#what-if-analysis">What-If Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#multiple-days-of-market-data">Multiple Days of Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#log-configuration">Log Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/toc.html">Advanced Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/trade_model.html">Trade Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/third_party_dependencies.html">Third-Party Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          </section>
+        </div>
+
+        <main id="main" class="main">
+          
+  <div class="section" id="setting-up-a-development-environment">
+<h1>Setting up a Development Environment</h1>
+<div class="section" id="system-requirements">
+<h2>System requirements</h2>
+<p>The following software is required to run Eurex Clearing PME.</p>
+<ul class="simple">
+<li><strong>Java 7 or 8 SDK</strong></li>
+<li><strong>Apache Maven</strong> (3.2+)</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<div class="section" id="eurex-clearing-pme">
+<h3>Eurex Clearing PME</h3>
+<p>Eurex Clearing PME is distributed as a zip file containing a Maven repository. The zip file is named
+<code class="docutils literal"><span class="pre">ogp4m-[version]_eurex-repository.zip</span></code>. The repository contains the code and resources necessary
+to run Eurex Clearing PME. All other required dependencies are available from Maven Central.</p>
+<p>You can use the Maven repository by extracting the contents of the zip file and adding
+the following block to the <code class="docutils literal"><span class="pre">&lt;repositories&gt;</span></code> section of your Maven <code class="docutils literal"><span class="pre">settings.xml</span></code> file:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;repository&gt;</span>
+    <span class="nt">&lt;id&gt;</span>eurex-pme<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;url&gt;</span>file://[path to extracted repository]<span class="nt">&lt;/url&gt;</span>
+<span class="nt">&lt;/repository&gt;</span>
+</pre></div>
+</div>
+<p>A full <code class="docutils literal"><span class="pre">settings.xml</span></code> may look as follows:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0</span>
+<span class="s">                      http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;profiles&gt;</span>
+    <span class="nt">&lt;profile&gt;</span>
+      <span class="nt">&lt;id&gt;</span>eurex-pme-profile<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;repositories&gt;</span>
+          <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>eurex-pme<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>file://[path to extracted repository]<span class="nt">&lt;/url&gt;</span>
+          <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;/repositories&gt;</span>
+    <span class="nt">&lt;/profile&gt;</span>
+  <span class="nt">&lt;/profiles&gt;</span>
+
+  <span class="nt">&lt;activeProfiles&gt;</span>
+    <span class="nt">&lt;activeProfile&gt;</span>eurex-pme-profile<span class="nt">&lt;/activeProfile&gt;</span>
+  <span class="nt">&lt;/activeProfiles&gt;</span>
+
+<span class="nt">&lt;/settings&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">settings.xml</span></code> file should be placed under <code class="docutils literal"><span class="pre">$M2_HOME/conf/settings.xml</span></code> or <code class="docutils literal"><span class="pre">${user.home}/.m2/settings.xml</span></code>.
+See <a class="reference external" href="https://maven.apache.org/settings.html">https://maven.apache.org/settings.html</a> for further details.</p>
+</div>
+<div class="section" id="examples">
+<h3>Examples</h3>
+<p>There are examples available which demonstrate how to use Eurex Clearing PME. They are distributed as a zip file
+containing a Maven project. The zip file is named <code class="docutils literal"><span class="pre">ogp4m-[version]_eurex-prisma-replication-examples.zip</span></code>.
+After unzipping the file, open a terminal in the project root directory and execute:</p>
+<div class="highlight-python"><div class="highlight"><pre>mvn install
+</pre></div>
+</div>
+<p>Maven will build the examples project and print a success message:</p>
+<div class="highlight-python"><div class="highlight"><pre>[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: ...
+[INFO] Finished at: ...
+[INFO] Final Memory: ...
+[INFO] ------------------------------------------------------------------------
+</pre></div>
+</div>
+<div class="section" id="importing-the-examples-project-into-intellij">
+<h4>Importing the examples project into IntelliJ</h4>
+<p>From the <code class="docutils literal"><span class="pre">File</span></code> menu select <code class="docutils literal"><span class="pre">Open...</span></code> and choose the file <code class="docutils literal"><span class="pre">pom.xml</span></code> from the examples project directory.</p>
+</div>
+<div class="section" id="importing-the-examples-project-into-eclipse">
+<h4>Importing the examples project into Eclipse</h4>
+<ul class="simple">
+<li>Ensure the m2eclipse plugin is installed</li>
+<li>From the <code class="docutils literal"><span class="pre">File</span></code> menu select <code class="docutils literal"><span class="pre">Import...</span></code></li>
+<li>Select <code class="docutils literal"><span class="pre">Existing</span> <span class="pre">Maven</span> <span class="pre">Projects</span></code></li>
+<li>Click <code class="docutils literal"><span class="pre">Next</span> <span class="pre">&gt;</span></code></li>
+<li>Choose the examples project directory</li>
+<li>Click <code class="docutils literal"><span class="pre">Select</span> <span class="pre">All</span></code></li>
+<li>Click <code class="docutils literal"><span class="pre">Finish</span></code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+        </main>
+      </div>
+
+      <footer>
+  <div class="row">
+    <div class="small-6 columns"><p>Version 1.8.3</p></div>
+    <div class="small-6 columns"><p class="copyright">&copy; 2015 OpenGamma Limited</p></div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+Quick Start
+===========
+
+The Eurex Clearing PME is designed to provide you with a consistent path for
+successful integration into your development environment and production applications.
+It focuses on following a logical set of steps, each of which can then be verified
+numerically with the step before it, to ensure that programming errors are minimized.
+It also provides the fastest way to get up and running with the Eurex PME in your
+existing applications, and gradually introduces key concepts and APIs.
+
+Before you get started, please ensure you have installed the following prerequisites:
+
+* A Java 7 or 8 SDK
+* A Java IDE
+* Apache Maven (3.2+)
+
+You will need to prepare the following data:
+
+* A portfolio on which to calculate Initial Margin in one of the :doc:`supported input formats <../data/trade_parsers>`
+* At least one day of OTC and/or ETD Transparency Enabler :doc:`market data files <../../common/data/eurex_market_data>` downloaded from Eurex
+* A :doc:`historical fixings file <../../common/data/fixings>` (OTC only)
+* A :doc:`holiday calendars file <../../common/data/holidays>` (OTC only)
+* :ref:`Cross margining configuration files <cross_margining>` (cross margining only)
+
+You are now ready to :doc:`set up your development environment <set_up_development_environment>`.
+
+.. toctree::
+  :maxdepth: 2
+  :hidden:
+
+  set_up_development_environment
+  run_examples
+  basic_library_integration
+  advanced_library_integration

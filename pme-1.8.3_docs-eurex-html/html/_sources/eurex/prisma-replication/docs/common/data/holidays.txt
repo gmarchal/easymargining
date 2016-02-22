@@ -1,0 +1,79 @@
+Holidays
+========
+
+Eurex does not provide a standard holidays file, but OpenGamma does include a
+simple holiday file parser as part of the Eurex implementation. Use of this
+parser is entirely optional.
+
+.. note::
+
+   When OTC trades are in the portfolio, holiday data must be loaded before submitting a ``EurexMarketDataLoadRequest`` as they are
+   needed for calculation of the hedge portfolio.
+
+Format
+------
+
+The format of the file is a simple CSV with a header row. The file must contain the following fields:
+
++---------------------------+--------------+---------------------------------------------------------------+
+| Column Name               | Format       | Description                                                   |
++===========================+==============+===============================================================+
+| Business Date             | MM/dd/yyyy   | Date associated with the holiday data set (currently ignored) |
++---------------------------+--------------+---------------------------------------------------------------+
+| Financial Business Center | Text         | 4 character holiday calendar code (e.g. AUSY, USNY)           |
++---------------------------+--------------+---------------------------------------------------------------+
+| Holiday Date              | MM/dd/yyyy   | The date of the holiday                                       |
++---------------------------+--------------+---------------------------------------------------------------+
+| Holiday Name              | Number       | The name of the holiday (currently ignored)                   |
++---------------------------+--------------+---------------------------------------------------------------+
+
+An example CSV file is shown below::
+
+  Business Date,Financial Business Center,Holiday Date,Holiday Name
+  06/03/2015,BEBR,04/03/2015,Bank Holiday
+  06/03/2015,BEBR,04/06/2015,Easter Monday
+  06/03/2015,BEBR,05/01/2015,Labour Day
+  06/03/2015,BEBR,05/14/2015,Ascension Day
+  06/03/2015,BEBR,05/15/2015,Bank Holiday
+  06/03/2015,BEBR,05/25/2015,Whit Monday
+  06/03/2015,BEBR,07/21/2015,National Holiday
+  06/03/2015,BEBR,11/11/2015,Armistice Day
+
+Only fields ``Financial Business Center`` and ``Holiday Date`` are required.
+
+API
+---
+
+We provide a simple API that allows you to these into the environment.
+
+.. code-block:: java
+
+  MarginEnvironment environment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
+
+  ...
+
+  Reader holidaysReader = new BufferedReader(new FileReader("holidays.csv"));
+  Multimap<String, LocalDate> holidays = EurexHolidaysParser.parse(holidaysReader);
+  MarginHolidaysLoadRequest holidaysLoadRequest = CoreLoadRequests.holidays(holidays);
+
+  environment.getMarginData().loadData(holidaysLoadRequest);
+
+One can also provide the data directly through the API rather than parsing from file. For instance the
+code below creates load request that simply calls a factory method that creates a simple collection
+of holdiays (just a single holdiays on 1 Jan 2020 for EUTA in this case).
+
+.. code-block:: java
+
+    // load holidays
+    Multimap<String, LocalDate> holidays = buildHolidays();
+    MarginHolidaysLoadRequest holidaysLoadRequest = CoreLoadRequests.holidays(holidays);
+    marginData.loadData(holidaysLoadRequest);
+
+  private static Multimap<String, LocalDate> buildHolidays() {
+    return ImmutableMultimap.of(
+        "EUTA",
+        LocalDate.of(2020, 1, 1)
+    );
+  }
+
+See the example code in ``EurexPrismaBasicApiIntegrationClient`` for more information.

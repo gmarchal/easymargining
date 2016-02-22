@@ -1,0 +1,63 @@
+FIXML
+=====
+
+FIXML v5.0 SP2 is supported for ETD positions.
+
+Features
+--------
+
+The Trade Capture Report is used. Only a subset of the FIXML is necessary to populate the trade
+model, as documented below.
+
++-------------+------------------+----------+----------------------------------------------------------------+
+| XML Element | Atribute         | Optional | Description                                                    |
++=============+==================+==========+================================================================+
+| ``Instrmt`` | ``Sym``          | No       | Eurex product code e.g. CONF                                   |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``MMY``          | Yes      | Actual expiry year and month – required for non flex contracts |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``MatDt``        | No       | Actual expiry day – required for flex contracts                |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``OptAT``        | Yes      | Version - required for options                                 |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``SettlMeth``    | Yes      | Required for flex contracts                                    |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``SettlSubMeth`` | Yes      | Required for flex contracts                                    |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``PutCall``      | Yes      | Required for options                                           |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``StrkPx``       | Yes      | Required for options                                           |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Instrmt`` | ``ExerStyle``    | Yes      | Required for flex options                                      |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Qty``     | ``Long``         | No       | Where Typ="TOT"                                                |
++-------------+------------------+----------+----------------------------------------------------------------+
+| ``Qty``     | ``Short``        | No       | Where Typ="TOT"                                                |
++-------------+------------------+----------+----------------------------------------------------------------+
+
+Limitations
+-----------
+
+See :doc:`../overview/known_limitations`.
+
+API
+---
+
+The FIXML parser is implemented by ``EurexFixmlTradeParser``.
+
+The code below shows a simple example of using it directly to load trades from a FIXML input file:
+
+.. code-block:: java
+
+  MarginEnvironment environment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
+  ...
+
+  OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
+
+  File fixmlFile = new File("fixml.xml");
+  ByteSource fixmlSource = Files.asByteSource(fixmlFile);
+  EurexFixmlTradeParser.parseTrades(fixmlSource, linkResolver);
+
+The ``OgmLinkResolver`` is required when loading ETD positions in order to resolve a valid reference to a security in
+the environment. Security definitions are part of the theoretical instruments ETD input file. For further details on the
+input files, see :doc:`../data/eurex_market_data`.

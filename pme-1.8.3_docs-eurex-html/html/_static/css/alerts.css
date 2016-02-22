@@ -1,0 +1,56 @@
+.admonition .admonition-title {
+  font-weight: 600;
+}
+
+.admonition p {
+  margin: 0;
+  padding: 0.5em;
+}
+
+div.note {
+  background-color: #d9edf7;
+}
+
+div.note > p.admonition-title {
+  display: block;
+  padding: 0.3em 0.5em;
+  margin: 0;
+  color: #ffffff;
+  background-color: #3a87ad;
+}
+
+div.important {
+  background-color: #fcf8e3;
+}
+
+div.important > p.admonition-title {
+  display: block;
+  padding: 0.3em 0.5em;
+  margin: 0;
+  color: #ffffff;
+  background-color: #c09853;
+}
+
+div.warning {
+  background-color: #f2dede;
+}
+
+div.warning > p.admonition-title {
+  display: block;
+  padding: 0.3em 0.5em;
+  margin: 0;
+  color: #ffffff;
+  background-color: #b94a48;
+}
+
+div.tip {
+  background-color: #dff0d8;
+}
+
+div.tip > p.admonition-title {
+  display: block;
+  padding: 0.3em 0.5em;
+  margin: 0;
+  color: #ffffff;
+  background-color: #468847;
+}

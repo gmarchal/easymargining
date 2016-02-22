@@ -1,0 +1,94 @@
+.. _loading_portfolios:
+
+Loading Portfolios
+==================
+
+To perform a margin calculation, a portfolio must be passed to the calculator API. This is represented by the
+``MarginPortfolio`` interface.
+
+Parsers are provided built-in for loading portfolios directly from files in several standard formats.
+However, a portfolio will often consist of a mix of ETD positions and OTC trades. This requires the use of multiple parsers.
+It may also be desirable to load portfolios from any of the supported file formats, without having to know
+in advance which format might be used.
+
+The ``PortfolioLoader`` utility is provided to abstract over all the trade parsers. This has a single, public, static
+method ``load()`` which takes URL references to one or more input files. These files are each parsed, automatically using
+the correct parser, and the resulting trades are concatenated into a single ``MarginPortfolio`` result.
+
+.. code-block:: java
+
+  MarginEnvironment environment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
+
+  ...  // populate environment with market data
+
+  URL etdFile = FileResources.byPath("etd.csv");
+  URL otcFile = FileResources.byPath("otc.csv");
+  OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
+  MarginPortfolio portfolio = PortfolioLoader.load(ImmutableList.of(etdFile, otcFile), linkResolver);
+
+The link resolver allows securities, referenced in ETD positions, to be resolved from the market data already loaded
+into the environment.
+
+It is also possible to zip multiple supported files together, and present them as a single ZIP file. For example, the
+files referenced above might be zipped into ``all.zip`` and equivalently loaded as follows:
+
+.. code-block:: java
+
+  MarginEnvironment environment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
+
+  ...  // populate environment with market data
+
+  URL tradeFile = FileResources.byPath("all.zip");
+  OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
+  MarginPortfolio portfolio = PortfolioLoader.load(ImmutableList.of(tradeFile), linkResolver);
+
+
+For more details on the supported trade formats, see :ref:`portfolio_toc`.
+
+The data may also come from a source other than files and be build programatically.
+See the example code in ``EurexPrismaBasicApiIntegrationClient`` for more information.
+
+
+Error handling during loading
+-----------------------------
+
+Filtering out matured trades in the portfolio
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If the user presents a portfolio that contains trades that have already matured,
+a message is printed and the trade is filtered from the portfolio.
+
+The message will be similar to::
+
+  WARN  c.o.m.e.prisma.cli.common.CliLogger -
+   Found trade failure: OTC trade has expired: security name: T_10MM_362763
+
+Filtering out trades that extend too far beyond yield curve
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If the user portfolio contains a trade that is extremely long dated (for instance matures in 75 years),
+then the system cannot reliably value the transaction, will print a warning message and filter
+the trade from the portfolio.
+
+The message will appear similar to::
+
+  WARN  c.o.m.e.prisma.cli.common.CliLogger -
+   Found trade failure: OTC trade extends past final curve point: security name: T_10MM_15151
+
+General parsing errors
+~~~~~~~~~~~~~~~~~~~~~~
+Each of the input formats has its own unique parser. In general, if the parser encounters as error,
+the system will throw an exception and the user will be expected to fix the problem before proceeding.
+This is similar to handing missing or unparseable market data; if these inputs cannot be loaded, then
+it is not prudent to proceed with calculation.
+
+An example error of a malformed OTC CSV input file in the portfolio::
+
+  com.opengamma.OpenGammaRuntimeException:
+  Encountered exception processing file: file:/tmp/myPortfolio/trade17052.csv
+  Caused by: java.lang.IllegalArgumentException: Unexpected instrument type: 17052
+
+And an example of a missing portfolio input file::
+
+  com.opengamma.DataNotFoundException:
+  Error getting URL for requested resource at /testData/trade/XYZ15a.csv
+  Caused by: java.io.FileNotFoundException: class path resource [testData/trade/XYZ15a.csv]
+  cannot be resolved to URL because it does not exist

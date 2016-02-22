@@ -1,0 +1,31 @@
+Eurex Clearing PME
+==================
+
+The Eurex Clearing Prisma Margin Estimator (PME) is OpenGamma's independent implementation of all three major Eurex Clearing margin methodologies: Eurex PRISMA for ETD, EurexOTC, and Eurex Cross Margining.
+
+It provides a set of high-level APIs for calculating initial margin on any given eligible-to-clear portfolio. The implementation is distributed as a Java library along with necessary third-party dependencies.
+
+Although not a stand-alone tool on its own, it can be easily embedded into existing applications or used
+as the basis for new applications to allow Eurex margin simulation in any context required by a modern
+trading firm.
+
+About The Documentation
+-----------------------
+
+The Eurex Cleaing PME comes packaged with a number of tools to help you easily integrate it into your applications.
+
+In addition to this high level documentation, the distribution includes Javadocs for all the core APIs necessary to add Eurex margin calculation support to your applications. It also has a number of examples in a ready-made project that you can use as a template to get started.
+
+Getting Started
+---------------
+
+The best way to get started with the Eurex Clearing PME is to follow our :doc:`Quick Start Guide <eurex/prisma-replication/docs/standalone/quick_start/toc>`. It's a proven way to go from this download to having full support for Eurex Clearing margin methodologies in a step-by-step sequence.
+
+.. toctree::
+   :hidden:
+
+   eurex/prisma-replication/docs/standalone/quick_start/toc
+   eurex/prisma-replication/docs/standalone/overview/toc
+   eurex/prisma-replication/docs/standalone/data/toc
+   eurex/prisma-replication/docs/standalone/integration/toc
+   eurex/prisma-replication/docs/standalone/advanced/toc

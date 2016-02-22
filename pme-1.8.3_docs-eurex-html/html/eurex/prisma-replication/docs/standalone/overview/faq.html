@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frequently Asked Questions | Eurex Clearing PME</title>
+    <link rel="shortcut icon" href="../../../../../_static/opengamma-favicon.ico"/>
+    <link rel="stylesheet" href="../../../../../_static/css/main.css">
+    <link rel="stylesheet" href="../../../../../_static/css/syntax.css">
+    <link rel="stylesheet" href="../../../../../_static/css/alerts.css">
+    <link rel="stylesheet" href="../../../../../_static/font-awesome-4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../../../../_static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../../../../_static/js/docs.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <header class="top">
+  <div class="row topbar">
+    <h1 id="logo" class="logo">
+      <a href="../../../../../index.html">Eurex Clearing PME</a>
+    </h1>
+    <nav>
+      <!--
+      <ul id="navigation" class="navigation">
+        <li><a href="http://www.opengamma.com/opengamma-platform/margining">More</a></li>
+      </ul>
+      -->
+      <div class="og">
+        <div class="toggle"><button type="button" id="toggle-menu" class="button--teal">Menu</button></div>
+        <div class="og_logo"><a href="http://www.opengamma.com"><img alt="OpenGamma" src="../../../../../_static/logo_topnav.png" /></a></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+      <div id="content" class="row">
+
+        <div id="sidebar" class="sidebar">
+
+          <section>
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quick_start/toc.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/set_up_development_environment.html">Setting up a Development Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/set_up_development_environment.html#system-requirements">System requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/set_up_development_environment.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/run_examples.html">Running the Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-initial-margin-for-otc-trades">Calculation of Initial Margin for OTC Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-initial-margin-for-etd-trades">Calculation of Initial Margin for ETD Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#calculation-of-cash-flows">Calculation of Cash Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#basic-api-integration-example">Basic API Integration Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/run_examples.html#running-from-the-command-line">Running from the Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/basic_library_integration.html">Basic Library Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#margin-environment-lifecycle">Margin Environment Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#data-lifecycle">Data Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick_start/basic_library_integration.html#third-party-libraries">Third-Party Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start/advanced_library_integration.html">Advanced Library Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="toc.html">Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/features.html">Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#margin-methodologies">Margin Methodologies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#product-scope">Product Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/features.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="system_requirements.html#software">Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system_requirements.html#hardware">Hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/known_limitations.html">Known Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#etd">ETD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/known_limitations.html#otc">OTC</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#market-data">Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trades-and-positions">Trades and Positions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#margin-calculation">Margin Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data/toc.html">Input Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/trade_parsers.html">Portfolio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_etd_csv.html">Eurex ETD CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_otc_csv.html">Eurex OTC CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/eurex_sensitivities_csv.html">Eurex Sensitivities CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fpml.html">FpML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/trade_parsers/fixml.html">FIXML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/eurex_market_data.html">Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#otc-requirements">OTC Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#etd-requirements">ETD Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/eurex_market_data.html#cross-margining-requirements">Cross-Margining Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/fixings.html">Fixings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/fixings.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/holidays.html">Holidays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#format">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/holidays.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/data/standard_directory_structure.html">Standard Directory Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/data/standard_directory_structure.html#individual-file-conventions">Individual File Conventions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/toc.html">Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_market_data.html">Loading Market Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#automatic-file-resolution">Automatic file resolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#explicit-usage">Explicit usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_market_data.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/loading_portfolios.html">Loading Portfolios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/loading_portfolios.html#error-handling-during-loading">Error handling during loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/api/performing_calculations.html">Performing Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#trade-requests">Trade Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-requests">Portfolio Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#add-ons">Add-ons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#portfolio-im">Portfolio IM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#building-a-request">Building a request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#p-l-calculation-methodology">P&amp;L calculation methodology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#output-model">Output Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/api/performing_calculations.html#error-handling-during-calculation">Error handling during calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/overview/calculation_modes.html">Calculation Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#full-revaluation">Full Revaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/overview/calculation_modes.html#delta-approximation">Delta Approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/margin_results.html">Margin Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#portfolio-results">Portfolio Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/margin_results.html#trade-results">Trade Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/concurrency.html">Concurrency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#cpu-utilization">CPU utilization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#custom-executor-service">Custom Executor Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/concurrency.html#concurrent-use-of-the-api">Concurrent use of the API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integration/common_tasks.html">Common Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#what-if-analysis">What-If Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#multiple-days-of-market-data">Multiple Days of Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integration/common_tasks.html#log-configuration">Log Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/toc.html">Advanced Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/trade_model.html">Trade Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/third_party_dependencies.html">Third-Party Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          </section>
+        </div>
+
+        <main id="main" class="main">
+          
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions</h1>
+<div class="section" id="system-requirements">
+<h2>System Requirements</h2>
+<dl class="docutils">
+<dt><strong>Can I run the Eurex Clearing PME if I do not have a machine which meets the recommended hardware specification?</strong></dt>
+<dd>Yes you can run the solution on a smaller machine. However it is recommended that you only
+load the market data that you require, for example just OTC data or only the open interest
+theoretical instrument file for ETD. If you do run on a machine with less memory and load
+all the available data then you will find that the calculations are slower than expected.</dd>
+<dt><strong>What if my operating system isn&#8217;t in the list of supported systems?</strong></dt>
+<dd>This is the list of operating systems that the Eurex Clearing PME has been tested on.
+However, as a Java library it is expected to run successfully on other operating systems.</dd>
+</dl>
+</div>
+<div class="section" id="market-data">
+<h2>Market Data</h2>
+<dl class="docutils">
+<dt><strong>Why do I have to provide my own fixings and holiday files?</strong></dt>
+<dd>For licensing reasons CCPs are not able to publish the fixings and holiday data that they
+use in their calculations. However, this data should be readily available within your own
+firm for your valuations. CSV parsers have been provided with Eurex Clearing PME to make
+it easy for you to integrate this data.</dd>
+<dt><strong>Do I need to provide fixings data for all eligible products?</strong></dt>
+<dd>In general you only need to provide the fixings necessary to price your trades. In particular,
+if you do not trade zero coupon inflation swaps then you do not need to provide inflation
+fixings.</dd>
+<dt><strong>What holiday data do I need to provide?</strong></dt>
+<dd>You will need to provide the holidays required to price your trades correctly. Providing
+past holidays is important to make sure that pricing does not fail trying to find fixings
+on days when they are not available.</dd>
+<dt><strong>Inflation fixings are for the month. Why do I have to provide a day in the input file?</strong></dt>
+<dd>The fixings file format expects an actual date to be provided. However it does not matter
+which day of the month is provided as the solution will automatically sort this out. Some
+data providers use the first day of the month whilst others use the last day of the month.
+The parser is flexible to allow for this.</dd>
+<dt><strong>Do I have to reload market data every time I want to calculate a margin?</strong></dt>
+<dd>No you only need to load the market data once into a <code class="docutils literal"><span class="pre">MarginEnvironment</span></code>, say at the start
+of day. You can then run all your calculation requests against that environment.</dd>
+</dl>
+</div>
+<div class="section" id="trades-and-positions">
+<h2>Trades and Positions</h2>
+<dl class="docutils">
+<dt><strong>What products are supported?</strong></dt>
+<dd>The Eurex Clearing PME supports all products which use the Eurex PRISMA for ETD or Eurex OTC
+methodologies (see <a class="reference internal" href="../../common/overview/features.html#product-scope"><span>Product Scope</span></a>. There are
+some known limitations to the supported OTC trades which are listed in <a class="reference internal" href="../../common/overview/known_limitations.html#known-limitations"><span>Known Limitations</span></a>.
+Any ETD products in the Eurex Transparency Enabler files are supported.</dd>
+<dt><strong>Are any eligibility checks performed on trades?</strong></dt>
+<dd>There are no specific eligibility checks performed on trades so it is possible that the
+Eurex Clearing PME will calculate margin on an ineligible trade. The Eurex Transparency Enabler
+files ensure that margin can only be calculated for OTC trades in valid currencies or for
+ETD positions on valid securities.  Checks are also performed to exclude matured trades
+and trades with a termination date beyond the end of the provided curves.</dd>
+<dt><strong>Does the Eurex Clearing PME perform any netting?</strong></dt>
+<dd>The solution does not perform any netting on ETD trades (see <a class="reference internal" href="../../common/overview/known_limitations.html#known-limitations"><span>Known Limitations</span></a>).
+To calculate the margin correctly for an ETD portfolio it requires it to be provided as
+total positions. Netting will be performed of long and short positions to calculate a net
+position if it is provided as a single record in either CSV or FIXML format.</dd>
+<dt><strong>My trades are not available in one of the provided formats. How do I load them into the PME?</strong></dt>
+<dd>The PME supports the file formats supported by Eurex but if you cannot access your trades
+in any of these formats then you have two options; you can take the format that you
+do have and convert it to one of the supported formats or you can load the trades
+by constructing the OpenGamma domain objects programmatically. For further information see
+<a class="reference internal" href="../../common/api/loading_portfolios.html#loading-portfolios"><span>Loading Portfolios</span></a>.</dd>
+</dl>
+</div>
+<div class="section" id="margin-calculation">
+<h2>Margin Calculation</h2>
+<dl class="docutils">
+<dt><strong>Can I use the Eurex Clearing PME to calculate variation margin?</strong></dt>
+<dd>The Eurex Clearing PME calculates initial margin. Variation margin is not available as
+an output. However, it is possible to output PV for all trades, and for premium paid up
+front options this is equivalent to the premium margin.</dd>
+<dt><strong>Can I choose the currency that my margin is calculated in?</strong></dt>
+<dd>You can choose to calculate your margin in either EUR or CHF.</dd>
+<dt><strong>How can I use the Eurex Clearing PME to better understand my margin?</strong></dt>
+<dd>The output from the Eurex Clearing PME provides a full breakdown of all the elements of
+the Eurex algorithms. It also provides some additional trade level information such as PV
+and P&amp;L. Therefore it is possible to understand, for example, which trades are contributing
+most to the VaR components of the margin or what is driving the level of the Liquidity Risk.</dd>
+<dt><strong>I am trying to do a what-if analysis. My base portfolio is a sensitivity profile and my new trade is in trade format. What does my calculation request need to be?</strong></dt>
+<dd>If any part of your portfolio is provided as a sensitivity profile then you need to
+use the delta approximation calculation mode (see <a class="reference internal" href="../../common/overview/calculation_modes.html#calculation-modes"><span>Calculation Modes</span></a>.
+The PME cannot combine full revaluation and delta approximation modes when calculating
+OTC margins. Similarly if you are trying to do cross margining and have your OTC
+portfolio as a sensitivity profile then you will need to use delta approximation mode.</dd>
+</dl>
+</div>
+</div>
+
+
+        </main>
+      </div>
+
+      <footer>
+  <div class="row">
+    <div class="small-6 columns"><p>Version 1.8.3</p></div>
+    <div class="small-6 columns"><p class="copyright">&copy; 2015 OpenGamma Limited</p></div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>

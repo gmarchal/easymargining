@@ -1,0 +1,97 @@
+Fixings
+=======
+
+Eurex does not provide a standard fixings file so fixings data must be supplied by the user.
+A fixings file parser is included for importing fixings files in a simple format.
+
+.. note::
+   When OTC trades are in the portfolio, the rate fixings must be loaded before submitting a
+   ``EurexMarketDataLoadRequest`` as they are needed for calculation of the hedge portfolio.
+
+
+Format
+------
+
+The format of the file is a simple CSV with a header row. The file must contain the following fields:
+
++---------------+--------------+--------------------------------------------------------------+
+| Column Name   | Format       | Description                                                  |
++===============+==============+==============================================================+
+| CurveName     | Text         | For example EUR-EURIBOR-Reuters                              |
++---------------+--------------+--------------------------------------------------------------+
+| Tenor         | Text         | For example 6M                                               |
++---------------+--------------+--------------------------------------------------------------+
+| Date          | yyyy-MM-dd   | For inflation this can be any day of the calendar month      |
++---------------+--------------+--------------------------------------------------------------+
+| Amount        | Number       | Fixings rate in decimal format. Index value for inflation.   |
++---------------+--------------+--------------------------------------------------------------+
+
+As described in the table, for inflation the fixings can have any calendar day in the month. If there is more
+that one value in a given month, the most recent value will be the one used by the system.
+
+The curve names and tenors referenced here must be consistent with those provided in the Transparency Enabler files.
+
+An example CSV file is shown below::
+
+  CurveName,Tenor,Date,Amount
+  EUR-EURIBOR-Reuters,9M,2015-06-12,0.00105
+  EUR-EURIBOR-Reuters,1M,2015-06-12,-0.00057
+  EUR-EURIBOR-Reuters,1W,2015-06-12,-0.00113
+  EUR-EURIBOR-Reuters,1Y,2015-06-12,0.00166
+  EUR-EURIBOR-Reuters,2M,2015-06-12,-0.00035
+  EUR-EURIBOR-Reuters,2W,2015-06-12,-0.00090
+  EUR-EURIBOR-Reuters,3M,2015-06-12,-0.00011
+  EUR-EURIBOR-Reuters,6M,2015-06-12,0.00055
+  GBP-LIBOR-BBA,6M,2015-06-12,0.0071566
+  GBP-LIBOR-BBA,1W,2015-06-12,0.0048488
+  GBP-LIBOR-BBA,3M,2015-06-12,0.0056878
+  GBP-LIBOR-BBA,1M,2015-06-12,0.0050637
+  GBP-LIBOR-BBA,2M,2015-06-12,0.0053516
+  GBP-LIBOR-BBA,1Y,2015-06-12,0.0100831
+  CHF-LIBOR-BBA,1W,2015-06-12,-0.00812
+  CHF-LIBOR-BBA,1Y,2015-06-12,-0.005863
+  CHF-LIBOR-BBA,2M,2015-06-12,-0.00801
+  CHF-LIBOR-BBA,3M,2015-06-12,-0.00791
+  CHF-LIBOR-BBA,1M,2015-06-12,-0.00819
+
+
+API
+---
+
+We provide an API that allows you to inject fixings into the environment.
+
+.. code-block:: java
+
+    //load fixings
+    Reader fixingsReader =
+              new BufferedReader(
+                new InputStreamReader(
+                  new GZIPInputStream(
+                    new FileInputStream(
+                      new ClassPathResource("examples/data/fixings/sample-curve-fixing.csv.gz")
+                      .getFile()))));
+
+    Map<String, LocalDateDoubleTimeSeries> fixings = EurexFixingsParser.parse(fixingsReader);
+    MarginFixingsLoadRequest fixingsLoadRequest = CoreLoadRequests.fixings(fixings);
+    marginData.loadData(fixingsLoadRequest);
+
+One can also provide the data directly through the API rather than parsing from file. For instance the
+code below creates load request that simply calls a factory method that creates a simple collection
+of fixings (just a single fixing on 1 Jun 2015 for CHF 1Y LIBOR in this case).
+
+.. code-block:: java
+
+    //build fixings
+    Map<String, LocalDateDoubleTimeSeries> fixings = buildFixings();
+    MarginFixingsLoadRequest fixingsLoadRequest = CoreLoadRequests.fixings(fixings);
+    marginData.loadData(fixingsLoadRequest);
+
+  private static Map<String, LocalDateDoubleTimeSeries> buildFixings() {
+    return ImmutableMap.of(
+        "CHF-LIBOR-BBA-1Y",
+        ImmutableLocalDateDoubleTimeSeries.builder()
+            .put(LocalDate.of(2015, 6, 1), -0.005863)
+            .build());
+  }
+
+See the example code in ``EurexPrismaBasicApiIntegrationClient`` for more information.

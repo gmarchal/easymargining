@@ -1,0 +1,83 @@
+Eurex ETD CSV
+=============
+
+The standard Eurex Clearing CSV format is supported for ETD positions. This is a standard CSV file with a header row.
+
+Fields
+------
+
+Each row in the CSV input file corresponds to a single position.
+
+The following fields are supported:
+
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| Column Name                     | Format                                  | Optional | Description                                     |
++=================================+=========================================+==========+=================================================+
+| ``Product ID``                  | Text                                    | No       | Eurex product code e.g. CONF                    |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Expiry Year``                 | yyyy                                    | No       | Actual expiry year                              |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Expiry Month``                | Month Number                            | No       | Actual expiry month                             |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Expiry Day``                  | Day Number                              | Yes      | Actual expiry day – required for flex contracts |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Version Number``              | Number                                  | Yes      | Required for options                            |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Product Settlement Type``     | Text                                    | Yes      | Required for flex contracts                     |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Call Put Flag``               | ``C`` or ``P``                          | Yes      | Required for options                            |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Exercise Price``              | Number                                  | Yes      | Required for options                            |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Exercise Style``              | ``AMERICAN`` or ``EUROPEAN``            | Yes      | Required for flex options                       |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Instrument Type``             | ``Future``, ``Option``, ``Flex Option`` | No       |                                                 |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Assigned/Notified Balance``   | Number                                  | Yes      | Not used                                        |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Exercised/Allocated Balance`` | Number                                  | Yes      | Not used                                        |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Long Balance``                | Number                                  | No       |                                                 |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``Short Balance``               | Number                                  | No       |                                                 |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+| ``OpenGammaId``                 | Text                                    | Yes      | Custom internal identifier                      |
++---------------------------------+-----------------------------------------+----------+-------------------------------------------------+
+
+By default, each loaded position is given a globally unique identifier corresponding to the next value in an incrementing sequence.
+When analysis of position-level results is required, it can be important to ensure that the results can be tied back to a specific input position via an identifier.
+The field ``OpenGammaId`` is supported in order to allow such an identifier to be specified.
+
+Example
+-------
+
+The following CSV file describes a position in ABBN::
+
+  Product ID,Expiry Year,Expiry Month,Expiry Day,Version Number,Product Settlement Type,Call Put Flag,Exercise Price,Exercise Style Flag,Instrument Type,Assigned/Notified Balance,Exercised/Allocated Balance,Long Balance,Short Balance
+  ABBN,2016,12,,0,S,C,20,AMERICAN,Option,0,0,10,7
+
+Limitations
+-----------
+
+See :doc:`../overview/known_limitations`.
+
+API
+---
+
+The ETD CSV parser is implemented by ``EurexEtdTradeFileReader``.
+
+The code below shows a simple example of using it directly to load trades from a CSV input file:
+
+.. code-block:: java
+
+  MarginEnvironment environment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
+  ...
+
+  OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
+
+  Reader etdReader = new BufferedReader(new FileReader("etd.csv"));
+  EurexEtdTradeFileReader.parse(linkResolver, etdReader);
+
+The ``OgmLinkResolver`` is required when loading ETD positions in order to resolve a valid reference to a security in
+the environment. Security definitions are part of the theoretical instruments ETD input file. For further details on the
+input files, see :doc:`../data/eurex_market_data`.
