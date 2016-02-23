@@ -8,7 +8,10 @@ import com.opengamma.margining.eurex.prisma.replication.EurexPrismaReplication;
 import com.opengamma.margining.eurex.prisma.replication.data.EurexEtdMarketDataLoadRequest;
 import com.opengamma.margining.eurex.prisma.replication.data.EurexMarketDataLoadRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.threeten.bp.LocalDate;
+
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by gmarchal on 22/02/2016.
@@ -19,6 +22,10 @@ public class EurexMarketDataEnvironment {
     private static EurexMarketDataEnvironment INSTANCE = null;
 
     private MarginEnvironment marginEnvironment = null;
+
+    private List<URL> theoreticalPricesAndInstrumentConfiguration = null;
+
+    private LocalDate valuationDate = null;
 
     private EurexMarketDataEnvironment() {
     }
@@ -36,23 +43,31 @@ public class EurexMarketDataEnvironment {
     }
 
     // Initialize Eurex MarketData Environment
-    public static void init(LocalDate s_valuationDate) {
-        log.info("Initialize Eurex Market Data Environment for valuation date : " + s_valuationDate.toString());
+    public static void init(String marketDataDirectory, LocalDate valuationDate) {
+        log.info("Initialize Eurex Market Data Environment for valuation date : " + valuationDate.toString());
         EurexMarketDataEnvironment environment =
                 EurexMarketDataEnvironment.getInstance() ;
+
+        // Convert LocalDate
+        org.threeten.bp.LocalDate s_valuationDate = org.threeten.bp.LocalDate.parse(valuationDate.toString());
 
         // Initialize environment with data
         MarginEnvironment marginEnvironment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
 
         // Use file resolver utility to discover data from standard Eurex directory structure
-        MarketDataFileResolver fileResolver = new MarketDataFileResolver("marketData", s_valuationDate);
+        String directoryFilePattern = new String("file:").concat(marketDataDirectory);
+        MarketDataFileResolver fileResolver = new MarketDataFileResolver(directoryFilePattern, s_valuationDate);
 
         // Create ETD data load request, pointing to classpath, and load
         EurexEtdMarketDataLoadRequest etdDataLoadRequest = MarketDataLoaders.etdRequest(fileResolver);
+
         EurexMarketDataLoadRequest loadRequest = EurexMarketDataLoadRequest.etdMarketDataRequest(s_valuationDate, etdDataLoadRequest);
         marginEnvironment.getMarginData().loadData(loadRequest);
 
         environment.setMarginEnvironment(marginEnvironment);
+        environment.setTheoreticalPricesAndInstrumentConfiguration(etdDataLoadRequest.getTheoreticalPricesAndInstrumentConfiguration());
+        environment.setValuationDate(valuationDate);
+
         log.info("Eurex Market Data Environment for valuation date : " + s_valuationDate.toString() + " is initialized ");
     }
 
@@ -62,5 +77,21 @@ public class EurexMarketDataEnvironment {
 
     public void setMarginEnvironment(MarginEnvironment marginEnvironment) {
         this.marginEnvironment = marginEnvironment;
+    }
+
+    public List<URL> getTheoreticalPricesAndInstrumentConfiguration() {
+        return theoreticalPricesAndInstrumentConfiguration;
+    }
+
+    public void setTheoreticalPricesAndInstrumentConfiguration(List<URL> theoreticalPricesAndInstrumentConfiguration) {
+        this.theoreticalPricesAndInstrumentConfiguration = theoreticalPricesAndInstrumentConfiguration;
+    }
+
+    public LocalDate getValuationDate() {
+        return valuationDate;
+    }
+
+    public void setValuationDate(LocalDate valuationDate) {
+        this.valuationDate = valuationDate;
     }
 }

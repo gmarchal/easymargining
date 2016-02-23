@@ -62,7 +62,7 @@ public class CcgMarsClassFileLoaderTest {
     public void testReadCCGClassFileFile() throws Exception {
         Assert.notNull(ccgMarsClassFileLoader);
 
-        URL url = new ClassPathResource("ccg/marketData/20151126/classfile.xml").getURL();
+        URL url = new ClassPathResource("resources/ccg/marketData/20151126/classfile.xml").getURL();
         Assert.notNull(url);
 
         List<ClassFileItem> items = ccgMarsClassFileLoader.readCCGClassFileFile(url);

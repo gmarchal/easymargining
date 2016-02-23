@@ -59,7 +59,7 @@ public class EurexPrismaEtdMarginClient {
     environment.getMarginData().loadData(loadRequest);
 
     // Obtain portfolio, loaded from a trade file on the classpath
-    URL tradeFile = FileResources.byPath("trade/etdTrades.csv");
+    URL tradeFile = FileResources.byPath("resources/eurex/trade/etdTrades.csv");
     OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
     MarginPortfolio portfolio = PortfolioLoader.load(ImmutableList.of(tradeFile), linkResolver);
 

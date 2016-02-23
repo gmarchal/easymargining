@@ -35,12 +35,6 @@ public class EurexTradeTransformer {
                 (trade) -> {
                     log.info(" --- " + trade.toString());
 
-                    //Calendar cal = Calendar.getInstance();
-                    //cal.setTime(trade.getExpiryDate());
-                    //int year = cal.get(Calendar.YEAR);
-                    //int month = cal.get(Calendar.MONTH);
-                    //int day = cal.get(Calendar.DAY_OF_MONTH);
-
                     LocalDate localDate = Instant.ofEpochMilli(trade.getExpiryDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                     int year = localDate.getYear();
                     int month = localDate.getMonthValue();

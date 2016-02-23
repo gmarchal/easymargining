@@ -139,7 +139,7 @@ public class EurexPrismaController {
         return null;
     }
 
-    @RequestMapping(value = "/trade/{sessionId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/resources/eurex/trade/{sessionId}", method = RequestMethod.GET)
     public ResponseEntity<List<EurexTradeEntity>> getTrades(@PathVariable("sessionId") String sessionId) {
         List<EurexTradeEntity> eurexTradeEntityList = null;
         try {
@@ -151,13 +151,13 @@ public class EurexPrismaController {
         }
     }
 
-    @RequestMapping(value = "/trade", method = RequestMethod.POST)
+    @RequestMapping(value = "/resources/eurex/trade", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> addTrade(@RequestBody EurexTradeEntity eurexTradeEntity) {
         return new ResponseEntity<>("AddTrade " + eurexTradeEntity, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/trade/{sessionId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/resources/eurex/trade/{sessionId}", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> postTrades(@PathVariable("sessionId") String sessionId, @RequestBody List<EurexTradeEntity> tradeEntities) {
         try {

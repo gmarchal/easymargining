@@ -98,3 +98,7 @@ http://l-lin.github.io/angular-datatables/#/gettingStarted
 http://themeforest.net/item/material-design-admin-with-angularjs/full_screen_preview/13582227
 
 http://themeforest.net/item/angulr-bootstrap-admin-web-app-with-angularjs/8437259?s_phrase=&s_rank=2
+
+
+# Command line for launching Application.
+java -Xms4g -Xmx8g -jar easymargining.eurex-0.0.1.jar -vd 2015-11-27 -m D:\gmarchal\eurex-data\marketdata

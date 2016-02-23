@@ -1,12 +1,11 @@
 package com.easymargining.replication.eurex.domain.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 
 /**
- * Created by Gilles Marchal on 12/01/2016.
+ * Created by gmarchal on 23/02/2016.
  */
 @Getter
 @Setter
@@ -14,17 +13,12 @@ import java.io.Serializable;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Portfolio implements Serializable {
+public class ContractMaturity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private String _id;
+    private Integer contractYear;
 
-    private String name;
-
-    //private String account;
-
-    private String ownerId;
+    private Integer contractMonth;
 
 }

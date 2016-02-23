@@ -33,7 +33,7 @@ public class TradeFileHandlerTest {
     public void testReadWriteTradeFile() throws Exception {
         Assert.notNull(tradeFileHandler);
 
-        URL url = FileResources.byPath("trade/etdTrades.csv");
+        URL url = FileResources.byPath("resources/eurex/trade/etdTrades.csv");
 
         Assert.notNull(url);
 
@@ -56,7 +56,7 @@ public class TradeFileHandlerTest {
     public void testWriteTradeFile() throws Exception {
         Assert.notNull(tradeFileHandler);
 
-        URL url = FileResources.byPath("trade/etdTrades.csv");
+        URL url = FileResources.byPath("resources/eurex/trade/etdTrades.csv");
 
         Assert.notNull(url);
 

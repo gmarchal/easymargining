@@ -25,11 +25,12 @@ angular.module('app')
 	    ProductReferentialFactory.getProductIds()
 	                             .success(function(data, status){
                                     $scope.productIds = data;
-                                 });;
+                                 });
 		$scope.optionTypes = PositionDataFactory.optionTypes;
 		$scope.instrumentTypes = PositionDataFactory.instrumentTypes;
         $scope.settlementTypes = PositionDataFactory.settlementTypes;
 		$scope.exerciseStyleFlags = PositionDataFactory.exerciseStyleFlags;
+		$scope.expiryDates = [];
 
 		$scope.showProductIds = function(p) {
 			var selected = [];
@@ -67,6 +68,14 @@ angular.module('app')
             var selected = [];
             if(p.productId) {
                 selected = $filter('filter')($scope.settlementTypes, {id: p.productSettlementType});
+            }
+            return selected.length ? selected[0].name : 'Not set';
+        };
+
+        $scope.showExpiryDates = function(p) {
+            var selected = [];
+            if(p.productId) {
+                selected = $filter('filter')($scope.expiryDates, {id: p.expiryDate});
             }
             return selected.length ? selected[0].name : 'Not set';
         };
@@ -136,6 +145,25 @@ angular.module('app')
                 }
             }
         );
+
+        $scope.$watch(function() {
+            return PositionDataFactory.productIds;
+            }, function(value, last) {
+                if (value) {
+                    console.log(value)
+                    $scope.productIds = PositionDataFactory.productIds
+                } else {
+                    console.log('Event on productIds.')
+                    $scope.productIds = [];
+                }
+            }
+        );
+
+        $scope.refreshMaturities = function(productId) {
+            console.log(productId);
+            $scope.expiryDates = PositionDataFactory.getMaturities(productId);
+            console.log($scope.expiryDates);
+        };
 
         $scope.$watch(function() {
             return PositionDataFactory.productIds;

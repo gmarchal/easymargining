@@ -62,5 +62,13 @@ angular.module('app')
       factory.getProductIds = function(){
           return $http.get("/api/product/alldef");
       };
+      factory.getMaturities = function(productId) {
+          return $http.get("/api/product/getMaturities",
+                            { data: { productId: productId } } );
+      };
+      factory.getMaturities = function(productId, maturity) {
+          return $http.get("/api/product/getStrikes",
+                            { data: { productId: productId, maturity: maturity } } );
+      };
       return factory;
   }]);

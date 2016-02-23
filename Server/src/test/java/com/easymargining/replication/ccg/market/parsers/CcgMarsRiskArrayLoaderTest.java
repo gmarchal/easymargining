@@ -34,7 +34,7 @@ public class CcgMarsRiskArrayLoaderTest {
     public void testReadCCGRiskArrayFile() throws Exception {
         Assert.notNull(ccgMarsRiskArrayLoader);
 
-        URL url = new ClassPathResource("ccg/marketData/20151126/riskarray.xml").getURL();
+        URL url = new ClassPathResource("resources/ccg/marketData/20151126/riskarray.xml").getURL();
         Assert.notNull(url);
 
         List<RiskArrayItem> items = ccgMarsRiskArrayLoader.readCCGRiskArrayFile(url);

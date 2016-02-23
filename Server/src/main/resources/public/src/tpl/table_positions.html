@@ -16,20 +16,19 @@
     <tr ng-repeat="trade in positions">
 	  <td class="v-middle">
 		<span editable-select="trade.productId" e-name="productId" e-form="rowform"
-				  e-ng-options="s.eurexCode as s.eurexCode for s in productIds">{{ showProductIds(trade) }} </span>
+				  e-ng-options="s.eurexCode as s.eurexCode for s in productIds" e-ng-change="refreshMaturities(trade.productId)">{{ showProductIds(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		<span editable-select="trade.instrumentType" e-name="instrumentType" e-form="rowform"
-				  e-ng-options="s.id as s.name for s in instrumentTypes">{{ showInstrumentTypes(trade) }} </span>
+				  e-ng-options="s.id as s.name for s in instrumentTypes" >{{ showInstrumentTypes(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		<span editable-select="trade.optionType" e-name="optionType" e-form="rowform"
 				  e-ng-options="s.id as s.name for s in optionTypes">{{ showOptionTypes(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
-		<span editable-date="trade.expiryDate" e-name="expiryDate" e-form="rowform">
-				{{ (trade.expiryDate | date:"MM/yyyy") || 'empty' }}
-			</span>
+		  <span editable-select="trade.expiryDate" e-name="expiryDate" e-form="rowform"
+				e-ng-options="s.id as s.name for s in expiryDates">{{ showExpiryDates(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		  <span editable-select="trade.productSettlementType" e-name="productSettlementType" e-form="rowform"

@@ -11,11 +11,13 @@ import java.util.List;
  */
 public interface IProductRepository extends MongoRepository<Product, String> {
 
-    Product findByProductId(String productId);
+    List<Product> findByProductId(String productId);
 
     List<Product> findDistinctProductByEffectiveDate(LocalDate effectiveDate);
 
     List<Product> findByEffectiveDate(LocalDate effectiveDate);
 
     List<Product> findByProductIdAndEffectiveDate(String productId, LocalDate effectiveDate);
+
+    List<Product> findByProductIdAndContractYearAndContractMonth(String productId, Integer contractYear, Integer contractMonth);
 }

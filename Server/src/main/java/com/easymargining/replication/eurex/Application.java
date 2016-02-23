@@ -3,26 +3,20 @@ package com.easymargining.replication.eurex;
 import com.easymargining.replication.eurex.config.MongoConfiguration;
 import com.easymargining.replication.eurex.config.WebSecurityConfiguration;
 import com.easymargining.replication.eurex.converter.TradeFileHandler;
-import com.easymargining.replication.eurex.domain.services.ProductReferentialService;
 import com.easymargining.replication.eurex.domain.services.marketdata.EurexMarketDataEnvironment;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.cli.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.DateTimeFormatter;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.List;
 
 // VM parameter : -Xms4g -Xmx8g
 
@@ -33,17 +27,32 @@ import java.util.List;
         MongoConfiguration.class,
         WebSecurityConfiguration.class
 })
+
+/*
+    Configuration for the main class.
+    VM Options : -Xms4g -Xmx8g
+    Program arguments : -vd 2015-11-23 -m D:\gmarchal\eurex-data\marketdata
+
+ */
 public class Application {
+
+    private static final String VALUATION_DATE_OPTION = "vd";
+    private static final String MARKET_DATA_DIR_OPTION = "m";
 
     @Autowired
     TradeFileHandler tradeFileHandler;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
-        String valuationDate = "2015-06-03";  // Default Valuation Date.
-        if ( args.length > 1  && args[0].equals("-vd")) {
-            valuationDate = args[1]; // Valuation Date
-        }
+        Options commandLineOptions = getCommandLineOptions();
+        PosixParser commandLineParser = new PosixParser();
+        CommandLine commandLine = commandLineParser.parse(commandLineOptions, args);
+
+        LocalDate valuationDate = LocalDate.parse(commandLine.getOptionValue(VALUATION_DATE_OPTION),
+                                                                             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String marketDataDirectory = commandLine.getOptionValue(MARKET_DATA_DIR_OPTION);
+
+
 
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
         
@@ -59,9 +68,26 @@ public class Application {
                 ctx.getEnvironment().getProperty("server.port"));
 
         // Initialize EurexMarketDataEnvironment
-        LocalDate s_valuationDate = LocalDate.parse(valuationDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        //LocalDate s_valuationDate = LocalDate.of(2015, 6, 3);
-        EurexMarketDataEnvironment.init(s_valuationDate);
+        EurexMarketDataEnvironment.init(marketDataDirectory, valuationDate);
+    }
+
+    /**
+     * Obtains the command-line options.
+     *
+     * @return the options
+     */
+    private static Options getCommandLineOptions() {
+        Options options = new Options();
+
+        Option valuationDateOption = new Option(VALUATION_DATE_OPTION, true, "Valuation date, yyyy-MM-dd");
+        valuationDateOption.setRequired(true);
+        options.addOption(valuationDateOption);
+
+        Option marketDataDirOption = new Option(MARKET_DATA_DIR_OPTION, true, "Market data directory");
+        marketDataDirOption.setRequired(true);
+        options.addOption(marketDataDirOption);
+
+        return options;
     }
 
     @Bean

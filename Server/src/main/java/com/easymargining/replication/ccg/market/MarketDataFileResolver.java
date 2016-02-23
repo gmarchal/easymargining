@@ -22,7 +22,7 @@ public class MarketDataFileResolver {
 
     public MarketDataFileResolver(String marketDataDirectory, LocalDate valuationDate) {
         this.valuationDate = valuationDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        this.marketDataDirectory = String.format("ccg/%s/%s", new Object[]{marketDataDirectory, this.valuationDate});
+        this.marketDataDirectory = String.format("resources/ccg/%s/%s", new Object[]{marketDataDirectory, this.valuationDate});
     }
 
     public URL arrayFile(){

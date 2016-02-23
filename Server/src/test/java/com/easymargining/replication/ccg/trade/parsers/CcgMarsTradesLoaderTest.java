@@ -33,7 +33,7 @@ public class CcgMarsTradesLoaderTest {
     public void testReadTradeFile() throws Exception {
         Assert.notNull(ccgMarsTradesLoader);
 
-        URL url = new ClassPathResource("ccg/trade/ccgTrades.csv").getURL();
+        URL url = new ClassPathResource("resources/ccg/trade/ccgTrades.csv").getURL();
         Assert.notNull(url);
 
         List<CcgMarsMarginTradeItem> tradeEntities = ccgMarsTradesLoader.readTradeFile(url);
