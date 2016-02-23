@@ -7,7 +7,6 @@ import com.opengamma.margining.eurex.prisma.loader.MarketDataLoaders;
 import com.opengamma.margining.eurex.prisma.replication.EurexPrismaReplication;
 import com.opengamma.margining.eurex.prisma.replication.data.EurexEtdMarketDataLoadRequest;
 import com.opengamma.margining.eurex.prisma.replication.data.EurexMarketDataLoadRequest;
-import com.opengamma.margining.eurex.prisma.replication.data.EurexOtcMarketDataLoadRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.threeten.bp.LocalDate;
 
@@ -38,6 +37,7 @@ public class EurexMarketDataEnvironment {
 
     // Initialize Eurex MarketData Environment
     public static void init(LocalDate s_valuationDate) {
+        log.info("Initialize Eurex Market Data Environment for valuation date : " + s_valuationDate.toString());
         EurexMarketDataEnvironment environment =
                 EurexMarketDataEnvironment.getInstance() ;
 
@@ -53,6 +53,7 @@ public class EurexMarketDataEnvironment {
         marginEnvironment.getMarginData().loadData(loadRequest);
 
         environment.setMarginEnvironment(marginEnvironment);
+        log.info("Eurex Market Data Environment for valuation date : " + s_valuationDate.toString() + " is initialized ");
     }
 
     public MarginEnvironment getMarginEnvironment() {
