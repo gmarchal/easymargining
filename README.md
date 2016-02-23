@@ -98,3 +98,7 @@ http://l-lin.github.io/angular-datatables/#/gettingStarted
 http://themeforest.net/item/material-design-admin-with-angularjs/full_screen_preview/13582227
 
 http://themeforest.net/item/angulr-bootstrap-admin-web-app-with-angularjs/8437259?s_phrase=&s_rank=2
+
+# Launch App
+
+java -Xms4g -Xmx6g -jar easymargining.eurex-0.0.1.jar -vd 2015-06-03
