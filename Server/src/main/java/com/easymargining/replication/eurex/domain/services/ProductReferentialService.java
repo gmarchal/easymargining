@@ -9,7 +9,6 @@ import com.easymargining.tools.eurex.EurexProductDefinitionParser;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexProductDefinition;
 import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexScenarioPricesParser;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.list.SetUniqueList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
@@ -72,12 +73,18 @@ public class ProductReferentialService {
         List<Product> eurexProducts = new ArrayList<>();
         productDefinitions.forEach(
                 (eurexProductDefinition) -> {
+
+                    Integer contractYear = eurexProductDefinition.getContractYear();
+                    if (contractYear != null) {
+                        contractYear = 2000 + contractYear;
+                    }
+
                     // Bulk insert
                     eurexProducts.add(new Product (
                             null,
                             effectiveDate,
                             eurexProductDefinition.getProductId(),
-                            eurexProductDefinition.getContractYear(),
+                            contractYear,
                             eurexProductDefinition.getContractMonth(),
                             eurexProductDefinition.getSeriesDefinition().getVersionNumber(),
                             eurexProductDefinition.getSeriesDefinition().getSettlementType().toString(),
@@ -122,7 +129,7 @@ public class ProductReferentialService {
     }
 
     public Set<ContractMaturity> getMaturities(String productId) {
-        List<Product> products = productRepository.findByProductId(productId);
+        List<Product> products = productRepository.findMaturitiesByProductId(productId);
         Set<ContractMaturity> maturitiesSet= new ConcurrentSkipListSet<>(new ContractMaturityComparator());
         products.parallelStream().forEach(product -> {
             maturitiesSet.add(new ContractMaturity(product.getContractYear(), product.getContractMonth()));
@@ -134,8 +141,8 @@ public class ProductReferentialService {
     public Set<Double> getStrikes(String productId, String maturity) {
         LocalDate maturityDate = LocalDate.parse(maturity.concat("-01"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         log.info("ProductReferentialService::getStrikes( " + productId + ", " + maturityDate.getYear() + maturityDate.getMonthValue() + " )");
-        List<Product> products = productRepository.findByProductIdAndContractYearAndContractMonth(productId, maturityDate.getYear(), maturityDate.getMonthValue());
-        log.info("ProductReferentialService::getStrikes( " + productId + ", " + maturityDate.getYear() + maturityDate.getMonthValue() + " ) return " +products.size() + "products.");
+        List<Product> products = productRepository.findStrikesByProductIdAndContractMaturity(productId, maturityDate.getYear(), maturityDate.getMonthValue());
+        log.info("ProductReferentialService::getStrikes( " + productId + ", " + maturityDate.getYear() + ", " + maturityDate.getMonthValue() + " ) return " +products.size() + " products.");
         Set<Double> strikes = new ConcurrentSkipListSet<>();
         products.parallelStream().forEach(product -> {
             strikes.add(product.getExercisePrice());
@@ -145,5 +152,22 @@ public class ProductReferentialService {
 
     public List<Product> getProducts(String productId) {
         return productRepository.findByProductId(productId);
+    }
+
+    //Product Type = Future or Option
+    public List<Product> getProductsByType(String productType) {
+
+        List<String> parameter = new ArrayList<>();
+        parameter.add("C");
+        parameter.add("P");
+
+        if (productType.equals("Option")) {
+            return productRepository.findByOptionTypeIn(parameter);
+        } else if (productType.equals("Future")) {
+            return productRepository.findByOptionTypeNotIn(parameter);
+        }
+
+        return new ArrayList<>();
+
     }
 }

@@ -96,7 +96,7 @@ public class ProductReferentialController {
 
     @RequestMapping(value = "/getProducts", method= RequestMethod.GET)
     public List<Product> getProducts(String productId) {
-        log.info("ProductReferentialController::getMaturities( " + productId + " )");
+        log.info("ProductReferentialController::getProducts( " + productId + " )");
         return productReferentialService.getProducts(productId);
     }
 

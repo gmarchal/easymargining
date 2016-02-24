@@ -31,6 +31,7 @@ angular.module('app')
         $scope.settlementTypes = PositionDataFactory.settlementTypes;
 		$scope.exerciseStyleFlags = PositionDataFactory.exerciseStyleFlags;
 		$scope.expiryDates = [];
+		$scope.exercisePrices = [];
 
 		$scope.showProductIds = function(p) {
 			var selected = [];
@@ -50,7 +51,7 @@ angular.module('app')
 
 		$scope.showOptionTypes = function(p) {
             var selected = [];
-            if(p.productId) {
+            if(p.optionType) {
                 selected = $filter('filter')($scope.optionTypes, {id: p.optionType});
             }
             return selected.length ? selected[0].name : 'Not set';
@@ -58,7 +59,7 @@ angular.module('app')
 
 		$scope.showExerciseStyle = function(p) {
             var selected = [];
-            if(p.productId) {
+            if(p.exerciseStyleFlag) {
                 selected = $filter('filter')($scope.exerciseStyleFlags, {id: p.exerciseStyleFlag});
             }
             return selected.length ? selected[0].name : 'Not set';
@@ -66,7 +67,7 @@ angular.module('app')
 
         $scope.showSettlementTypes = function(p) {
             var selected = [];
-            if(p.productId) {
+            if(p.productSettlementType) {
                 selected = $filter('filter')($scope.settlementTypes, {id: p.productSettlementType});
             }
             return selected.length ? selected[0].name : 'Not set';
@@ -74,8 +75,16 @@ angular.module('app')
 
         $scope.showExpiryDates = function(p) {
             var selected = [];
-            if(p.productId) {
+            if(p.expiryDate) {
                 selected = $filter('filter')($scope.expiryDates, {id: p.expiryDate});
+            }
+            return selected.length ? selected[0].name : 'Not set';
+        };
+
+        $scope.showExercisePrices = function(p) {
+            var selected = [];
+            if(p.exercisePrice) {
+                selected = $filter('filter')($scope.exercisePrices, {id: p.exercisePrice});
             }
             return selected.length ? selected[0].name : 'Not set';
         };
@@ -110,9 +119,9 @@ angular.module('app')
 			$scope.inserted = {
 				portfolioId: $scope.portfolioId,
 				productId: $scope.productIds.length ? $scope.productIds[0].eurexCode : 'Not set',      // First ProductId
-				instrumentType: $scope.instrumentTypes[1].id,                                   // Option
-				optionType: $scope.optionTypes.length ? $scope.optionTypes[0].id : 'Not set',   // Call
-				expiryDate:  Date.now(),                                                        // ExpiryDate = Now + 3M
+				instrumentType: $scope.instrumentTypes[1].id,                                          // Option
+				optionType: $scope.optionTypes.length ? $scope.optionTypes[0].id : 'Not set',          // Call
+				expiryDate:  Date.now(),                                                               // ExpiryDate = Now + 3M
 				productSettlementType: '',
 				exercisePrice: 0,
 				exerciseStyleFlag: '',
@@ -159,24 +168,23 @@ angular.module('app')
             }
         );
 
-        $scope.refreshMaturities = function(productId) {
+        $scope.loadMaturities = function(productId) {
             console.log(productId);
-            $scope.expiryDates = PositionDataFactory.getMaturities(productId);
+            ProductReferentialFactory.getMaturities(productId)
+            	                             .success(function(data, status){
+                                                $scope.expiryDates = data;
+                                             });
+        };
+
+        $scope.loadExercisePrices = function(productId, maturity ) {
+            console.log(productId);
+            ProductReferentialFactory.getStrikes(productId, maturity)
+                                             .success(function(data, status){
+                                                $scope.exercisePrices = data;
+                                             });
             console.log($scope.expiryDates);
         };
 
-        $scope.$watch(function() {
-            return PositionDataFactory.productIds;
-            }, function(value, last) {
-                if (value) {
-                    console.log(value)
-                    $scope.productIds = PositionDataFactory.productIds
-                } else {
-                    console.log('Event on productIds.')
-                    $scope.productIds = [];
-                }
-            }
-        );
 	  }
     };
   });
