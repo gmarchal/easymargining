@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cd031 xmlns="http://www.eurexchange.com/technology">
+<rptHdr>
+<exchNam>EUREX</exchNam>
+<envText>P</envText>
+<rptCod>CD031</rptCod>
+<rptNam>Daily Collateral Valuation</rptNam>
+<membLglNam>SOCIETE GENERALE S.A.</membLglNam>
+<rptPrntEffDat>2015-11-26</rptPrntEffDat>
+<rptPrntRunDat>2015-11-26</rptPrntRunDat>
+</rptHdr>
+<cd031Grp>
+<cd031KeyGrp>
+<membClgIdCod>SOGCX</membClgIdCod>
+</cd031KeyGrp>
+<cd031Grp1>
+<cd031KeyGrp1>
+<cshAcctCod>M</cshAcctCod>
+<poolId>DESPAXSOGCXSEG </poolId>
+</cd031KeyGrp1>
+<cd031Grp3>
+<cd031KeyGrp3>
+<membExchIdCod>DESPA</membExchIdCod>
+</cd031KeyGrp3>
+<cd031Grp4>
+<cd031KeyGrp4>
+<currTypCod>EUR</currTypCod>
+</cd031KeyGrp4>
+<cd031Rec>
+<isinCod>CASH        </isinCod>
+<secuId>CASH</secuId>
+<secuBlkCollQty>+116546.60</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+1.00</secuLstClsPrc>
+<secuMktVal>116547</secuMktVal>
+<secuEvalPct>1.000</secuEvalPct>
+<secuCollVal>116547</secuCollVal>
+<csdId>      </csdId>
+<membCsdAct>            </membCsdAct>
+</cd031Rec>
+<sumCurrSecuMktVal>116547</sumCurrSecuMktVal>
+<sumCurrSecuCollVal>116547</sumCurrSecuCollVal>
+</cd031Grp4>
+</cd031Grp3></cd031Grp1>
+<cd031Grp1>
+<cd031KeyGrp1>
+<cshAcctCod>F</cshAcctCod>
+<poolId>SOGCXXCLEARFUND</poolId>
+</cd031KeyGrp1>
+<cd031Grp3>
+<cd031KeyGrp3>
+<membExchIdCod>SOGCX</membExchIdCod>
+</cd031KeyGrp3>
+<cd031Grp4>
+<cd031KeyGrp4>
+<currTypCod>DKK</currTypCod>
+</cd031KeyGrp4>
+<cd031Rec>
+<isinCod>DK0009922403</isinCod>
+<secuBlkCollQty>+35000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+116.52</secuLstClsPrc>
+<secuMktVal>40782000</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>39517758</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<sumCurrSecuMktVal>40782000</sumCurrSecuMktVal>
+<sumCurrSecuCollVal>39517758</sumCurrSecuCollVal>
+</cd031Grp4>
+<cd031Grp4>
+<cd031KeyGrp4>
+<currTypCod>EUR</currTypCod>
+</cd031KeyGrp4>
+<cd031Rec>
+<isinCod>BE0000328378</isinCod>
+<secuBlkCollQty>+5000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+113.64</secuLstClsPrc>
+<secuMktVal>5682000</secuMktVal>
+<secuEvalPct>0.945</secuEvalPct>
+<secuCollVal>5369490</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>CASH        </isinCod>
+<secuId>CASH</secuId>
+<secuBlkCollQty>+45899808.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+1.00</secuLstClsPrc>
+<secuMktVal>45899808</secuMktVal>
+<secuEvalPct>1.000</secuEvalPct>
+<secuCollVal>45899808</secuCollVal>
+<csdId>      </csdId>
+<membCsdAct>            </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001104602</isinCod>
+<secuBlkCollQty>+13940000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+100.63</secuLstClsPrc>
+<secuMktVal>14027822</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>13592960</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>ES00000123C7</isinCod>
+<secuBlkCollQty>+10000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+140.83</secuLstClsPrc>
+<secuMktVal>14083000</secuMktVal>
+<secuEvalPct>0.806</secuEvalPct>
+<secuCollVal>11350898</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0000571150</isinCod>
+<secuBlkCollQty>+20000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+150.56</secuLstClsPrc>
+<secuMktVal>30112000</secuMktVal>
+<secuEvalPct>0.937</secuEvalPct>
+<secuCollVal>28214944</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0010070060</isinCod>
+<secuBlkCollQty>+3000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+154.62</secuLstClsPrc>
+<secuMktVal>4638600</secuMktVal>
+<secuEvalPct>0.894</secuEvalPct>
+<secuCollVal>4146908</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0011486067</isinCod>
+<secuBlkCollQty>+30000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+110.05</secuLstClsPrc>
+<secuMktVal>33015000</secuMktVal>
+<secuEvalPct>0.945</secuEvalPct>
+<secuCollVal>31199175</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0012634558</isinCod>
+<secuBlkCollQty>+36500000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+100.70</secuLstClsPrc>
+<secuMktVal>36755500</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>35616080</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0001278511</isinCod>
+<secuBlkCollQty>+4000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+138.55</secuLstClsPrc>
+<secuMktVal>5542000</secuMktVal>
+<secuEvalPct>0.750</secuEvalPct>
+<secuCollVal>4156500</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60681       </membCsdAct>
+</cd031Rec>
+<sumCurrSecuMktVal>189755730</sumCurrSecuMktVal>
+<sumCurrSecuCollVal>179546763</sumCurrSecuCollVal>
+</cd031Grp4>
+</cd031Grp3></cd031Grp1>
+<cd031Grp1>
+<cd031KeyGrp1>
+<cshAcctCod>M</cshAcctCod>
+<poolId>SOGCXXCLIENTECM</poolId>
+</cd031KeyGrp1>
+<cd031Grp3>
+<cd031KeyGrp3>
+<membExchIdCod>SOGCX</membExchIdCod>
+</cd031KeyGrp3>
+<cd031Grp4>
+<cd031KeyGrp4>
+<currTypCod>EUR</currTypCod>
+</cd031KeyGrp4>
+<cd031Rec>
+<isinCod>CASH        </isinCod>
+<secuId>CASH</secuId>
+<secuBlkCollQty>+9444798.35</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+1.00</secuLstClsPrc>
+<secuMktVal>9444798</secuMktVal>
+<secuEvalPct>1.000</secuEvalPct>
+<secuCollVal>9444798</secuCollVal>
+<csdId>      </csdId>
+<membCsdAct>            </membCsdAct>
+</cd031Rec>
+<sumCurrSecuMktVal>9444798</sumCurrSecuMktVal>
+<sumCurrSecuCollVal>9444798</sumCurrSecuCollVal>
+</cd031Grp4>
+</cd031Grp3></cd031Grp1>
+<cd031Grp1>
+<cd031KeyGrp1>
+<cshAcctCod>M</cshAcctCod>
+<poolId>SOGCXXSTANDARD </poolId>
+</cd031KeyGrp1>
+<cd031Grp3>
+<cd031KeyGrp3>
+<membExchIdCod>SOGCX</membExchIdCod>
+</cd031KeyGrp3>
+<cd031Grp4>
+<cd031KeyGrp4>
+<currTypCod>EUR</currTypCod>
+</cd031KeyGrp4>
+<cd031Rec>
+<isinCod>BE0000318270</isinCod>
+<secuBlkCollQty>+5000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+118.35</secuLstClsPrc>
+<secuMktVal>5917500</secuMktVal>
+<secuEvalPct>0.964</secuEvalPct>
+<secuCollVal>5704470</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>BE0000320292</isinCod>
+<secuBlkCollQty>+5681760.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+151.94</secuLstClsPrc>
+<secuMktVal>8632866</secuMktVal>
+<secuEvalPct>0.871</secuEvalPct>
+<secuCollVal>7519226</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>BE0000323320</isinCod>
+<secuBlkCollQty>+9536562.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+106.01</secuLstClsPrc>
+<secuMktVal>10109709</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>9796308</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>BE0000335449</isinCod>
+<secuBlkCollQty>+9000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+94.30</secuLstClsPrc>
+<secuMktVal>8487000</secuMktVal>
+<secuEvalPct>0.893</secuEvalPct>
+<secuCollVal>7578891</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>CASH        </isinCod>
+<secuId>CASH</secuId>
+<secuBlkCollQty>+700818235.03</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+1.00</secuLstClsPrc>
+<secuMktVal>700818235</secuMktVal>
+<secuEvalPct>1.000</secuEvalPct>
+<secuCollVal>700818235</secuCollVal>
+<csdId>      </csdId>
+<membCsdAct>            </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001030526</isinCod>
+<secuBlkCollQty>+8000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+112.04</secuLstClsPrc>
+<secuMktVal>8963200</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>8685341</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001030542</isinCod>
+<secuBlkCollQty>+8500000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+107.40</secuLstClsPrc>
+<secuMktVal>9129000</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>8846001</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001030559</isinCod>
+<secuBlkCollQty>+1800000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+114.88</secuLstClsPrc>
+<secuMktVal>2067840</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>2003737</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001102374</isinCod>
+<secuBlkCollQty>+11000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+100.87</secuLstClsPrc>
+<secuMktVal>11095700</secuMktVal>
+<secuEvalPct>0.931</secuEvalPct>
+<secuCollVal>10330097</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001104602</isinCod>
+<secuBlkCollQty>+25000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+100.63</secuLstClsPrc>
+<secuMktVal>25157500</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>24377618</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001135143</isinCod>
+<secuBlkCollQty>+5000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+173.41</secuLstClsPrc>
+<secuMktVal>8670500</secuMktVal>
+<secuEvalPct>0.918</secuEvalPct>
+<secuCollVal>7959519</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001135176</isinCod>
+<secuBlkCollQty>+8000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+165.43</secuLstClsPrc>
+<secuMktVal>13234400</secuMktVal>
+<secuEvalPct>0.912</secuEvalPct>
+<secuCollVal>12069773</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001135226</isinCod>
+<secuBlkCollQty>+9789400.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+162.61</secuLstClsPrc>
+<secuMktVal>15918543</secuMktVal>
+<secuEvalPct>0.895</secuEvalPct>
+<secuCollVal>14247096</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>DE0001135481</isinCod>
+<secuBlkCollQty>+3200000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+129.70</secuLstClsPrc>
+<secuMktVal>4150400</secuMktVal>
+<secuEvalPct>0.844</secuEvalPct>
+<secuCollVal>3502938</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>ES00000120J8</isinCod>
+<secuBlkCollQty>+40000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+104.40</secuLstClsPrc>
+<secuMktVal>41760000</secuMktVal>
+<secuEvalPct>0.906</secuEvalPct>
+<secuCollVal>37834560</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>ES00000123B9</isinCod>
+<secuBlkCollQty>+9000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+125.55</secuLstClsPrc>
+<secuMktVal>11299500</secuMktVal>
+<secuEvalPct>0.883</secuEvalPct>
+<secuCollVal>9977459</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>ES00000123C7</isinCod>
+<secuBlkCollQty>+90000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+140.83</secuLstClsPrc>
+<secuMktVal>126747000</secuMktVal>
+<secuEvalPct>0.806</secuEvalPct>
+<secuCollVal>102158082</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>ES00000124I2</isinCod>
+<secuBlkCollQty>+250000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+103.00</secuLstClsPrc>
+<secuMktVal>257500000</secuMktVal>
+<secuEvalPct>0.906</secuEvalPct>
+<secuCollVal>233295000</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>ES00000127G9</isinCod>
+<secuBlkCollQty>+300300000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+105.26</secuLstClsPrc>
+<secuMktVal>316095780</secuMktVal>
+<secuEvalPct>0.796</secuEvalPct>
+<secuCollVal>251612241</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0000187635</isinCod>
+<secuBlkCollQty>+8200000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+166.18</secuLstClsPrc>
+<secuMktVal>13626760</secuMktVal>
+<secuEvalPct>0.906</secuEvalPct>
+<secuCollVal>12345845</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0000571150</isinCod>
+<secuBlkCollQty>+5000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+150.56</secuLstClsPrc>
+<secuMktVal>7528000</secuMktVal>
+<secuEvalPct>0.937</secuEvalPct>
+<secuCollVal>7053736</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0010050559</isinCod>
+<secuBlkCollQty>+13000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+115.77</secuLstClsPrc>
+<secuMktVal>15050100</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>14583547</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0010171975</isinCod>
+<secuBlkCollQty>+20000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+155.87</secuLstClsPrc>
+<secuMktVal>31174000</secuMktVal>
+<secuEvalPct>0.832</secuEvalPct>
+<secuCollVal>25936768</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0010371401</isinCod>
+<secuBlkCollQty>+16800000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+144.95</secuLstClsPrc>
+<secuMktVal>24351600</secuMktVal>
+<secuEvalPct>0.878</secuEvalPct>
+<secuCollVal>21380705</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0010447367</isinCod>
+<secuBlkCollQty>+13000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+142.30</secuLstClsPrc>
+<secuMktVal>18499000</secuMktVal>
+<secuEvalPct>0.849</secuEvalPct>
+<secuCollVal>15705651</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0010773192</isinCod>
+<secuBlkCollQty>+9000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+157.72</secuLstClsPrc>
+<secuMktVal>14194800</secuMktVal>
+<secuEvalPct>0.872</secuEvalPct>
+<secuCollVal>12377866</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0010776161</isinCod>
+<secuBlkCollQty>+25365000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+114.81</secuLstClsPrc>
+<secuMktVal>29121557</secuMktVal>
+<secuEvalPct>0.969</secuEvalPct>
+<secuCollVal>28218789</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0011059088</isinCod>
+<secuBlkCollQty>+20000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+118.45</secuLstClsPrc>
+<secuMktVal>23690000</secuMktVal>
+<secuEvalPct>0.957</secuEvalPct>
+<secuCollVal>22671330</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0011317783</isinCod>
+<secuBlkCollQty>+14200000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+119.10</secuLstClsPrc>
+<secuMktVal>16912200</secuMktVal>
+<secuEvalPct>0.921</secuEvalPct>
+<secuCollVal>15576136</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>FR0011337880</isinCod>
+<secuBlkCollQty>+13200000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+113.48</secuLstClsPrc>
+<secuMktVal>14979360</secuMktVal>
+<secuEvalPct>0.950</secuEvalPct>
+<secuCollVal>14230392</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0000062072</isinCod>
+<secuId>ASG </secuId>
+<secuBlkCollQty>+7870000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+17.87</secuLstClsPrc>
+<secuMktVal>140636900</secuMktVal>
+<secuEvalPct>0.769</secuEvalPct>
+<secuCollVal>108149776</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0000072618</isinCod>
+<secuId>IES5</secuId>
+<secuBlkCollQty>+65726592.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+3.19</secuLstClsPrc>
+<secuMktVal>209667828</secuMktVal>
+<secuEvalPct>0.769</secuEvalPct>
+<secuCollVal>161234560</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0001444378</isinCod>
+<secuBlkCollQty>+15000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+148.08</secuLstClsPrc>
+<secuMktVal>22212000</secuMktVal>
+<secuEvalPct>0.740</secuEvalPct>
+<secuCollVal>16436880</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0003128367</isinCod>
+<secuId>ENL5</secuId>
+<secuBlkCollQty>+58650000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+4.16</secuLstClsPrc>
+<secuMktVal>243984000</secuMktVal>
+<secuEvalPct>0.769</secuEvalPct>
+<secuCollVal>187623696</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0003132476</isinCod>
+<secuId>ENT </secuId>
+<secuBlkCollQty>+10060000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+15.43</secuLstClsPrc>
+<secuMktVal>155225800</secuMktVal>
+<secuEvalPct>0.769</secuEvalPct>
+<secuCollVal>119368640</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0003621460</isinCod>
+<secuBlkCollQty>+58500000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+128.67</secuLstClsPrc>
+<secuMktVal>75271950</secuMktVal>
+<secuEvalPct>0.818</secuEvalPct>
+<secuCollVal>61572455</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0003745541</isinCod>
+<secuBlkCollQty>+12000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+123.93</secuLstClsPrc>
+<secuMktVal>14871600</secuMktVal>
+<secuEvalPct>0.651</secuEvalPct>
+<secuCollVal>9681412</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0004735152</isinCod>
+<secuBlkCollQty>+1200000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+126.93</secuLstClsPrc>
+<secuMktVal>1523160</secuMktVal>
+<secuEvalPct>0.905</secuEvalPct>
+<secuCollVal>1378460</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0004759673</isinCod>
+<secuBlkCollQty>+5500000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+125.72</secuLstClsPrc>
+<secuMktVal>6914600</secuMktVal>
+<secuEvalPct>0.858</secuEvalPct>
+<secuCollVal>5932727</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0004761950</isinCod>
+<secuBlkCollQty>+18099000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+103.84</secuLstClsPrc>
+<secuMktVal>18794002</secuMktVal>
+<secuEvalPct>0.896</secuEvalPct>
+<secuCollVal>16839426</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0004781412</isinCod>
+<secuId>CRI </secuId>
+<secuBlkCollQty>+27102414.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+5.58</secuLstClsPrc>
+<secuMktVal>151231470</secuMktVal>
+<secuEvalPct>0.769</secuEvalPct>
+<secuCollVal>116297000</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0004889033</isinCod>
+<secuBlkCollQty>+5188000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+133.72</secuLstClsPrc>
+<secuMktVal>6937394</secuMktVal>
+<secuEvalPct>0.760</secuEvalPct>
+<secuCollVal>5272419</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0004898034</isinCod>
+<secuBlkCollQty>+8000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+124.75</secuLstClsPrc>
+<secuMktVal>9980000</secuMktVal>
+<secuEvalPct>0.836</secuEvalPct>
+<secuCollVal>8343280</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0004957574</isinCod>
+<secuBlkCollQty>+8000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+110.27</secuLstClsPrc>
+<secuMktVal>8821600</secuMktVal>
+<secuEvalPct>0.896</secuEvalPct>
+<secuCollVal>7904154</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0005020778</isinCod>
+<secuBlkCollQty>+15004000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+100.02</secuLstClsPrc>
+<secuMktVal>15007001</secuMktVal>
+<secuEvalPct>0.896</secuEvalPct>
+<secuCollVal>13446273</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0005023459</isinCod>
+<secuBlkCollQty>+136000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+101.73</secuLstClsPrc>
+<secuMktVal>138352800</secuMktVal>
+<secuEvalPct>0.896</secuEvalPct>
+<secuCollVal>123964109</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0005089955</isinCod>
+<secuBlkCollQty>+124700000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+100.02</secuLstClsPrc>
+<secuMktVal>124724940</secuMktVal>
+<secuEvalPct>0.896</secuEvalPct>
+<secuCollVal>111753546</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>IT0005090318</isinCod>
+<secuBlkCollQty>+12600000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+101.45</secuLstClsPrc>
+<secuMktVal>12782700</secuMktVal>
+<secuEvalPct>0.783</secuEvalPct>
+<secuCollVal>10008854</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>NL0000102317</isinCod>
+<secuBlkCollQty>+7000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+153.73</secuLstClsPrc>
+<secuMktVal>10761100</secuMktVal>
+<secuEvalPct>0.926</secuEvalPct>
+<secuCollVal>9964779</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>NL0009446418</isinCod>
+<secuBlkCollQty>+5900000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+153.22</secuLstClsPrc>
+<secuMktVal>9039980</secuMktVal>
+<secuEvalPct>0.863</secuEvalPct>
+<secuCollVal>7801503</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>NL0010071189</isinCod>
+<secuBlkCollQty>+4000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+121.12</secuLstClsPrc>
+<secuMktVal>4844800</secuMktVal>
+<secuEvalPct>0.893</secuEvalPct>
+<secuCollVal>4326406</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>NL0010418810</isinCod>
+<secuBlkCollQty>+5150000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+110.89</secuLstClsPrc>
+<secuMktVal>5710835</secuMktVal>
+<secuEvalPct>0.944</secuEvalPct>
+<secuCollVal>5391028</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>NL0010733424</isinCod>
+<secuBlkCollQty>+20000000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+113.05</secuLstClsPrc>
+<secuMktVal>22610000</secuMktVal>
+<secuEvalPct>0.938</secuEvalPct>
+<secuCollVal>21208180</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>XS0546057570</isinCod>
+<secuBlkCollQty>+18995000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+106.71</secuLstClsPrc>
+<secuMktVal>20269565</secuMktVal>
+<secuEvalPct>0.869</secuEvalPct>
+<secuCollVal>17614252</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>XS0582479522</isinCod>
+<secuBlkCollQty>+19520000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+109.48</secuLstClsPrc>
+<secuMktVal>21370496</secuMktVal>
+<secuEvalPct>0.869</secuEvalPct>
+<secuCollVal>18570961</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<cd031Rec>
+<isinCod>XS0674635288</isinCod>
+<secuBlkCollQty>+42624000.00</secuBlkCollQty>
+<unUsedSecQty>+0</unUsedSecQty>
+<secuLstClsPrc>+102.82</secuLstClsPrc>
+<secuMktVal>43825997</secuMktVal>
+<secuEvalPct>0.869</secuEvalPct>
+<secuCollVal>38084791</secuCollVal>
+<csdId>CBF/WR</csdId>
+<membCsdAct>60112       </membCsdAct>
+</cd031Rec>
+<sumCurrSecuMktVal>3290254568</sumCurrSecuMktVal>
+<sumCurrSecuCollVal>2856566924</sumCurrSecuCollVal>
+</cd031Grp4>
+</cd031Grp3></cd031Grp1>
+</cd031Grp>
+</cd031>
