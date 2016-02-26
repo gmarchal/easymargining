@@ -15,7 +15,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class LiquidationGroupSplitMarginResult implements Serializable {
     // Liquidation Group Split Name
-    private String liquidationGroupSplit;
+    private String liquidationGroupSplitName;
+    // IM Liquidation Group Split
+    private Double imLiquidationGroupSplit;
     // Liquidity Risk Adjustment for a Liquidation Group Split
     private LiquidityRiskAdjustmentResult liquidityRiskAdjustmentResult;
     // Market Risk IM for a Liquidation Group Split

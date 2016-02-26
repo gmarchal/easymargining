@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -138,11 +137,10 @@ public class ProductReferentialService {
     }
 
     // Maturity contract Ex : {2022-01}
-    public Set<Double> getStrikes(String productId, String maturity) {
-        LocalDate maturityDate = LocalDate.parse(maturity.concat("-01"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        log.info("ProductReferentialService::getStrikes( " + productId + ", " + maturityDate.getYear() + maturityDate.getMonthValue() + " )");
-        List<Product> products = productRepository.findStrikesByProductIdAndContractMaturity(productId, maturityDate.getYear(), maturityDate.getMonthValue());
-        log.info("ProductReferentialService::getStrikes( " + productId + ", " + maturityDate.getYear() + ", " + maturityDate.getMonthValue() + " ) return " +products.size() + " products.");
+    public Set<Double> getStrikes(String productId, ContractMaturity maturity) {
+        log.info("ProductReferentialService::getStrikes( " + productId + ", " + maturity.getContractYear() + maturity.getContractMonth() + " )");
+        List<Product> products = productRepository.findStrikesByProductIdAndContractMaturity(productId, maturity.getContractYear(), maturity.getContractMonth());
+        log.info("ProductReferentialService::getStrikes( " + productId + ", " + maturity.getContractYear() + ", " + maturity.getContractMonth() + " ) return " +products.size() + " products.");
         Set<Double> strikes = new ConcurrentSkipListSet<>();
         products.parallelStream().forEach(product -> {
             strikes.add(product.getExercisePrice());

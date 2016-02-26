@@ -33,12 +33,22 @@ angular.module('app')
 		$scope.expiryDates = [];
 		$scope.exercisePrices = [];
 
+        var monthNames = [
+          "Jan", "Feb", "Mar",
+          "Apr", "May", "Jun", "Jul",
+          "Aug", "Sep", "Oct",
+          "Nov", "Dec"
+        ];
+		$scope.formatExpiryDate = function (expiryDate) {
+		    return expiryDate.contractYear + ' ' + monthNames[expiryDate.contractMonth-1]
+		}
+
 		$scope.showProductIds = function(p) {
 			var selected = [];
 			if(p.productId) {
 				selected = $filter('filter')($scope.productIds, {eurexCode: p.productId});
 			}
-			return selected.length ? selected[0].eurexCode : 'Not set';
+    		return selected.length ? selected[0].eurexCode : 'Not set';
 		};
 
 		$scope.showInstrumentTypes = function(p) {
@@ -76,17 +86,17 @@ angular.module('app')
         $scope.showExpiryDates = function(p) {
             var selected = [];
             if(p.expiryDate) {
-                selected = $filter('filter')($scope.expiryDates, {id: p.expiryDate});
+                selected = $filter('filter')($scope.expiryDates, {contractYear: p.expiryDate.contractYear, contractMonth: p.expiryDate.contractMonth});
             }
-            return selected.length ? selected[0].name : 'Not set';
+            return selected.length ? $scope.formatExpiryDate(selected[0]) : 'Not set';
         };
 
         $scope.showExercisePrices = function(p) {
             var selected = [];
             if(p.exercisePrice) {
-                selected = $filter('filter')($scope.exercisePrices, {id: p.exercisePrice});
+                selected = $filter('filter')($scope.exercisePrices, p.exercisePrice);
             }
-            return selected.length ? selected[0].name : 'Not set';
+            return selected.length ? selected[0] : 'Not set';
         };
 			
 		// Save Trade
@@ -168,6 +178,32 @@ angular.module('app')
             }
         );
 
+        /*
+        $scope.$watch('trade.productId', function(newVal, oldVal) {
+            if (newVal !== oldVal) {
+              console.log('>>>>>>>> trade.productId =', newVal);
+              return
+
+              var selected = $filter('filter')($scope.groups, {
+                id: $scope.user.group
+              });
+              $scope.user.groupName = selected.length ? selected[0].text : null;
+            }
+          });
+          */
+
+        $scope.handleProductIdChange = function(productId, trade) {
+            console.log('userId =', productId);
+            console.log('user =', trade)
+
+            $scope.loadMaturities(productId);
+            //trade.maturity =
+        }
+
+        $scope.refreshMaturities = function(eurexCode) {
+            console.log('product changed, new value of product.productId is: ', eurexCode);
+        }
+
         $scope.loadMaturities = function(productId) {
             console.log(productId);
             ProductReferentialFactory.getMaturities(productId)
@@ -185,6 +221,9 @@ angular.module('app')
             console.log($scope.expiryDates);
         };
 
+        // Temporaire
+		//$scope.loadMaturities("ORDX");
+		$scope.loadExercisePrices("ORDX", {contractYear: 2022, contractMonth: 12})
 	  }
     };
   });

@@ -16,7 +16,8 @@
     <tr ng-repeat="trade in positions">
 	  <td class="v-middle">
 		<span editable-select="trade.productId" e-name="productId" e-form="rowform"
-				  e-ng-options="s.eurexCode as s.eurexCode for s in productIds">{{ showProductIds(trade) }} </span>
+				  e-ng-options="s.eurexCode as s.eurexCode for s in productIds"
+			      e-ng-change="handleProductIdChange($data, trade)">{{ showProductIds(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		<span editable-select="trade.instrumentType" e-name="instrumentType" e-form="rowform"
@@ -28,8 +29,7 @@
 	  </td>
 	  <td class="v-middle">
 		  <span editable-select="trade.expiryDate" e-name="expiryDate" e-form="rowform"
-				e-ng-options="s.id as (s.contractYear + ' - ' + s.contractMonth) for s in expiryDates"
-				e-ng-show="loadMaturities(trade.productId)">{{ showExpiryDates(trade) }} </span>
+				e-ng-options="s.contractMonth group by s.contractYear for s in expiryDates">{{ showExpiryDates(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		  <span editable-select="trade.productSettlementType" e-name="productSettlementType" e-form="rowform"
@@ -37,8 +37,7 @@
 	  </td>
 	  <td class="v-middle">
 		  <span editable-select="trade.exercisePrice" e-name="exercisePrice" e-form="rowform"
-				e-ng-options="s.id as s.name for s in exercisePrices"
-				e-ng-show="loadExercisePrices(trade.productId, (trade.contractYear + ' - ' + s.contractMonth))">{{ showExercisePrices(trade) }} </span>
+				e-ng-options="s for s in exercisePrices">{{ showExercisePrices(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		  <span editable-select="trade.exerciseStyleFlag" e-name="exerciseStyleFlag" e-form="rowform"

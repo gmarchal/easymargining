@@ -7,11 +7,15 @@ import com.opengamma.margining.eurex.prisma.loader.MarketDataLoaders;
 import com.opengamma.margining.eurex.prisma.replication.EurexPrismaReplication;
 import com.opengamma.margining.eurex.prisma.replication.data.EurexEtdMarketDataLoadRequest;
 import com.opengamma.margining.eurex.prisma.replication.data.EurexMarketDataLoadRequest;
+import com.opengamma.margining.eurex.prisma.replication.market.parsers.EurexRiskMeasureConfigParser;
+import com.opengamma.util.tuple.Triple;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * Created by gmarchal on 22/02/2016.
@@ -20,6 +24,18 @@ import java.util.List;
 public class EurexMarketDataEnvironment {
 
     private static EurexMarketDataEnvironment INSTANCE = null;
+
+    /* Liquidation Group
+        Listed Equity (Index) Derivatives Liquidation Group (PEQ01)
+        Listed Fixed Income Liquidation Group (PFI01)
+        Asian cooperations KOSPI/TAIFEX Liquidation Group (PAC01)
+        Commodity (Index) Derivatives Liquidation Group (PCM01)
+        Precious Metal Derivatives Liquidation Group (PPM01)
+        Property Futures Liquidation Group (PPR01)
+        FX Derivatives Liquidation Group (PFX01)
+        GMEX IRS Constant Maturity Futures Liquidation Group (PGE01)
+    */
+    private Map<String, Set<String>> liquidationGroupSplit = null;
 
     private MarginEnvironment marginEnvironment = null;
 
@@ -68,6 +84,28 @@ public class EurexMarketDataEnvironment {
         environment.setTheoreticalPricesAndInstrumentConfiguration(etdDataLoadRequest.getTheoreticalPricesAndInstrumentConfiguration());
         environment.setValuationDate(valuationDate);
 
+        // Load Eurex Risk Measure
+        Set<Triple<String, String, String>> liquidationGroupDef = null;
+        Map<String, Set<String>> liquidationGroupSplit = new HashMap<>();
+        try {
+            liquidationGroupDef = (new EurexRiskMeasureConfigParser().parse(etdDataLoadRequest.getRiskMeasureConfig())).keySet();
+            Iterator<Triple<String, String, String>> liquidityGroupDefIter = liquidationGroupDef.iterator();
+            while (liquidityGroupDefIter.hasNext()) {
+                Triple<String, String, String> stringStringStringTriple = liquidityGroupDefIter.next();
+                Set<String> currentLiquidationGroupSplit = liquidationGroupSplit.get(stringStringStringTriple.getFirst());
+                if (currentLiquidationGroupSplit == null) {
+                    currentLiquidationGroupSplit = new ConcurrentSkipListSet<>();
+                    currentLiquidationGroupSplit.add(stringStringStringTriple.getSecond());
+                    liquidationGroupSplit.put(stringStringStringTriple.getFirst(), currentLiquidationGroupSplit);
+                }
+                currentLiquidationGroupSplit.add(stringStringStringTriple.getSecond());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        environment.setLiquidationGroupSplit(liquidationGroupSplit);
+
         log.info("Eurex Market Data Environment for valuation date : " + s_valuationDate.toString() + " is initialized ");
     }
 
@@ -93,5 +131,14 @@ public class EurexMarketDataEnvironment {
 
     public void setValuationDate(LocalDate valuationDate) {
         this.valuationDate = valuationDate;
+    }
+
+    // Map<Liquidation Group Name, <Liquidation Group Name Split>>
+    public Map<String, Set<String>> getLiquidationGroupSplit() {
+        return liquidationGroupSplit;
+    }
+
+    public void setLiquidationGroupSplit(Map<String, Set<String>> liquidationGroupSplit) {
+        this.liquidationGroupSplit = liquidationGroupSplit;
     }
 }

@@ -9,17 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-
-import static org.testng.Assert.*;
 
 /**
  * Created by gmarchal on 23/02/2016.
@@ -42,7 +38,7 @@ public class ProductReferentialServiceTest {
 
     @Test
     public void testGetStrikes() throws Exception {
-        Set<Double> strikes = productReferentialService.getStrikes("ORDX", "2015-12");
+        Set<Double> strikes = productReferentialService.getStrikes("ORDX", new ContractMaturity(2022, 12));
 
     }
 

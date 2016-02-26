@@ -8,9 +8,7 @@ import com.opengamma.margining.core.util.OgmLinkResolver;
 import com.opengamma.sesame.trade.TradeWrapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
-import org.threeten.bp.ZoneId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +33,12 @@ public class EurexTradeTransformer {
                 (trade) -> {
                     log.info(" --- " + trade.toString());
 
-                    LocalDate localDate = Instant.ofEpochMilli(trade.getExpiryDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                    int year = localDate.getYear();
-                    int month = localDate.getMonthValue();
+                    //LocalDate localDate = Instant.ofEpochMilli(trade.getExpiryDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                    //int year = localDate.getYear();
+                    //int month = localDate.getMonthValue();
+
+                    int year = trade.getExpiryDate().getContractYear().intValue();
+                    int month = trade.getExpiryDate().getContractMonth().intValue();
 
                     double longBalance = 0;
                     double shortBalance = 0;

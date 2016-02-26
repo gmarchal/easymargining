@@ -34,6 +34,8 @@ public class PositionController {
     @ResponseStatus(HttpStatus.CREATED)
     public Trade addPosition(@RequestBody Trade trade) {
         log.info("Save position asked for position : " + trade );
+
+
         tradeRepository.save(trade);
         return trade;
     }

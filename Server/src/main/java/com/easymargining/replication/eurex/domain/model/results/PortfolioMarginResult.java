@@ -15,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PortfolioMarginResult implements Serializable {
+    // Eurex Portfolio Name : PEQ01 for Equity portfolio
+    private String portfolioName;
     // Currency of IM Result
     private String currency;
     // Total IM for the portfolio

@@ -4,7 +4,6 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by Gilles Marchal on 19/01/2015.
@@ -26,7 +25,7 @@ public class Trade implements Serializable {
 
     // Trade fields
     private String productId;
-    private Date expiryDate;
+    private ContractMaturity expiryDate;
     private String versionNumber;
     private String productSettlementType;
     private String optionType;  //Call or Put

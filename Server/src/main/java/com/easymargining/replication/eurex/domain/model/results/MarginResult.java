@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MarginResult implements Serializable {
-
     // List of IMResult by currency.
     private List<PortfolioMarginResult> portfolioMarginResults;
 
