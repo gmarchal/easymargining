@@ -83,18 +83,28 @@ angular.module('app')
             return selected.length ? selected[0].name : 'Not set';
         };
 
-        $scope.showExpiryDates = function(p) {
+        $scope.showExpiryDates = function(trade) {
+            //console.log('trade.expiryDates:', trade.expiryDates)
             var selected = [];
-            if(p.expiryDate) {
-                selected = $filter('filter')($scope.expiryDates, {contractYear: p.expiryDate.contractYear, contractMonth: p.expiryDate.contractMonth});
+            if(trade.expiryDate) {
+                selected = $filter('filter')(trade.expiryDates, {contractYear: trade.expiryDate.contractYear, contractMonth: trade.expiryDate.contractMonth});
+            }
+            //console.log('selected:', selected)
+            if (!selected) {
+                selected = [];
             }
             return selected.length ? $scope.formatExpiryDate(selected[0]) : 'Not set';
         };
 
-        $scope.showExercisePrices = function(p) {
+        $scope.showExercisePrices = function(trade) {
+            //console.log('trade.exercisePrices:', trade.exercisePrices)
             var selected = [];
-            if(p.exercisePrice) {
-                selected = $filter('filter')($scope.exercisePrices, p.exercisePrice);
+            if(trade.exercisePrice) {
+                selected = $filter('filter')(trade.exercisePrices, trade.exercisePrice);
+            }
+            //console.log('selected:', selected)
+            if (!selected) {
+                selected = [];
             }
             return selected.length ? selected[0] : 'Not set';
         };
@@ -178,52 +188,38 @@ angular.module('app')
             }
         );
 
-        /*
-        $scope.$watch('trade.productId', function(newVal, oldVal) {
-            if (newVal !== oldVal) {
-              console.log('>>>>>>>> trade.productId =', newVal);
-              return
-
-              var selected = $filter('filter')($scope.groups, {
-                id: $scope.user.group
-              });
-              $scope.user.groupName = selected.length ? selected[0].text : null;
-            }
-          });
-          */
-
-        $scope.handleProductIdChange = function(productId, trade) {
-            console.log('userId =', productId);
-            console.log('user =', trade)
-
-            $scope.loadMaturities(productId);
-            //trade.maturity =
-        }
-
         $scope.refreshMaturities = function(eurexCode) {
             console.log('product changed, new value of product.productId is: ', eurexCode);
         }
 
-        $scope.loadMaturities = function(productId) {
-            console.log(productId);
-            ProductReferentialFactory.getMaturities(productId)
-            	                             .success(function(data, status){
-                                                $scope.expiryDates = data;
-                                             });
+        $scope.loadMaturities = function(productId, trade) {
+            trade.selectedProducId = productId || trade.productId;
+
+            ProductReferentialFactory.getMaturities(trade.selectedProducId)
+                                         .success(function(data, status){
+                                            trade.expiryDates = angular.copy(data);
+                                         });
+
+            $scope.loadExercisePrices(trade.selectedProducId, trade.expiryDate, trade);
         };
 
-        $scope.loadExercisePrices = function(productId, maturity ) {
-            console.log(productId);
-            ProductReferentialFactory.getStrikes(productId, maturity)
-                                             .success(function(data, status){
-                                                $scope.exercisePrices = data;
-                                             });
-            console.log($scope.expiryDates);
+        $scope.loadExercisePrices = function(productId, maturity, trade ) {
+            trade.selectedProducId = productId || trade.selectedProducId || trade.productId;
+            maturity = maturity || trade.expiryDate;
+
+            console.log('----------------------------');
+            console.log('>> new changes:', trade.selectedProducId, maturity);
+            //console.log('>> new trade value:', trade);
+
+            ProductReferentialFactory.getStrikes(trade.selectedProducId, maturity.contractYear, maturity.contractMonth)
+                                         .success(function(data, status){
+                                            trade.exercisePrices = angular.copy(data);
+                                         });
         };
 
         // Temporaire
 		//$scope.loadMaturities("ORDX");
-		$scope.loadExercisePrices("ORDX", {contractYear: 2022, contractMonth: 12})
+		//$scope.loadExercisePrices("ORDX", {contractYear: 2022, contractMonth: 12})
 	  }
     };
   });

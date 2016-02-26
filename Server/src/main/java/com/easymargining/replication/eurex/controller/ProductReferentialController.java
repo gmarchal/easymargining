@@ -107,8 +107,9 @@ public class ProductReferentialController {
     }
 
     @RequestMapping(value = "/getStrikes", method= RequestMethod.GET)
-    public Set<Double> getStrikes(String productId, ContractMaturity maturity) {
-        log.info("ProductReferentialController::getStrikes( " + productId + ", " + maturity + " )");
+    public Set<Double> getStrikes(String productId, Integer maturityYear, Integer maturityMonth) {
+        log.info("ProductReferentialController::getStrikes( " + productId + ", " + maturityYear + ", " + maturityMonth + " )");
+        ContractMaturity maturity = new ContractMaturity(maturityYear, maturityMonth);
         return productReferentialService.getStrikes(productId, maturity);
     }
 }

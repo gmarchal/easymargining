@@ -15,9 +15,13 @@
 	</thead>
     <tr ng-repeat="trade in positions">
 	  <td class="v-middle">
-		<span editable-select="trade.productId" e-name="productId" e-form="rowform"
-				  e-ng-options="s.eurexCode as s.eurexCode for s in productIds"
-			      e-ng-change="handleProductIdChange($data, trade)">{{ showProductIds(trade) }} </span>
+		<span editable-select="trade.productId"
+			  e-name="productId" e-form="rowform"
+			  e-ng-options="s.eurexCode as s.eurexCode for s in productIds"
+			  ng-init="loadMaturities(undefined, trade);
+			  		   loadExercisePrices(undefined, trade.expiryDate, trade)"
+			  e-ng-change="loadMaturities($data, trade)">
+				{{ showProductIds(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		<span editable-select="trade.instrumentType" e-name="instrumentType" e-form="rowform"
@@ -28,16 +32,24 @@
 				  e-ng-options="s.id as s.name for s in optionTypes">{{ showOptionTypes(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
-		  <span editable-select="trade.expiryDate" e-name="expiryDate" e-form="rowform"
-				e-ng-options="s.contractMonth group by s.contractYear for s in expiryDates">{{ showExpiryDates(trade) }} </span>
+		  <span editable-select="trade.expiryDate"
+				e-name="expiryDate"
+				e-form="rowform"
+				onshow="loadMaturities(undefined, trade)"
+				e-ng-change="loadExercisePrices(undefined, $data, trade)"
+				e-ng-options="s.contractMonth group by s.contractYear for s in trade.expiryDates">
+			  		{{ showExpiryDates(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		  <span editable-select="trade.productSettlementType" e-name="productSettlementType" e-form="rowform"
 				e-ng-options="s.id as s.name for s in settlementTypes">{{ showSettlementTypes(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
-		  <span editable-select="trade.exercisePrice" e-name="exercisePrice" e-form="rowform"
-				e-ng-options="s for s in exercisePrices">{{ showExercisePrices(trade) }} </span>
+		  <span editable-select="trade.exercisePrice"
+				e-name="exercisePrice"
+				e-form="rowform"
+				e-ng-options="s for s in trade.exercisePrices">
+			  		{{ showExercisePrices(trade) }} </span>
 	  </td>
 	  <td class="v-middle">
 		  <span editable-select="trade.exerciseStyleFlag" e-name="exerciseStyleFlag" e-form="rowform"

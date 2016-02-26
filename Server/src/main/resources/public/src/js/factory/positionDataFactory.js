@@ -67,9 +67,9 @@ angular.module('app')
           return $http.get("/api/product/getMaturities",
                             { params: { productId: productId } } );
       };
-      factory.getStrikes = function(productId, maturity) {
+      factory.getStrikes = function(productId, maturityYear, maturityMonth) {
           return $http.get("/api/product/getStrikes",
-                            { params: { productId: productId, maturity: maturity } } );
+                            { params: { productId: productId, maturityYear: maturityYear, maturityMonth: maturityMonth } } );
       };
       return factory;
   }]);
