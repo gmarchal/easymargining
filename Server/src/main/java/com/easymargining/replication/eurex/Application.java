@@ -32,8 +32,7 @@ import java.util.Arrays;
     Configuration for the main class.
     VM Options : -Xms4g -Xmx8g
     Program arguments : -vd 2015-11-23 -m D:\gmarchal\eurex-data\marketdata
-
- */
+*/
 public class Application {
 
     private static final String VALUATION_DATE_OPTION = "vd";

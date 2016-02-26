@@ -17,48 +17,24 @@
             <div class="row">
                 <div class="col-md-6">
                     <ul>
-                        <li><button class="btn m-b-xs w-xs btn-primary" data-ng-click="loadEurexProductDefinitions()">Load Eurex Product Definition</button></li>
+                        <li>
+                            <span>Load Eurex product definition for an effective date</span>
+                            <button class="btn m-b-xs btn-primary" data-ng-click="loadEurexProductDefinitions()">Start</button>
+                        </li>
                     </ul>
                     <ul>
-                        <li><button class="btn m-b-xs w-xs btn-primary" data-ng-click="loadEurexProducts()">Load Eurex Product</button></li>
+                        <li>
+                            <span>Load Eurex products for an effective date (take many time)</span>
+                            <button class="btn m-b-xs btn-primary" data-ng-click="loadEurexProducts()">Start</button>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <span>clear all positions for all users</span>
+                            <button class="btn m-b-xs btn-primary" data-ng-click="clearAllPositions()">Start</button>
+                        </li>
                     </ul>
                 </div>
-            </div>
-            <div class="row">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading font-bold">
-                        Inline form
-                    </div>
-                    <div class="panel-body">
-                        <form class="form-inline" role="form">
-                            <div class="form-group">
-                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
-                            </div>
-                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                            <div class="checkbox m-l m-r-xs">
-                                <label class="i-checks">
-                                    <input type="checkbox"><i></i> Remember me
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-default">Sign in</button>
-                            <span ng-controller="ModalDemoCtrl">
-                              <script type="text/ng-template" id="myModalContent.html">
-                                  <div ng-include="'tpl/modal.form.html'"></div>
-                              </script>
-                              <button class="btn btn-success" ng-click="open('lg')">Form in a modal</button>
-                            </span>
-                        </form>
-                    </div>
-                </div>
-                <tabset class="tab-container">
-                    <tab heading="Option">
-
-                    </tab>
-                    <tab heading="Future" >
-                    </tab>
-                </tabset>
             </div>
         </div>
     </div>

@@ -49,7 +49,7 @@ public class EurexTradeTransformer {
 
                     // Transform Generic Trade to Eurex Trade
                     if ( trade.getInstrumentType().equals("Option") ) {
-
+                        log.info( "Build Eurex Option Trade from : " + trade);
                         etdTrades.add(
                                 eurexETDTradeBuilder.
                                         buildOptionTrade(
@@ -66,6 +66,7 @@ public class EurexTradeTransformer {
                                                         null));
 
                     } else if ( trade.getInstrumentType().equals("Future") ) {
+                        log.info( "Build Eurex Future Trade from : " + trade);
                         etdTrades.add(
                                 eurexETDTradeBuilder.
                                         buildFutureTrade(

@@ -92,7 +92,7 @@
 					<div class="panel-heading font-bold">Detail for the simulation</div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div ui-jq="plot" ui-options="
                                       [
                                         { label: 'IM Base', data: {{d1_1}} },
@@ -122,7 +122,7 @@
                                       }
                                 " style="height:240px;width:100%"></div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <table class="table table-striped m-b-none">
                                     <thead>
                                     <tr>
@@ -133,21 +133,37 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>Liquidity Add-On </td>
+                                        <td>Liquidity Risk component (AddOn) </td>
 										<td class="text-success"
 											data-ng-repeat="portfolioMarginResult in marginResult.portfolioMarginResults">
-											{{ portfolioMarginResult.liquidationGroupIMResults[0]. | number:0 }}
+											{{ portfolioMarginResult.liquidationGroupIMResults | number:0 }}
 										</td>
                                     </tr>
-                                    <tr>
-                                        <td>Market Risk Component</td>
-                                        <td class="text-success">
-                                            40€
-                                        </td>
-                                    </tr>
+									<tr>
+										<td>Correlation break adj.</td>
+										<td class="text-success"
+											data-ng-repeat="portfolioMarginResult in marginResult.portfolioMarginResults">
+											N/A
+										</td>
+									</tr>
+									<tr>
+										<td>Compression error adj.</td>
+										<td class="text-success"
+											data-ng-repeat="portfolioMarginResult in marginResult.portfolioMarginResults">
+											N/A
+										</td>
+									</tr>
+									<tr>
+										<td>Market Risk Component</td>
+										<td class="text-success"
+											data-ng-repeat="portfolioMarginResult in marginResult.portfolioMarginResults">
+											N/A
+										</td>
+									</tr>
                                     <tr>
                                         <td><strong>Initial Margin Total :</strong></td>
-                                        <td class="text-success" data-ng-repeat="portfolioMarginResult in marginResult.portfolioMarginResults">
+                                        <td class="text-success"
+											data-ng-repeat="portfolioMarginResult in marginResult.portfolioMarginResults">
                                             {{ portfolioMarginResult.imResult | number:0 }}
                                         </td>
                                     </tr>

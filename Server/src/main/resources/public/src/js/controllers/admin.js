@@ -26,4 +26,15 @@ app
                 console.error('Error', status, data);
             });
     };
+
+    $scope.clearAllPositions = function(){
+       $http.post("/api/positions/clearAllPositions")
+           .success(function(data) {
+
+           })
+           .error(function(data, status) {
+               console.error('Error', status, data);
+           });
+    };
+
   }]);
