@@ -18,6 +18,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
+    <swagger2.version>2.4.0</swagger2.version>
     <lombok.version>1.16.6</lombok.version>
     <jackson-core.version>2.4.1</jackson-core.version>
     <jackson-databind.version>2.4.1.1</jackson-databind.version>
@@ -123,29 +124,37 @@
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>${swagger2.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>${swagger2.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
     </dependency>
-
     <dependency>
       <groupId>com.univocity</groupId>
       <artifactId>univocity-parsers</artifactId>
       <version>1.5.6</version>
       <type>jar</type>
     </dependency>
-
     <dependency>
       <groupId>com.opengamma.margining</groupId>
       <artifactId>ogm-eurex-prisma-replication</artifactId>
       <version>1.8.3</version>
     </dependency>
-
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
-
   </dependencies>
 </project>
