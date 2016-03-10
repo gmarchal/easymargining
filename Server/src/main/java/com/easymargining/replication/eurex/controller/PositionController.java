@@ -40,6 +40,12 @@ public class PositionController {
         return trade;
     }
 
+    @RequestMapping(value = "/clearAllPositions", method = RequestMethod.POST)
+    public void clearAllPositions() {
+        log.info("Clear all positions ");
+        tradeRepository.deleteAll();
+    }
+
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public Trade removePosition(@RequestBody Trade trade) {
         log.info("Remove position asked for position : " + trade );
@@ -52,4 +58,6 @@ public class PositionController {
         tradeRepository.delete(trades);
         return true;
     }
+
+
 }

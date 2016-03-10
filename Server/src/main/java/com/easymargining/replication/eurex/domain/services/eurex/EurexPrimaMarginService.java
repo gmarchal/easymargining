@@ -38,7 +38,8 @@ import java.util.Set;
 @Service
 public class EurexPrimaMarginService {
 
-    private static final LocalDate s_valuationDate = LocalDate.of(2015, 6, 3);
+
+    private static final LocalDate s_valuationDate = LocalDate.of(2015, 11, 27);
 
     @Autowired
     private ITradeRepository tradeRepository;
@@ -50,20 +51,8 @@ public class EurexPrimaMarginService {
         List<Trade> trades = tradeRepository.findByPortfolioId(portfolioId);
         log.info ("Number of trades loaded  : " + trades.size());
 
-        /*
-        // Initialize environment with data
-        MarginEnvironment environment = MarginEnvironmentFactory.buildBasicEnvironment(new EurexPrismaReplication());
-        // Use file resolver utility to discover data from standard Eurex directory structure
-        MarketDataFileResolver fileResolver = new MarketDataFileResolver("marketData", s_valuationDate);
-        // Create ETD data load request, pointing to classpath, and load
-        EurexEtdMarketDataLoadRequest etdDataLoadRequest = MarketDataLoaders.etdRequest(fileResolver);
-        EurexMarketDataLoadRequest loadRequest = EurexMarketDataLoadRequest.etdMarketDataRequest(s_valuationDate, etdDataLoadRequest);
-        environment.getMarginData().loadData(loadRequest);
-        */
-
         // Load MarketData
         MarginEnvironment environment = EurexMarketDataEnvironment.getInstance().getMarginEnvironment();
-
 
         // Obtain portfolio, loaded from a trade file on the classpath
         OgmLinkResolver linkResolver = environment.getInjector().getInstance(OgmLinkResolver.class);
@@ -132,6 +121,8 @@ public class EurexPrimaMarginService {
         Map<String, Set<String>> liquidationGroupDefinitions = EurexMarketDataEnvironment.getInstance().getLiquidationGroupSplit();
         List<String> liquidationGroups = new ArrayList(liquidationGroupDefinitions.keySet());
 
+        log.info("List of liquidation groups : " + liquidationGroupDefinitions);
+
 
         for (int i=0 ; i< currencyAmounts.length; i++) {
             currencyAmounts[i].getCurrency();
@@ -142,27 +133,31 @@ public class EurexPrimaMarginService {
 
                 String liquidationGroupName = liquidationGroups.get(j);
 
-                liquidationGroupMarginResults = new ArrayList();
-                result.getPortfolioMarginResults().add(
-                        new PortfolioMarginResult(liquidationGroupName,
-                                currencyAmounts[i].getCurrency().getCode(),
-                                currencyAmounts[i].getAmount(),
-                                liquidationGroupMarginResults));
-
                 // Identify IM for Liquidation Group
                 MultipleCurrencyAmount imgroup = null;
 
+                log.info("Find IM Group Margin Result for Liquidation Group : " + liquidationGroupName);
                 Result<MultipleCurrencyAmount> imgroupMarginResult =
                         imResults.getPortfolioResults().getValues()
                                 .get("Total",
                                         EurexPrismaReplicationRequests.portfolioMeasures()
                                                 .groupIm(liquidationGroupName));
 
+                log.info("IM Group Margin Result : " + imgroupMarginResult);
+
                 if (imgroupMarginResult!= null) {
                     imgroup = imgroupMarginResult.getValue();
                 }
 
                 if (imgroup != null) {
+
+                    liquidationGroupMarginResults = new ArrayList();
+                    result.getPortfolioMarginResults().add(
+                            new PortfolioMarginResult(liquidationGroupName,
+                                    currencyAmounts[i].getCurrency().getCode(),
+                                    currencyAmounts[i].getAmount(),
+                                    liquidationGroupMarginResults));
+
                     List<LiquidationGroupSplitMarginResult> liquidationGroupSplitMarginResults = new ArrayList();
                     double value = imgroup.getAmount(currencyAmounts[i].getCurrency());
                     liquidationGroupMarginResults.add(new LiquidationGroupMarginResult(liquidationGroupName, value, liquidationGroupSplitMarginResults));

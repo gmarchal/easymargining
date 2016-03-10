@@ -161,6 +161,9 @@ public class EurexETDTradeBuilder {
                                      double shortBalance,
                                      String openGammaSpecifiedId ) {
 
+        log.info ("Create new Future Trade with parameter : { productId : " + productId + ", expiryYear : " + expiryYear
+                + ", expiryMonth : " + expiryMonth + ", quantity : " + (longBalance - shortBalance) + " } ");
+
         SecurityLink link = SecurityLink.resolvable(
                 EurexIdUtils.buildClearedEtdFutureSecurityId(
                         productId,
