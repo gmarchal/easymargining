@@ -6,13 +6,6 @@
 package com.opengamma.margining.example;
 
 
-import java.io.IOException;
-import java.net.URL;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.threeten.bp.LocalDate;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Table;
 import com.opengamma.margining.core.MarginEnvironment;
@@ -37,6 +30,12 @@ import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaRepli
 import com.opengamma.margining.eurex.prisma.replication.request.EurexPrismaReplicationRequests;
 import com.opengamma.sesame.trade.TradeWrapper;
 import com.opengamma.util.result.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.threeten.bp.LocalDate;
+
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Basic integration example for Eurex Prisma calculations on OTC trades.

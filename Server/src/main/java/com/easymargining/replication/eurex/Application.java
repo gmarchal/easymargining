@@ -1,6 +1,7 @@
 package com.easymargining.replication.eurex;
 
 import com.easymargining.replication.eurex.config.MongoConfiguration;
+import com.easymargining.replication.eurex.config.SwaggerConfiguration;
 import com.easymargining.replication.eurex.config.WebSecurityConfiguration;
 import com.easymargining.replication.eurex.converter.TradeFileHandler;
 import com.easymargining.replication.eurex.domain.services.marketdata.EurexMarketDataEnvironment;
@@ -25,7 +26,8 @@ import java.util.Arrays;
 @Import(value = {
         DefaultConfig.class,
         MongoConfiguration.class,
-        WebSecurityConfiguration.class
+        WebSecurityConfiguration.class,
+        SwaggerConfiguration.class
 })
 
 /*

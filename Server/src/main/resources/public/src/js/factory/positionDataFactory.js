@@ -9,16 +9,6 @@ angular.module('app')
     			{ eurexCode: 'OGB1' },
     			{ eurexCode: 'VVU' },
     		];
-    /*
-    var productIds = [];
-    $http.get("/api/product/alldef")
-        .success(function(data) {
-            console.log(data);
-            productIds=data;
-        })
-        .error(function(data, status) {
-            console.error('Error', status, data);
-        });*/
 
     var optionTypes = [
     			{ id: 'C', name: 'Call'},
