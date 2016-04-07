@@ -48,9 +48,13 @@ https://desktop.github.com/
 - tar xvzf mongodb-linux-x86_64-rhel62-3.2.1.tgz
 - Installation description on : http://www.tokiwinter.com/mongodb-installation-basic-configuration/
 
+#Unix
+/home/esmuat01/app/mongodb/bin/ ./mongod --config /home/esmuat01/conf/mongodb.conf
+
 # Windows CMD
 c:\Homeware\easymargining>mongod --port 27017 --dbpath "c:\\Homeware\\MongoDB\\data\\db"
 C:\Users\Gilles Marchal>mongo -port 27017
+
 
 # MongDb Config
 vi /home/esmuat01/conf/mongodb.conf
